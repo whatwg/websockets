@@ -6,7 +6,7 @@ Abstract: This specification provides APIs to enable web applications to maintai
 Abstract: communications with server-side processes.
 Indent: 1
 Markup Shorthands: markdown yes
-Text Macro: TWITTER NO
+Text Macro: TWITTER whatsockets
 </pre>
 
 <pre class=biblio>
@@ -77,7 +77,7 @@ example, this interface could not be used to implement an IRC client without pro
 through a custom server.</p>
 </div>
 
-<h2 id=websocket-protocol>WebSocket protocol alterations</h2>
+# WebSocket protocol alterations # {#websocket-protocol}
 
 <div class=note>
  <p>This section replaces part of the WebSocket protocol opening handshake client requirement to
@@ -95,9 +95,9 @@ through a custom server.</p>
 </div>
 
 
-<h3 id=websocket-connections>Connections</h3>
+## Connections ## {#websocket-connections}
 
-<p>To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</dfn>, given a
+To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</dfn>, given a
 <var>url</var>, run these steps:
 
 <ol>
@@ -121,9 +121,9 @@ therefore not shareable, a WebSocket connection is very close to identical to an
 <a>connection</a>.
 
 
-<h3 id=websocket-opening-handshake>Opening handshake</h3>
+## Opening handshake ## {#websocket-opening-handshake}
 
-<p>To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, given a
+To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, given a
 <var>url</var>, <var>protocols</var>, and <var>client</var>, run these steps:
 
 <ol>
@@ -215,7 +215,7 @@ therefore not shareable, a WebSocket connection is very close to identical to an
  </ol>
 </ol>
 
-<p><dfn>Fail the WebSocket connection</dfn> and <dfn>the WebSocket connection is established</dfn>
+<dfn>Fail the WebSocket connection</dfn> and <dfn>the WebSocket connection is established</dfn>
 are defined by The WebSocket Protocol. [[!WSP]]
 
 <p class=warning>The reason redirects are not followed and this handshake is generally restricted is
@@ -263,7 +263,7 @@ interface WebSocket : EventTarget {
 };
 </xmp>
 
-<p>Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
+Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
 
 <dl class="domintro non-normative">
  <dt><code><var>socket</var> = new {{WebSocket/constructor(url, protocols)|WebSocket}}(<var>url</var> [, <var>protocols</var> ] )</code>
@@ -376,10 +376,10 @@ interface WebSocket : EventTarget {
 
 <hr>
 
-<p>The <dfn attribute for=WebSocket><code>url</code></dfn> attribute's getter must return this
+The <dfn attribute for=WebSocket><code>url</code></dfn> attribute's getter must return this
 {{WebSocket}} object's [=url=], <a dfn lt="URL serializer">serialized</a>.
 
-<p>The <dfn attribute for=WebSocket><code>readyState</code></dfn> attribute represents the state of
+The <dfn attribute for=WebSocket><code>readyState</code></dfn> attribute represents the state of
 the connection. It can have the following values:
 
 : <dfn><code>CONNECTING</code></dfn> (numeric value 0)
@@ -392,14 +392,14 @@ the connection. It can have the following values:
 : <dfn><code>CLOSED</code></dfn> (numeric value 3)
 :: The connection has been closed or could not be opened.
 
-<p>When the object is created its {{WebSocket/readyState}} must be set to {{WebSocket/CONNECTING}}
+When the object is created its {{WebSocket/readyState}} must be set to {{WebSocket/CONNECTING}}
 (0).
 
-<p>The <dfn attribute for=WebSocket><code>extensions</code></dfn> attribute must initially return
+The <dfn attribute for=WebSocket><code>extensions</code></dfn> attribute must initially return
 the empty string. After [=the WebSocket connection is established=], its value might change, as
 defined below.</p>
 
-<p>The <dfn attribute for=WebSocket><code>protocol</code></dfn> attribute must initially return the
+The <dfn attribute for=WebSocket><code>protocol</code></dfn> attribute must initially return the
 empty string. After [=the WebSocket connection is established=], its value might change, as defined
 below.
 
@@ -472,7 +472,7 @@ do it. -->
 
 <hr>
 
-<p>The <dfn attribute for=WebSocket><code>bufferedAmount</code></dfn> attribute must return the number of bytes of
+The <dfn attribute for=WebSocket><code>bufferedAmount</code></dfn> attribute must return the number of bytes of
 application data (UTF-8 text and binary data) that have been queued using {{WebSocket/send()}} but
 that, as of the last time the [=event loop=] reached <a for="event loop">step 1</a>, had not yet
 been transmitted to the network. (This thus includes any text sent during the execution of the
@@ -482,7 +482,7 @@ or buffering done by the operating system or network hardware.
 
 <div class="example" id="buffered-amount-example">
 
-<p>In this simple example, the {{WebSocket/bufferedAmount}} attribute is used to ensure that updates
+In this simple example, the {{WebSocket/bufferedAmount}} attribute is used to ensure that updates
 are sent either at the rate of one update every 50ms, if the network can handle that rate, or at
 whatever rate the network <em>can</em> handle, if that is too fast.
 
@@ -496,7 +496,7 @@ socket.onopen = function () {
 };
 </xmp>
 
-<p>The {{WebSocket/bufferedAmount}} attribute can also be
+The {{WebSocket/bufferedAmount}} attribute can also be
 used to saturate the network without sending the data at a higher rate than the network can
 handle, though this requires more careful monitoring of the value of the attribute over time.
 
@@ -506,7 +506,7 @@ handle, though this requires more careful monitoring of the value of the attribu
 
 <div>
 
-<p>When a {{WebSocket}} object is created, its <dfn attribute
+When a {{WebSocket}} object is created, its <dfn attribute
 for=WebSocket><code>binaryType</code></dfn> IDL attribute must be set to the string
 "<code>[=blob=]</code>". On getting, it must return the last value it was set to. On setting, the
 user agent must set the IDL attribute to the new value.
@@ -520,7 +520,7 @@ script to change the attribute at the last minute. This latter aspect is importa
 because it is quite possible for the attribute to be changed after the user agent has received the
 data but before the user agent has fired the event for it.
 
-<p>The <dfn method for=WebSocket><code>send(<var>data</var>)</code></dfn> method transmits data
+The <dfn method for=WebSocket><code>send(<var>data</var>)</code></dfn> method transmits data
 using the connection. If the {{WebSocket/readyState}} attribute is <code>CONNECTING</code>, it must
 throw an "{{InvalidStateError}}" {{DOMException}}. Otherwise, the user agent must run the
 appropriate set of steps from the following list:
@@ -578,7 +578,7 @@ appropriate set of steps from the following list:
 
 <hr>
 
-<p>The following are the [=event handlers=] (and their corresponding [=event
+The following are the [=event handlers=] (and their corresponding [=event
 handler event types=]) that must be supported, as [=event handler IDL
 attributes=], by all objects implementing the {{WebSocket}} interface:
 
@@ -597,7 +597,7 @@ attributes=], by all objects implementing the {{WebSocket}} interface:
 
 # Feedback from the protocol # {#feedback-from-the-protocol}
 
-<p>When [=the WebSocket connection is established=], the
+When [=the WebSocket connection is established=], the
 user agent must [=queue a task=] to run these steps:
 
  1. Change the {{WebSocket/readyState}} attribute's value to <code>[=OPEN=]</code>
@@ -614,7 +614,7 @@ being established</a> and the script setting up an event listener for the <a eve
 
 <hr>
 
-<p>When [=a WebSocket message has been received=]
+When [=a WebSocket message has been received=]
 with type |type| and data |data|, the user agent must [=queue a task=]
 to follow these steps: [[!WSP]]
 
@@ -656,7 +656,7 @@ created the {{ArrayBuffer}} object.
 
 <div class="example" id="message-example">
 
-<p>Here is an example of how to define a handler for the <a event><code>message</code></a>
+Here is an example of how to define a handler for the <a event><code>message</code></a>
 event in the case of text frames:
 
 <xmp highlight="js">
@@ -669,7 +669,7 @@ mysocket.onmessage = function (event) {
 };
 </xmp>
 
-<p>The protocol here is a trivial one, with the server just sending "on" or "off" messages.
+The protocol here is a trivial one, with the server just sending "on" or "off" messages.
 
 </div>
 
@@ -677,7 +677,7 @@ mysocket.onmessage = function (event) {
 
 <div>
 
-<p>When [=the websocket closing handshake is started=], the user agent must [=queue a task=] to change the {{WebSocket/readyState}} attribute's value to <code><a>CLOSING</a></code> (2). (If the {{WebSocket/close()}} method was called, the {{WebSocket/readyState}} attribute's value will already be set to <code><a>CLOSING</a></code> (2) when this task runs.) [[!WSP]]
+When [=the websocket closing handshake is started=], the user agent must [=queue a task=] to change the {{WebSocket/readyState}} attribute's value to <code><a>CLOSING</a></code> (2). (If the {{WebSocket/close()}} method was called, the {{WebSocket/readyState}} attribute's value will already be set to <code><a>CLOSING</a></code> (2) when this task runs.) [[!WSP]]
 
 <hr>
 
@@ -699,7 +699,7 @@ mysocket.onmessage = function (event) {
 
 <div class="warning">
 
-<p>User agents must not convey any failure information to scripts in a way that would allow a
+User agents must not convey any failure information to scripts in a way that would allow a
 script to distinguish the following situations:
 
  * A server whose host name could not be resolved.
@@ -715,10 +715,10 @@ script to distinguish the following situations:
  * A WebSocket server that abruptly closed the connection after successfully completing the
    opening handshake.
 
-<p>In all of these cases, the [=the WebSocket connection close code=] would be 1006, as
+In all of these cases, the [=the WebSocket connection close code=] would be 1006, as
 required by <cite>WebSocket Protocol</cite>. [[!WSP]]
 
-<p>Allowing a script to distinguish these cases would allow a script to probe the user's local
+Allowing a script to distinguish these cases would allow a script to probe the user's local
 network in preparation for an attack.
 
 <p class="note">In particular, this means the code 1015 is not used by the user agent (unless the
@@ -728,7 +728,7 @@ server erroneously uses it in its close frame, of course).
 
 <hr>
 
-<p>The [=task source=] for all [=tasks=] <a lt="queue a task">queued</a> in this section is the
+The [=task source=] for all [=tasks=] <a lt="queue a task">queued</a> in this section is the
 <dfn export>WebSocket task source</dfn>.
 
 </div>
@@ -736,11 +736,11 @@ server erroneously uses it in its close frame, of course).
 
 # Ping and Pong frames # {#ping-and-pong-frames}
 
-<p><cite>The WebSocket protocol</cite> defines Ping and Pong frames that can be used for
+<cite>The WebSocket protocol</cite> defines Ping and Pong frames that can be used for
 keep-alive, heart-beats, network status probing, latency instrumentation, and so forth. These are
 not currently exposed in the API.
 
-<p>User agents may send ping and unsolicited pong frames as desired, for example in an
+User agents may send ping and unsolicited pong frames as desired, for example in an
 attempt to maintain local network NAT mappings, to detect failed connections, or to display
 latency metrics to the user. User agents must not use pings or unsolicited pongs to aid the
 server; it is assumed that servers will solicit pongs whenever appropriate for the server's
@@ -753,7 +753,7 @@ https://www.w3.org/Bugs/Public/show_bug.cgi?id=17264 -->
 
 # The {{CloseEvent}} interface # {#the-closeevent-interface}
 
-<p>{{WebSocket}} objects use the {{CloseEvent}} interface for their <a event><code>close</code></a>
+{{WebSocket}} objects use the {{CloseEvent}} interface for their <a event><code>close</code></a>
 events:
 
 <xmp class="idl">
@@ -786,47 +786,47 @@ dictionary CloseEventInit : EventInit {
 
 <div>
 
-<p>The <dfn attribute for=CloseEvent><code>wasClean</code></dfn> attribute must return the value it was initialized
+The <dfn attribute for=CloseEvent><code>wasClean</code></dfn> attribute must return the value it was initialized
  to. It represents whether the connection closed cleanly or not.
 
-<p>The <dfn attribute for=CloseEvent><code>code</code></dfn> attribute must return the value it was initialized to.
+The <dfn attribute for=CloseEvent><code>code</code></dfn> attribute must return the value it was initialized to.
  It represents the WebSocket connection close code provided by the server.
 
-<p>The <dfn attribute for=CloseEvent><code>reason</code></dfn> attribute must return the value it was initialized
+The <dfn attribute for=CloseEvent><code>reason</code></dfn> attribute must return the value it was initialized
 to. It represents the WebSocket connection close reason provided by the server.
 
 
 
 # Garbage collection # {#garbage-collection}
 
-<p>A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
+A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
 <code><a>CONNECTING</a></code> (0) as of the last time the [=event loop=] reached <a for="event
 loop">step 1</a> must not be garbage collected if there are any event listeners registered for <a
 event><code>open</code></a> events, <a event><code>message</code></a> events, <a
 event><code>error</code></a> events, or <a event><code>close</code></a> events.
 
-<p>A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
+A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
 <code>[=OPEN=]</code> (1) as of the last time the [=event loop=] reached <a for="event loop">step
 1</a> must not be garbage collected if there are any event listeners registered for <a
 event><code>message</code></a> events, <a event><code>error</code></a>, or <a
 event><code>close</code></a> events.
 
-<p>A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
+A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
 <code><a>CLOSING</a></code> (2) as of the last time the [=event loop=] reached
 <a for="event loop">step 1</a> must not be garbage collected if there are any event listeners
 registered for <a event><code>error</code></a> or <a event><code>close</code></a> events.
 
-<p>A {{WebSocket}} object with <a lt="the WebSocket connection is established">an established
+A {{WebSocket}} object with <a lt="the WebSocket connection is established">an established
 connection</a> that has data queued to be transmitted to the network must not be garbage collected.
 [[!WSP]]
 
-<p>If a {{WebSocket}} object is garbage collected while its connection is still open, the user agent
+If a {{WebSocket}} object is garbage collected while its connection is still open, the user agent
 must [=start the WebSocket closing handshake=], with no status code<!--CLOSE CODE--> for the Close
 message. [[!WSP]]
 
 <hr>
 
-<p>If a user agent is to <dfn export>make disappear</dfn> a {{WebSocket}} object (this happens
+If a user agent is to <dfn export>make disappear</dfn> a {{WebSocket}} object (this happens
 when a {{Document}} object goes away), the user agent must follow the first appropriate
 set of steps from the following list:
 
