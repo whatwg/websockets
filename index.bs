@@ -144,7 +144,6 @@ therefore not shareable, a WebSocket connection is very close to identical to an
  <a for=request>client</a> is <var>client</var>,
  <a>service-workers mode</a> is "<code>none</code>",
  <a for=request>referrer</a> is "<code>no-referrer</code>",
- <a>synchronous flag</a> is set,
  <a for=request>mode</a> is "<code>websocket</code>",
  <a for=request>credentials mode</a> is
  "<code>include</code>",
@@ -163,9 +162,9 @@ therefore not shareable, a WebSocket connection is very close to identical to an
   <p>Let <var>keyValue</var> be a nonce consisting of a randomly selected 16-byte value that has
   been <a lt="forgiving-base64 encode">forgiving-base64-encoded</a> and <a>isomorphic encoded</a>.
 
-  <p id=example-random-value class=example>If the randomly selected value was the byte sequence 0x01 0x02 0x03 0x04 0x05
+ <p id=example-random-value class=example>If the randomly selected value was the byte sequence 0x01 0x02 0x03 0x04 0x05
   0x06 0x07 0x08 0x09 0x0a 0x0b 0x0c 0x0d 0x0e 0x0f 0x10, <var>keyValue</var> would be
-  forgiving-base64-encoded to "<code>AQIDBAUGBwgJCgsMDQ4PEC==</code>" and isomorphic encoded
+  forgiving-base64-encoded to "`AQIDBAUGBwgJCgsMDQ4PEC==`" and isomorphic encoded
   to \``AQIDBAUGBwgJCgsMDQ4PEC==`\`.
 
  <li><p><a for="header list">Append</a>
@@ -191,25 +190,29 @@ therefore not shareable, a WebSocket connection is very close to identical to an
  \``Sec-WebSocket-Extensions`\`/<var>permessageDeflate</var>
  to <var>request</var>'s <a for=request>header list</a>.
 
- <li><p>Let <var>response</var> be the result of <a lt=fetch for=/>fetching</a>
- <var>request</var>.
-
- <li><p>If <var>response</var> is a <a>network error</a> or its <a for=response>status</a> is not
- 101, <a>fail the WebSocket connection</a>.
-
  <li>
-  <p>If <var>protocols</var> is not the empty list and <a>extracting header list values</a> given
-  \``Sec-WebSocket-Protocol`\` and <var>response</var>'s <a for=request>header list</a>
-  results in null, failure, or the empty byte sequence, then <a>fail the WebSocket connection</a>.
+  <p><a lt=fetch for=/>Fetch</a> <var>request</var> with <a for=fetch><i>useParallelQueue</i></a>
+  set to true, and <a for=fetch><i>processResponse</i></a> given <var>response</var> being these
+  steps:
+
+ <ol>
+  <li><p>If <var>response</var> is a <a>network error</a> or its <a for=response>status</a> is not
+  101, <a>fail the WebSocket connection</a>.
+
+  <li>
+   <p>If <var>protocols</var> is not the empty list and <a>extracting header list values</a> given
+   \``Sec-WebSocket-Protocol`\` and <var>response</var>'s <a for=request>header list</a>
+   results in null, failure, or the empty byte sequence, then <a>fail the WebSocket connection</a>.
 
   <p class=note>This is different from the check on this header defined by The WebSocket Protocol.
-  That only covers a subprotocol not requested by the client. This covers a subprotocol requested by
-  the client, but not acknowledged by the server.
+  That only covers a subprotocol not requested by the client. This covers a subprotocol requested
+  by the client, but not acknowledged by the server.
 
- <li><p>Follow the requirements stated step 2 to step 6, inclusive, of the last set of steps in
- <a href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol
- to validate <var>response</var>. This either results in <a>fail the WebSocket connection</a>
- or <a>the WebSocket connection is established</a>.
+  <li><p>Follow the requirements stated step 2 to step 6, inclusive, of the last set of steps in
+  <a href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol
+  to validate <var>response</var>. This either results in <a>fail the WebSocket connection</a>
+  or <a>the WebSocket connection is established</a>.
+ </ol>
 </ol>
 
 <p><dfn>Fail the WebSocket connection</dfn> and <dfn>the WebSocket connection is established</dfn>

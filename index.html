@@ -11,7 +11,7 @@
 <script async crossorigin src="https://resources.whatwg.org/file-issue.js"></script>
 <script async crossorigin src="https://resources.whatwg.org/commit-snapshot-shortcut-key.js"></script>
   <meta content="Bikeshed version 40de15f9, updated Thu Jun 11 17:47:04 2020 -0700" name="generator">
-  <meta content="4bfa9e2b2f3f4da2008f8696dbbad4c75d509cfc" name="document-revision">
+  <meta content="7a2d1b250562e29dc0c7f570780414dbe8bc1a97" name="document-revision">
 <style>/* style-dfn-panel */
 
 .dfn-panel {
@@ -65,7 +65,7 @@
     <a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" crossorigin height="100" src="https://resources.whatwg.org/logo-websockets.svg"> </a> 
    <hgroup>
     <h1 class="p-name no-ref" id="title">WebSockets</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2021-01-27">27 January 2021</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2021-03-03">3 March 2021</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -173,7 +173,7 @@ therefore not shareable, a WebSocket connection is very close to identical to an
      <p class="note no-backref" role="note">This change of scheme is essential to integrate well with <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch">fetching</a>. E.g., HSTS would not work without it. There is no real
   reason for WebSocket to have distinct schemes, it’s a legacy artefact. <a data-link-type="biblio" href="#biblio-hsts">[HSTS]</a> </p>
     <li>
-     <p>Let <var>request</var> be a new <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request" id="ref-for-concept-request">request</a>, whose <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-url" id="ref-for-concept-request-url">URL</a> is <var>requestURL</var>, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-client" id="ref-for-concept-request-client">client</a> is <var>client</var>, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#request-service-workers-mode" id="ref-for-request-service-workers-mode">service-workers mode</a> is "<code>none</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-referrer" id="ref-for-concept-request-referrer">referrer</a> is "<code>no-referrer</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#synchronous-flag" id="ref-for-synchronous-flag">synchronous flag</a> is set, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-mode" id="ref-for-concept-request-mode">mode</a> is "<code>websocket</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-credentials-mode" id="ref-for-concept-request-credentials-mode">credentials mode</a> is
+     <p>Let <var>request</var> be a new <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request" id="ref-for-concept-request">request</a>, whose <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-url" id="ref-for-concept-request-url">URL</a> is <var>requestURL</var>, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-client" id="ref-for-concept-request-client">client</a> is <var>client</var>, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#request-service-workers-mode" id="ref-for-request-service-workers-mode">service-workers mode</a> is "<code>none</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-referrer" id="ref-for-concept-request-referrer">referrer</a> is "<code>no-referrer</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-mode" id="ref-for-concept-request-mode">mode</a> is "<code>websocket</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-credentials-mode" id="ref-for-concept-request-credentials-mode">credentials mode</a> is
  "<code>include</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-cache-mode" id="ref-for-concept-request-cache-mode">cache mode</a> is "<code>no-store</code>", and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-redirect-mode" id="ref-for-concept-request-redirect-mode">redirect mode</a> is "<code>error</code>". </p>
     <li>
      <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append">Append</a> `<code>Upgrade</code>`/`<code>websocket</code>` to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list">header list</a>. </p>
@@ -199,19 +199,22 @@ therefore not shareable, a WebSocket connection is very close to identical to an
     <li>
      <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append④">Append</a> `<code>Sec-WebSocket-Extensions</code>`/<var>permessageDeflate</var> to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list⑤">header list</a>. </p>
     <li>
-     <p>Let <var>response</var> be the result of <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch①">fetching</a> <var>request</var>. </p>
-    <li>
-     <p>If <var>response</var> is a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error" id="ref-for-concept-network-error">network error</a> or its <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response-status" id="ref-for-concept-response-status">status</a> is not
- 101, <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection">fail the WebSocket connection</a>. </p>
-    <li>
-     <p>If <var>protocols</var> is not the empty list and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#extract-header-list-values" id="ref-for-extract-header-list-values">extracting header list values</a> given
-  `<code>Sec-WebSocket-Protocol</code>` and <var>response</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list⑥">header list</a> results in null, failure, or the empty byte sequence, then <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection①">fail the WebSocket connection</a>. </p>
-     <p class="note" role="note">This is different from the check on this header defined by The WebSocket Protocol.
-  That only covers a subprotocol not requested by the client. This covers a subprotocol requested by
-  the client, but not acknowledged by the server. </p>
-    <li>
-     <p>Follow the requirements stated step 2 to step 6, inclusive, of the last set of steps in <a href="http://tools.ietf.org/html/rfc6455#section-4.1">section 4.1</a> of The WebSocket Protocol
- to validate <var>response</var>. This either results in <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection②">fail the WebSocket connection</a> or <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established">the WebSocket connection is established</a>. </p>
+     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch①">Fetch</a> <var>request</var> with <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#fetch-useparallelqueue" id="ref-for-fetch-useparallelqueue"><i>useParallelQueue</i></a> set to true, and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#process-response" id="ref-for-process-response"><i>processResponse</i></a> given <var>response</var> being these
+  steps: </p>
+     <ol>
+      <li>
+       <p>If <var>response</var> is a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error" id="ref-for-concept-network-error">network error</a> or its <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response-status" id="ref-for-concept-response-status">status</a> is not
+  101, <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection">fail the WebSocket connection</a>. </p>
+      <li>
+       <p>If <var>protocols</var> is not the empty list and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#extract-header-list-values" id="ref-for-extract-header-list-values">extracting header list values</a> given
+   `<code>Sec-WebSocket-Protocol</code>` and <var>response</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list⑥">header list</a> results in null, failure, or the empty byte sequence, then <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection①">fail the WebSocket connection</a>. </p>
+       <p class="note" role="note">This is different from the check on this header defined by The WebSocket Protocol.
+  That only covers a subprotocol not requested by the client. This covers a subprotocol requested
+  by the client, but not acknowledged by the server. </p>
+      <li>
+       <p>Follow the requirements stated step 2 to step 6, inclusive, of the last set of steps in <a href="http://tools.ietf.org/html/rfc6455#section-4.1">section 4.1</a> of The WebSocket Protocol
+  to validate <var>response</var>. This either results in <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection②">fail the WebSocket connection</a> or <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established">the WebSocket connection is established</a>. </p>
+     </ol>
    </ol>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fail-the-websocket-connection">Fail the WebSocket connection</dfn> and <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="the-websocket-connection-is-established">the WebSocket connection is established</dfn> are defined by The WebSocket Protocol. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> </p>
    <p class="warning">The reason redirects are not followed and this handshake is generally restricted is
@@ -239,15 +242,15 @@ has the right hostname. </p>
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long-long" id="ref-for-idl-unsigned-long-long"><c- b>unsigned</c-> <c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long long" href="#dom-websocket-bufferedamount" id="ref-for-dom-websocket-bufferedamount"><c- g>bufferedAmount</c-></a>;
 
   // networking
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onopen" id="ref-for-dom-websocket-onopen"><c- g>onopen</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onerror" id="ref-for-dom-websocket-onerror"><c- g>onerror</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onclose" id="ref-for-dom-websocket-onclose"><c- g>onclose</c-></a>;
+  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onopen" id="ref-for-dom-websocket-onopen"><c- g>onopen</c-></a>;
+  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler①"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onerror" id="ref-for-dom-websocket-onerror"><c- g>onerror</c-></a>;
+  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler②"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onclose" id="ref-for-dom-websocket-onclose"><c- g>onclose</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString②"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dom-websocket-extensions" id="ref-for-dom-websocket-extensions"><c- g>extensions</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString③"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dom-websocket-protocol" id="ref-for-dom-websocket-protocol"><c- g>protocol</c-></a>;
   <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined"><c- n>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-websocket-close" id="ref-for-dom-websocket-close"><c- g>close</c-></a>(<c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp" id="ref-for-Clamp"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-short" id="ref-for-idl-unsigned-short⑤"><c- b>unsigned</c-> <c- b>short</c-></a> <dfn class="idl-code" data-dfn-for="WebSocket/close(code, reason), WebSocket/close(code), WebSocket/close()" data-dfn-type="argument" data-export id="dom-websocket-close-code-reason-code"><code><c- g>code</c-></code><a class="self-link" href="#dom-websocket-close-code-reason-code"></a></dfn>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString②"><c- b>USVString</c-></a> <dfn class="idl-code" data-dfn-for="WebSocket/close(code, reason), WebSocket/close(code), WebSocket/close()" data-dfn-type="argument" data-export id="dom-websocket-close-code-reason-reason"><code><c- g>reason</c-></code><a class="self-link" href="#dom-websocket-close-code-reason-reason"></a></dfn>);
 
   // messaging
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onmessage" id="ref-for-dom-websocket-onmessage"><c- g>onmessage</c-></a>;
+  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler" id="ref-for-eventhandler③"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onmessage" id="ref-for-dom-websocket-onmessage"><c- g>onmessage</c-></a>;
   <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="#enumdef-binarytype" id="ref-for-enumdef-binarytype"><c- n>BinaryType</c-></a> <a class="idl-code" data-link-type="attribute" data-type="BinaryType" href="#dom-websocket-binarytype" id="ref-for-dom-websocket-binarytype"><c- g>binaryType</c-></a>;
   <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-undefined" id="ref-for-idl-undefined①"><c- n>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-websocket-send" id="ref-for-dom-websocket-send"><c- g>send</c-></a>((<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource" id="ref-for-BufferSource"><c- n>BufferSource</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString③"><c- b>USVString</c-></a>) <dfn class="idl-code" data-dfn-for="WebSocket/send(data)" data-dfn-type="argument" data-export id="dom-websocket-send-data-data"><code><c- g>data</c-></code><a class="self-link" href="#dom-websocket-send-data-data"></a></dfn>);
 };
@@ -561,8 +564,8 @@ being established</a> and the script setting up an event listener for the <a cla
       </dl>
      <li data-md>
       <p><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire①">Fire an event</a> named <a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-message" id="ref-for-event-message①"><code>message</code></a> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①③">WebSocket</a></code> object,
-  using <code class="idl"><a data-link-type="idl">MessageEvent</a></code>, with the <code class="idl"><a data-link-type="idl">origin</a></code> attribute initialized to the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-serializer" id="ref-for-concept-url-serializer①">serialization</a> of the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①④">WebSocket</a></code> object’s <a data-link-type="dfn" href="#url" id="ref-for-url③">url</a>'s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin" id="ref-for-concept-url-origin">origin</a>, and
-  the <code class="idl"><a data-link-type="idl">data</a></code> attribute initialized to <var>dataForEvent</var>.</p>
+  using <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#messageevent" id="ref-for-messageevent">MessageEvent</a></code>, with the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#dom-messageevent-origin" id="ref-for-dom-messageevent-origin">origin</a></code> attribute initialized to the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-serializer" id="ref-for-concept-url-serializer①">serialization</a> of the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①④">WebSocket</a></code> object’s <a data-link-type="dfn" href="#url" id="ref-for-url③">url</a>'s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin" id="ref-for-concept-url-origin">origin</a>, and
+  the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#dom-messageevent-data" id="ref-for-dom-messageevent-data">data</a></code> attribute initialized to <var>dataForEvent</var>.</p>
     </ol>
     <p class="note" role="note">User agents are encouraged to check if they can perform the above steps efficiently
 before they run the task, picking tasks from other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#task-queue" id="ref-for-task-queue">task queues</a> while they prepare the buffers if
@@ -921,6 +924,12 @@ if ("serviceWorker" in navigator) {
     <li><a href="#ref-for-concept-network-error">2.2. Opening handshake</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-process-response">
+   <a href="https://fetch.spec.whatwg.org/#process-response">https://fetch.spec.whatwg.org/#process-response</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-process-response">2.2. Opening handshake</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-redirect-mode">
    <a href="https://fetch.spec.whatwg.org/#concept-request-redirect-mode">https://fetch.spec.whatwg.org/#concept-request-redirect-mode</a><b>Referenced in:</b>
    <ul>
@@ -951,16 +960,16 @@ if ("serviceWorker" in navigator) {
     <li><a href="#ref-for-concept-response-status">2.2. Opening handshake</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-synchronous-flag">
-   <a href="https://fetch.spec.whatwg.org/#synchronous-flag">https://fetch.spec.whatwg.org/#synchronous-flag</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-synchronous-flag">2.2. Opening handshake</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-url">
    <a href="https://fetch.spec.whatwg.org/#concept-request-url">https://fetch.spec.whatwg.org/#concept-request-url</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-request-url">2.2. Opening handshake</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-fetch-useparallelqueue">
+   <a href="https://fetch.spec.whatwg.org/#fetch-useparallelqueue">https://fetch.spec.whatwg.org/#fetch-useparallelqueue</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-fetch-useparallelqueue">2.2. Opening handshake</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-header-value">
@@ -976,12 +985,30 @@ if ("serviceWorker" in navigator) {
     <li><a href="#ref-for-dfn-Blob⑦">4. Feedback from the protocol</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-eventhandler">
+   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler">https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-eventhandler">3.1. Interface definition</a> <a href="#ref-for-eventhandler①">(2)</a> <a href="#ref-for-eventhandler②">(3)</a> <a href="#ref-for-eventhandler③">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-messageevent">
+   <a href="https://html.spec.whatwg.org/multipage/comms.html#messageevent">https://html.spec.whatwg.org/multipage/comms.html#messageevent</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-messageevent">4. Feedback from the protocol</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-event-close">
    <a href="https://html.spec.whatwg.org/multipage/indices.html#event-close">https://html.spec.whatwg.org/multipage/indices.html#event-close</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-event-close">3.1. Interface definition</a> <a href="#ref-for-event-close①">(2)</a> <a href="#ref-for-event-close②">(3)</a> <a href="#ref-for-event-close③">(4)</a> <a href="#ref-for-event-close④">(5)</a> <a href="#ref-for-event-close⑤">(6)</a> <a href="#ref-for-event-close⑥">(7)</a>
     <li><a href="#ref-for-event-close⑦">6. The CloseEvent interface</a>
     <li><a href="#ref-for-event-close⑧">7. Garbage collection</a> <a href="#ref-for-event-close⑨">(2)</a> <a href="#ref-for-event-close①⓪">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dom-messageevent-data">
+   <a href="https://html.spec.whatwg.org/multipage/comms.html#dom-messageevent-data">https://html.spec.whatwg.org/multipage/comms.html#dom-messageevent-data</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-messageevent-data">4. Feedback from the protocol</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-entry-settings-object">
@@ -1042,6 +1069,12 @@ if ("serviceWorker" in navigator) {
     <li><a href="#ref-for-event-open">3.1. Interface definition</a>
     <li><a href="#ref-for-event-open①">4. Feedback from the protocol</a> <a href="#ref-for-event-open②">(2)</a>
     <li><a href="#ref-for-event-open③">7. Garbage collection</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dom-messageevent-origin">
+   <a href="https://html.spec.whatwg.org/multipage/comms.html#dom-messageevent-origin">https://html.spec.whatwg.org/multipage/comms.html#dom-messageevent-origin</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-messageevent-origin">4. Feedback from the protocol</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-queue-a-task">
@@ -1376,13 +1409,14 @@ if ("serviceWorker" in navigator) {
      <li><span class="dfn-paneled" id="term-for-concept-request-header-list" style="color:initial">header list</span>
      <li><span class="dfn-paneled" id="term-for-concept-request-mode" style="color:initial">mode</span>
      <li><span class="dfn-paneled" id="term-for-concept-network-error" style="color:initial">network error</span>
+     <li><span class="dfn-paneled" id="term-for-process-response" style="color:initial">processresponse</span>
      <li><span class="dfn-paneled" id="term-for-concept-request-redirect-mode" style="color:initial">redirect mode</span>
      <li><span class="dfn-paneled" id="term-for-concept-request-referrer" style="color:initial">referrer</span>
      <li><span class="dfn-paneled" id="term-for-concept-request" style="color:initial">request</span>
      <li><span class="dfn-paneled" id="term-for-request-service-workers-mode" style="color:initial">service-workers mode</span>
      <li><span class="dfn-paneled" id="term-for-concept-response-status" style="color:initial">status</span>
-     <li><span class="dfn-paneled" id="term-for-synchronous-flag" style="color:initial">synchronous flag</span>
      <li><span class="dfn-paneled" id="term-for-concept-request-url" style="color:initial">url</span>
+     <li><span class="dfn-paneled" id="term-for-fetch-useparallelqueue" style="color:initial">useparallelqueue</span>
      <li><span class="dfn-paneled" id="term-for-concept-header-value" style="color:initial">value</span>
     </ul>
    <li>
@@ -1393,7 +1427,10 @@ if ("serviceWorker" in navigator) {
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="term-for-eventhandler" style="color:initial">EventHandler</span>
+     <li><span class="dfn-paneled" id="term-for-messageevent" style="color:initial">MessageEvent</span>
      <li><span class="dfn-paneled" id="term-for-event-close" style="color:initial">close</span>
+     <li><span class="dfn-paneled" id="term-for-dom-messageevent-data" style="color:initial">data</span>
      <li><span class="dfn-paneled" id="term-for-entry-settings-object" style="color:initial">entry settings object</span>
      <li><span class="dfn-paneled" id="term-for-event-error" style="color:initial">error</span>
      <li><span class="dfn-paneled" id="term-for-event-handlers" style="color:initial">event handler</span>
@@ -1403,6 +1440,7 @@ if ("serviceWorker" in navigator) {
      <li><span class="dfn-paneled" id="term-for-in-parallel" style="color:initial">in parallel</span>
      <li><span class="dfn-paneled" id="term-for-event-message" style="color:initial">message</span>
      <li><span class="dfn-paneled" id="term-for-event-open" style="color:initial">open</span>
+     <li><span class="dfn-paneled" id="term-for-dom-messageevent-origin" style="color:initial">origin</span>
      <li><span class="dfn-paneled" id="term-for-queue-a-task" style="color:initial">queue a task</span>
      <li><span class="dfn-paneled" id="term-for-concept-relevant-realm" style="color:initial">relevant realm</span>
      <li><span class="dfn-paneled" id="term-for-step1" style="color:initial">step 1</span>
@@ -1511,15 +1549,15 @@ if ("serviceWorker" in navigator) {
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long-long"><c- b>unsigned</c-> <c- b>long</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="unsigned long long" href="#dom-websocket-bufferedamount"><c- g>bufferedAmount</c-></a>;
 
   // networking
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onopen"><c- g>onopen</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onerror"><c- g>onerror</c-></a>;
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onclose"><c- g>onclose</c-></a>;
+  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onopen"><c- g>onopen</c-></a>;
+  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onerror"><c- g>onerror</c-></a>;
+  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onclose"><c- g>onclose</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dom-websocket-extensions"><c- g>extensions</c-></a>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString"><c- b>DOMString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="DOMString" href="#dom-websocket-protocol"><c- g>protocol</c-></a>;
   <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-undefined"><c- n>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-websocket-close"><c- g>close</c-></a>(<c- b>optional</c-> [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Clamp"><c- g>Clamp</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-short"><c- b>unsigned</c-> <c- b>short</c-></a> <a href="#dom-websocket-close-code-reason-code"><code><c- g>code</c-></code></a>, <c- b>optional</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a> <a href="#dom-websocket-close-code-reason-reason"><code><c- g>reason</c-></code></a>);
 
   // messaging
-  <c- b>attribute</c-> <a class="n" data-link-type="idl-name"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onmessage"><c- g>onmessage</c-></a>;
+  <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler"><c- n>EventHandler</c-></a> <a class="idl-code" data-link-type="attribute" data-type="EventHandler" href="#dom-websocket-onmessage"><c- g>onmessage</c-></a>;
   <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="#enumdef-binarytype"><c- n>BinaryType</c-></a> <a class="idl-code" data-link-type="attribute" data-type="BinaryType" href="#dom-websocket-binarytype"><c- g>binaryType</c-></a>;
   <a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-undefined"><c- n>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-websocket-send"><c- g>send</c-></a>((<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#BufferSource"><c- n>BufferSource</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString"><c- b>USVString</c-></a>) <a href="#dom-websocket-send-data-data"><code><c- g>data</c-></code></a>);
 };
