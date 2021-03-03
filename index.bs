@@ -230,84 +230,61 @@ interface WebSocket : EventTarget {
 Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
 
 <dl class="domintro non-normative">
- <dt><code>|socket| = new {{WebSocket/constructor(url, protocols)|WebSocket}}(|url| [, |protocols| ] )</code>
- <dd>
-  <p>Creates a new {{WebSocket}} object, immediately establishing the associated
+ : <code>|socket| = new {{WebSocket/constructor(url, protocols)|WebSocket}}(|url| [, |protocols| ] )</code>
+ :: Creates a new {{WebSocket}} object, immediately establishing the associated
   WebSocket connection.
 
-  <p>|url| is a string giving the <a dfn spec=url>URL</a> over which the connection is established.
+  |url| is a string giving the <a dfn spec=url>URL</a> over which the connection is established.
   Only "`ws`" or "`wss`" schemes are allowed; others will cause a "{{SyntaxError}}"
   {{DOMException}}. URLs with [=fragments=] will also cause such an exception.
 
-  <p>|protocols| is either a string or an array of strings. If it is a string, it is
+  |protocols| is either a string or an array of strings. If it is a string, it is
   equivalent to an array consisting of just that string; if it is omitted, it is equivalent to the
   empty array. Each string in the array is a subprotocol name. The connection will only be
   established if the server reports that it has selected one of these subprotocols. The subprotocol
   names have to match the requirements for elements that comprise the value of
   <code>[=Sec-WebSocket-Protocol=]</code> fields as defined by The WebSocket protocol. [[!WSP]]
 
- <dt><code>|socket| . <a method for=WebSocket data-lt=send()>send</a>( |data| )</code>
-
- <dd>
-  <p>Transmits |data| using the WebSocket connection. |data| can be a string, a
+ : <code>|socket| . <a method for=WebSocket data-lt=send()>send</a>( |data| )</code>
+ :: Transmits |data| using the WebSocket connection. |data| can be a string, a
   {{Blob}}, an {{ArrayBuffer}}, or an {{ArrayBufferView}}.
 
- <dt><code>|socket| . <a method for=WebSocket>close</a>( [ |code| ] [, |reason| ] )</code>
-
- <dd>
-  <p>Closes the WebSocket connection, optionally using |code| as the [=the WebSocket connection
+ : <code>|socket| . <a method for=WebSocket>close</a>( [ |code| ] [, |reason| ] )</code>
+ :: Closes the WebSocket connection, optionally using |code| as the [=the WebSocket connection
   close code=] and |reason| as the [=the WebSocket connection close reason=].
 
- <dt><code>|socket| . <a attribute for=WebSocket>url</a></code>
+ : <code>|socket| . <a attribute for=WebSocket>url</a></code>
+ :: Returns the <a lt="url">URL that was used</a> to establish the WebSocket connection.
 
- <dd>
-  <p>Returns the <a lt="url">URL that was used</a> to establish the WebSocket connection.
+ : <code>|socket| . <a attribute for=WebSocket>readyState</a></code>
+ :: Returns the state of the {{WebSocket}} object's connection. It can have the values described
+  below.
 
- <dt><code>|socket| . <a attribute for=WebSocket>readyState</a></code>
-
- <dd>
-  <p>Returns the state of the {{WebSocket}} object's connection. It can have the values
-  described below.
-
- <dt><code>|socket| . <a attribute>bufferedAmount</a></code>
-
- <dd>
-  <p>Returns the number of bytes of application data (UTF-8 text and binary data) that have been
+ : <code>|socket| . <a attribute>bufferedAmount</a></code>
+ :: Returns the number of bytes of application data (UTF-8 text and binary data) that have been
   queued using {{WebSocket/send()}} but not yet been transmitted to the network.
 
-  <p>If the WebSocket connection is closed, this attribute's value will only increase with each call
+  If the WebSocket connection is closed, this attribute's value will only increase with each call
   to the {{WebSocket/send()}} method. (The number does not reset to zero once the connection
   closes.)
 
- <dt><code>|socket| . <a attribute>extensions</a></code>
+ : <code>|socket| . <a attribute>extensions</a></code>
+ :: Returns the extensions selected by the server, if any.
 
- <dd>
-  <p>Returns the extensions selected by the server, if any.
-
- <dt><code>|socket| . <a attribute>protocol</a></code>
-
- <dd>
-  <p>Returns the subprotocol selected by the server, if any. It can be used in conjunction with the
+ : <code>|socket| . <a attribute>protocol</a></code>
+ :: Returns the subprotocol selected by the server, if any. It can be used in conjunction with the
   array form of the constructor's second argument to perform subprotocol negotiation.
 
- <dt><code>|socket| . <a attribute>binaryType</a> [ = <var ignore>value</var> ]</code>
+ : <code>|socket| . <a attribute>binaryType</a> [ = <var ignore>value</var> ]</code>
+ :: Returns a string that indicates how binary data from the {{WebSocket}} object is exposed to
+  scripts:
 
- <dd>
-  <p>Returns a string that indicates how binary data from the {{WebSocket}} object is
-  exposed to scripts:
+  : "<a dfn>`blob`</a>"
+  :: Binary data is returned in {{Blob}} form.
+  : "<a dfn>`arraybuffer`</a>"
+  :: Binary data is returned in {{ArrayBuffer}} form.
 
-   <dl>
-    <dt>"<a dfn>`blob`</a>"
-    <dd>
-     <p>Binary data is returned in {{Blob}} form.
-
-    <dt>"<a dfn>`arraybuffer`</a>"
-    <dd>
-     <p>Binary data is returned in {{ArrayBuffer}} form.
-   </dl>
-
-  <p>Can be set, to change how binary data is returned. The default is "`blob`"
-
+  Can be set, to change how binary data is returned. The default is "`blob`"
 </dl>
 
 <div algorithm>
