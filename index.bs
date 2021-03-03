@@ -289,7 +289,7 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
 
 <div algorithm>
 
- <p>The <dfn constructor for=WebSocket><code>WebSocket(|url|, |protocols|)</code></dfn>
+ The <dfn constructor for=WebSocket><code>WebSocket(|url|, |protocols|)</code></dfn>
  constructor, when invoked, must run these steps:
 
  1. Let |urlRecord| be the result of applying the [=URL parser=] to |url|.
@@ -346,7 +346,7 @@ below.
 
 <div algorithm>
 
- <p>The <dfn method for=WebSocket><code>close(|code|, |reason|)</code></dfn>
+ The <dfn method for=WebSocket><code>close(|code|, |reason|)</code></dfn>
  method, when invoked, must run these steps:
 
  1. If |code| is present, but is neither an integer equal to 1000 nor an integer in the range 3000
@@ -357,14 +357,13 @@ below.
  1. Run the first matching steps from the following list:
   <dl class="switch">
   : If the {{WebSocket/readyState}} attribute is in the {{WebSocket/CLOSING}} (2) or {{WebSocket/CLOSED}} (3) state
-  ::
-   <p>Do nothing.
+  :: Do nothing.
+
    <p class="note">The connection is already closing or is already closed. If it has not already, a
    <a event>`close`</a> event will eventually fire <a href="#closeWebSocket">as described
    below</a>.
   : If the WebSocket connection is not yet [=established=] [[!WSP]]
-  ::
-   <p>[=Fail the WebSocket connection=] and set the {{WebSocket/readyState}} attribute's value to
+  :: [=Fail the WebSocket connection=] and set the {{WebSocket/readyState}} attribute's value to
    {{WebSocket/CLOSING}} (2). [[!WSP]]
 
    <p class="note">The [=fail the WebSocket connection=] algorithm invokes the [=close the WebSocket
@@ -373,21 +372,20 @@ below.
 
   : If the WebSocket closing handshake has not yet been <a lt="the WebSocket closing handshake is
     started">started</a>. [[!WSP]]
-  ::
-   <p>[=Start the WebSocket closing handshake=] and set the {{WebSocket/readyState}}
+  :: [=Start the WebSocket closing handshake=] and set the {{WebSocket/readyState}}
    attribute's value to {{WebSocket/CLOSING}} (2). [[!WSP]]
 
-   <p>If neither |code| nor |reason| is present, the WebSocket Close message must not have a body.
+   If neither |code| nor |reason| is present, the WebSocket Close message must not have a body.
 
    <p class="note">The WebSocket Protocol erroneously states that the status code is <span
    class=allow-2119>required</a> for the [=start the WebSocket closing handshake=] algorithm.
    <!-- TODO(ricea): File an errata against RFC6455. -->
 
-   <p>If |code| is present, then the status code<!--CLOSE CODE--> to use in the
-   WebSocket Close message must be the integer given by |code|. [[!WSP]]
+   If |code| is present, then the status code<!--CLOSE CODE--> to use in the WebSocket Close message
+   must be the integer given by |code|. [[!WSP]]
 
-   <p>If |reason| is also present, then |reasonBytes| must be provided in the
-   Close message after the status code<!--CLOSE CODE-->. [[!WSP]]
+   If |reason| is also present, then |reasonBytes| must be provided in the Close message after the
+   status code<!--CLOSE CODE-->. [[!WSP]]
 
    <p class="note">The [=start the WebSocket closing handshake=] algorithm eventually invokes the
    [=close the WebSocket connection=] algorithm, which then establishes that [=the WebSocket
@@ -395,13 +393,13 @@ below.
    href="#closeWebSocket">as described below</a>.
 
   : Otherwise
-  ::
-   <p>Set the {{WebSocket/readyState}} attribute's value to {{WebSocket/CLOSING}} (2).
+  :: Set the {{WebSocket/readyState}} attribute's value to {{WebSocket/CLOSING}} (2).
 
-   <p class="note">[=The WebSocket closing handshake
-   is started=], and will eventually invoke the [=close the
-   WebSocket connection=] algorithm, which will establish that [=the WebSocket connection is closed=], and thus the <a event>`close`</a> event will fire, <a href="#closeWebSocket">as described
-   below</a>.
+   <p class="note">[=The WebSocket closing handshake is started=], and will eventually invoke the
+   [=close the WebSocket connection=] algorithm, which will establish that [=the WebSocket
+   connection is closed=], and thus the <a event>`close`</a> event will fire, <a
+   href="#closeWebSocket">as described below</a>.
+
    </dl>
 </div>
 
@@ -466,8 +464,7 @@ connection. If the {{WebSocket/readyState}} attribute is `CONNECTING`, it must t
 steps from the following list:
 
 : If the argument is a string
-::
- <p>If [=the WebSocket connection is established=] and <a lt="the WebSocket closing handshake is
+:: If [=the WebSocket connection is established=] and <a lt="the WebSocket closing handshake is
  started">the WebSocket closing handshake has not yet started</a>, then the user agent must [=send a
  WebSocket Message=] comprised of the |data| argument using a text frame opcode; if the data cannot
  be sent, e.g. because it would need to be buffered but the buffer is full, the user agent must <a
@@ -478,8 +475,7 @@ steps from the following list:
 
 
 : If the argument is a {{Blob}} object
-::
- <p>If [=the WebSocket connection is established=], and <a lt="the WebSocket closing handshake is
+:: If [=the WebSocket connection is established=], and <a lt="the WebSocket closing handshake is
  started">the WebSocket closing handshake has not yet started</a>, then the user agent must [=send a
  WebSocket Message=] comprised of |data| using a binary frame opcode; if the data cannot be sent,
  e.g. because it would need to be buffered but the buffer is full, the user agent must <a
@@ -491,8 +487,7 @@ steps from the following list:
  bytes. <!-- that sentence is meant to invoke the same as Blob.size --> [[!WSP]] [[!FILEAPI]]
 
 : If the argument is an {{ArrayBuffer}} object
-::
- <p>If [=the WebSocket connection is established=], and <a lt="the WebSocket closing handshake is
+:: If [=the WebSocket connection is established=], and <a lt="the WebSocket closing handshake is
  started">the WebSocket closing handshake has not yet started</a>, then the user agent must [=send a
  WebSocket Message=] comprised of |data| using a binary frame opcode; if the data cannot be sent,
  e.g. because it would need to be buffered but the buffer is full, the user agent must <a
@@ -503,8 +498,7 @@ steps from the following list:
  [[!WSP]]
 
 : If the argument is an object that matches the {{ArrayBufferView}} type definition
-::
- <p>If [=the WebSocket connection is established=], and <a lt="the WebSocket closing handshake is
+:: If [=the WebSocket connection is established=], and <a lt="the WebSocket closing handshake is
  started">the WebSocket closing handshake has not yet started</a>, then the user agent must [=send a
  WebSocket Message=] comprised of |data| using a binary frame opcode; if the data cannot be sent,
  e.g. because it would need to be buffered but the buffer is full, the user agent must <a

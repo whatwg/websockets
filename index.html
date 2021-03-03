@@ -11,7 +11,7 @@
 <script async crossorigin src="https://resources.whatwg.org/file-issue.js"></script>
 <script async crossorigin src="https://resources.whatwg.org/commit-snapshot-shortcut-key.js"></script>
   <meta content="Bikeshed version 40de15f9, updated Thu Jun 11 17:47:04 2020 -0700" name="generator">
-  <meta content="3cea2aae9811037590826b81a8c691c087b56d1b" name="document-revision">
+  <meta content="065b7b832a9481fb224bb752229912a3602583cc" name="document-revision">
 <style>/* style-dfn-panel */
 
 .dfn-panel {
@@ -309,7 +309,7 @@ scripts:</p>
      <p>Can be set, to change how binary data is returned. The default is "<code>blob</code>"</p>
    </dl>
    <div class="algorithm" data-algorithm="WebSocket(url, protocols)" data-algorithm-for="WebSocket">
-    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="constructor" data-export data-lt="WebSocket(url, protocols)|constructor(url, protocols)|WebSocket(url)|constructor(url)" id="dom-websocket-websocket"><code>WebSocket(<var>url</var>, <var>protocols</var>)</code></dfn> constructor, when invoked, must run these steps: </p>
+    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="constructor" data-export data-lt="WebSocket(url, protocols)|constructor(url, protocols)|WebSocket(url)|constructor(url)" id="dom-websocket-websocket"><code>WebSocket(<var>url</var>, <var>protocols</var>)</code></dfn> constructor, when invoked, must run these steps:</p>
     <ol>
      <li data-md>
       <p>Let <var>urlRecord</var> be the result of applying the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser">URL parser</a> to <var>url</var>.</p>
@@ -368,7 +368,7 @@ defined below.</p>
 empty string. After <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established③">the WebSocket connection is established</a>, its value might change, as defined
 below.</p>
    <div class="algorithm" data-algorithm="close(code, reason)" data-algorithm-for="WebSocket">
-    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="method" data-export data-lt="close(code, reason)|close(code)|close()" id="dom-websocket-close"><code>close(<var>code</var>, <var>reason</var>)</code></dfn> method, when invoked, must run these steps: </p>
+    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="method" data-export data-lt="close(code, reason)|close(code)|close()" id="dom-websocket-close"><code>close(<var>code</var>, <var>reason</var>)</code></dfn> method, when invoked, must run these steps:</p>
     <ol>
      <li data-md>
       <p>If <var>code</var> is present, but is neither an integer equal to 1000 nor an integer in the range 3000
@@ -386,33 +386,31 @@ below.</p>
       <dl class="switch">
        <dt data-md>If the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate③">readyState</a></code> attribute is in the <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing">CLOSING</a></code> (2) or <code class="idl"><a data-link-type="idl" href="#dom-websocket-closed" id="ref-for-dom-websocket-closed">CLOSED</a></code> (3) state
        <dd data-md>
-        <p>Do nothing. </p>
+        <p>Do nothing.</p>
         <p class="note" role="note">The connection is already closing or is already closed. If it has not already, a <a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close①"><code>close</code></a> event will eventually fire <a href="#closeWebSocket">as described
 below</a>. </p>
        <dt data-md>If the WebSocket connection is not yet <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and">established</a> <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a>
        <dd data-md>
-        <p><a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection④">Fail the WebSocket connection</a> and set the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate④">readyState</a></code> attribute’s value to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing①">CLOSING</a></code> (2). <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> </p>
+        <p><a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection④">Fail the WebSocket connection</a> and set the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate④">readyState</a></code> attribute’s value to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing①">CLOSING</a></code> (2). <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
         <p class="note" role="note">The <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection⑤">fail the WebSocket connection</a> algorithm invokes the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1①">close the WebSocket
 connection</a> algorithm, which then establishes that <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.4" id="ref-for-section-7.1.4①">the WebSocket connection is closed</a>, which
 fires the <a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close②"><code>close</code></a> event <a href="#closeWebSocket">as described below</a>. </p>
        <dt data-md>If the WebSocket closing handshake has not yet been <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3">started</a>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a>
        <dd data-md>
-        <p><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.2" id="ref-for-section-7.1.2">Start the WebSocket closing handshake</a> and set the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate⑤">readyState</a></code> attribute’s value to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing②">CLOSING</a></code> (2). <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> </p>
-        <p>If neither <var>code</var> nor <var>reason</var> is present, the WebSocket Close message must not have a body. </p>
+        <p><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.2" id="ref-for-section-7.1.2">Start the WebSocket closing handshake</a> and set the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate⑤">readyState</a></code> attribute’s value to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing②">CLOSING</a></code> (2). <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+        <p>If neither <var>code</var> nor <var>reason</var> is present, the WebSocket Close message must not have a body.</p>
         <p class="note" role="note">The WebSocket Protocol erroneously states that the status code is <span class="allow-2119">required for the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.2" id="ref-for-section-7.1.2①">start the WebSocket closing handshake</a> algorithm. </span></p>
-        <p>If <var>code</var> is present, then the status code to use in the
-WebSocket Close message must be the integer given by <var>code</var>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> </p>
-        <p>If <var>reason</var> is also present, then <var>reasonBytes</var> must be provided in the
-Close message after the status code. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> </p>
+        <p>If <var>code</var> is present, then the status code to use in the WebSocket Close message
+must be the integer given by <var>code</var>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+        <p>If <var>reason</var> is also present, then <var>reasonBytes</var> must be provided in the Close message after the
+status code. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
         <p class="note" role="note">The <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.2" id="ref-for-section-7.1.2②">start the WebSocket closing handshake</a> algorithm eventually invokes the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1②">close the WebSocket connection</a> algorithm, which then establishes that <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.4" id="ref-for-section-7.1.4②">the WebSocket
 connection is closed</a>, which fires the <a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close③"><code>close</code></a> event <a href="#closeWebSocket">as described below</a>. </p>
        <dt data-md>Otherwise
        <dd data-md>
-        <p>Set the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate⑥">readyState</a></code> attribute’s value to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing③">CLOSING</a></code> (2). </p>
-        <p class="note" role="note"><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3①">The WebSocket closing handshake
-is started</a>, and will eventually invoke the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1③">close the
-WebSocket connection</a> algorithm, which will establish that <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.4" id="ref-for-section-7.1.4③">the WebSocket connection is closed</a>, and thus the <a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close④"><code>close</code></a> event will fire, <a href="#closeWebSocket">as described
-below</a>. </p>
+        <p>Set the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate⑥">readyState</a></code> attribute’s value to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing③">CLOSING</a></code> (2).</p>
+        <p class="note" role="note"><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3①">The WebSocket closing handshake is started</a>, and will eventually invoke the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1③">close the WebSocket connection</a> algorithm, which will establish that <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.4" id="ref-for-section-7.1.4③">the WebSocket
+connection is closed</a>, and thus the <a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close④"><code>close</code></a> event will fire, <a href="#closeWebSocket">as described below</a>. </p>
       </dl>
     </ol>
    </div>
@@ -469,7 +467,7 @@ WebSocket Message</a> comprised of the <var>data</var> argument using a text fra
 be sent, e.g. because it would need to be buffered but the buffer is full, the user agent must <a data-link-type="dfn" href="#flagged-as-full" id="ref-for-flagged-as-full">flag the WebSocket as full</a> and then <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1④">close the WebSocket connection</a>.
 Any invocation of this method with a string argument that does not throw an exception must increase
 the <code class="idl"><a data-link-type="idl" href="#dom-websocket-bufferedamount" id="ref-for-dom-websocket-bufferedamount④">bufferedAmount</a></code> attribute by the number of bytes needed to express the argument as
-UTF-8. <a data-link-type="biblio" href="#biblio-unicode">[UNICODE]</a> <a data-link-type="biblio" href="#biblio-encoding">[ENCODING]</a> <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> </p>
+UTF-8. <a data-link-type="biblio" href="#biblio-unicode">[UNICODE]</a> <a data-link-type="biblio" href="#biblio-encoding">[ENCODING]</a> <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <dt data-md>If the argument is a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob③">Blob</a></code> object
      <dd data-md>
       <p>If <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established⑤">the WebSocket connection is established</a>, and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3③">the WebSocket closing handshake has not yet started</a>, then the user agent must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_" id="ref-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_①">send a
@@ -478,7 +476,7 @@ e.g. because it would need to be buffered but the buffer is full, the user agent
 The data to be sent is the raw data represented by the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob④">Blob</a></code> object. 
 Any invocation of this
 method with a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑤">Blob</a></code> argument that does not throw an exception must increase the <code class="idl"><a data-link-type="idl" href="#dom-websocket-bufferedamount" id="ref-for-dom-websocket-bufferedamount⑤">bufferedAmount</a></code> attribute by the size of the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑥">Blob</a></code> object’s raw data, in
-bytes. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a> </p>
+bytes. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a></p>
      <dt data-md>If the argument is an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer②">ArrayBuffer</a></code> object
      <dd data-md>
       <p>If <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established⑥">the WebSocket connection is established</a>, and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3④">the WebSocket closing handshake has not yet started</a>, then the user agent must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_" id="ref-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_②">send a
@@ -486,7 +484,7 @@ WebSocket Message</a> comprised of <var>data</var> using a binary frame opcode; 
 e.g. because it would need to be buffered but the buffer is full, the user agent must <a data-link-type="dfn" href="#flagged-as-full" id="ref-for-flagged-as-full②">flag the WebSocket as full</a> and then <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1⑥">close the WebSocket connection</a>.
 The data to be sent is the data stored in the buffer described by the <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer③">ArrayBuffer</a></code> object. Any
 invocation of this method with an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer④">ArrayBuffer</a></code> argument that does not throw an exception must
-increase the <code class="idl"><a data-link-type="idl" href="#dom-websocket-bufferedamount" id="ref-for-dom-websocket-bufferedamount⑥">bufferedAmount</a></code> attribute by the length of the <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑤">ArrayBuffer</a></code> in bytes. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> </p>
+increase the <code class="idl"><a data-link-type="idl" href="#dom-websocket-bufferedamount" id="ref-for-dom-websocket-bufferedamount⑥">bufferedAmount</a></code> attribute by the length of the <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑤">ArrayBuffer</a></code> in bytes. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <dt data-md>If the argument is an object that matches the <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#ArrayBufferView" id="ref-for-ArrayBufferView①">ArrayBufferView</a></code> type definition
      <dd data-md>
       <p>If <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established⑦">the WebSocket connection is established</a>, and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3⑤">the WebSocket closing handshake has not yet started</a>, then the user agent must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_" id="ref-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_③">send a
@@ -494,7 +492,7 @@ WebSocket Message</a> comprised of <var>data</var> using a binary frame opcode; 
 e.g. because it would need to be buffered but the buffer is full, the user agent must <a data-link-type="dfn" href="#flagged-as-full" id="ref-for-flagged-as-full③">flag the WebSocket as full</a> and then <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1⑦">close the WebSocket connection</a>.
 The data to be sent is the data stored in the section of the buffer described by the <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑥">ArrayBuffer</a></code> object that <var>data</var> references. Any invocation of this method with this kind of
 argument that does not throw an exception must increase the <code class="idl"><a data-link-type="idl" href="#dom-websocket-bufferedamount" id="ref-for-dom-websocket-bufferedamount⑦">bufferedAmount</a></code> attribute
-by the length of <var>data</var>’s buffer in bytes. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> </p>
+by the length of <var>data</var>’s buffer in bytes. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
     </dl>
    </div>
    <hr>
