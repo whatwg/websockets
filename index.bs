@@ -112,7 +112,7 @@ To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</df
 
 <p class=note>Although structured a little differently, carrying different properties, and
 therefore not shareable, a WebSocket connection is very close to identical to an "ordinary"
-<a>connection</a>.
+[=connection=].
 
 
 ## Opening handshake ## {#websocket-opening-handshake}
@@ -132,7 +132,7 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
 1. Let |request| be a new <a for=/>request</a>, whose
  <a for=request>URL</a> is |requestURL|,
  <a for=request>client</a> is |client|,
- <a>service-workers mode</a> is "<code>none</code>",
+ [=service-workers mode=] is "<code>none</code>",
  <a for=request>referrer</a> is "<code>no-referrer</code>",
  <a for=request>mode</a> is "<code>websocket</code>",
  <a for=request>credentials mode</a> is
@@ -145,7 +145,7 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
 1. <a for="header list">Append</a> \``Connection`\`/\``Upgrade`\` to |request|'s
  <a for=request>header list</a>.
 1. Let |keyValue| be a nonce consisting of a randomly selected 16-byte value that has
- been <a lt="forgiving-base64 encode">forgiving-base64-encoded</a> and <a>isomorphic encoded</a>.
+ been <a lt="forgiving-base64 encode">forgiving-base64-encoded</a> and [=isomorphic encoded=].
 
  <p id=example-random-value class=example>If the randomly selected value was the byte sequence 0x01
   0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0a 0x0b 0x0c 0x0d 0x0e 0x0f 0x10, |keyValue|
@@ -172,12 +172,12 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
  set to true, and <a for=fetch><i>processResponse</i></a> given |response| being these
  steps:
 
- 1. If |response| is a <a>network error</a> or its <a for=response>status</a> is not
-  101, <a>fail the WebSocket connection</a>.
+ 1. If |response| is a [=network error=] or its <a for=response>status</a> is not
+  101, [=fail the WebSocket connection=].
 
- 1. If |protocols| is not the empty list and <a>extracting header list values</a> given
+ 1. If |protocols| is not the empty list and [=extracting header list values=] given
    \``Sec-WebSocket-Protocol`\` and |response|'s <a for=request>header list</a>
-   results in null, failure, or the empty byte sequence, then <a>fail the WebSocket connection</a>.
+   results in null, failure, or the empty byte sequence, then [=fail the WebSocket connection=].
 
   <p class=note>This is different from the check on this header defined by The WebSocket Protocol.
   That only covers a subprotocol not requested by the client. This covers a subprotocol requested
@@ -185,8 +185,8 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
 
  1. Follow the requirements stated step 2 to step 6, inclusive, of the last set of steps in
   <a href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol
-  to validate |response|. This either results in <a>fail the WebSocket connection</a>
-  or <a>the WebSocket connection is established</a>.
+  to validate |response|. This either results in [=fail the WebSocket connection=]
+  or [=the WebSocket connection is established=].
 
 <dfn>Fail the WebSocket connection</dfn> and <dfn>the WebSocket connection is established</dfn>
 are defined by The WebSocket Protocol. [[!WSP]]
@@ -343,7 +343,7 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
      then invokes the [=close the WebSocket connection=] algorithm, which then
      establishes that [=the WebSocket connection is closed=], which fires the
      <a event><code>close</code></a> event <a href="#closeWebSocket">as described below</a>.
- 1. Return a new {{WebSocket}} object whose <a>url</a> is |urlRecord|.
+ 1. Return a new {{WebSocket}} object whose [=url=] is |urlRecord|.
 
 </div>
 
@@ -650,7 +650,7 @@ The protocol here is a trivial one, with the server just sending "on" or "off" m
 
 <div>
 
-When [=the websocket closing handshake is started=], the user agent must [=queue a task=] to change the {{WebSocket/readyState}} attribute's value to <code><a>CLOSING</a></code> (2). (If the {{WebSocket/close()}} method was called, the {{WebSocket/readyState}} attribute's value will already be set to <code><a>CLOSING</a></code> (2) when this task runs.) [[!WSP]]
+When [=the websocket closing handshake is started=], the user agent must [=queue a task=] to change the {{WebSocket/readyState}} attribute's value to <code>[=CLOSING=]</code> (2). (If the {{WebSocket/close()}} method was called, the {{WebSocket/readyState}} attribute's value will already be set to <code>[=CLOSING=]</code> (2) when this task runs.) [[!WSP]]
 
 <hr>
 
@@ -658,7 +658,7 @@ When [=the websocket closing handshake is started=], the user agent must [=queue
  [=cleanly=], the user agent must [=queue a task=] to run the following substeps:
 
  1. Change the {{WebSocket/readyState}} attribute's value to
-    <code><a>CLOSED</a></code> (3).
+    <code>[=CLOSED=]</code> (3).
  1. If the user agent was required to [=fail the WebSocket connection=], or if the <a lt="the
     WebSocket connection is closed">the WebSocket connection was closed</a> after being <dfn>flagged
     as full</dfn>, [=fire an event=] named <a event><code>error</code></a> at the {{WebSocket}}
@@ -773,7 +773,7 @@ to. It represents the WebSocket connection close reason provided by the server.
 # Garbage collection # {#garbage-collection}
 
 A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
-<code><a>CONNECTING</a></code> (0) as of the last time the [=event loop=] reached <a for="event
+<code>[=CONNECTING=]</code> (0) as of the last time the [=event loop=] reached <a for="event
 loop">step 1</a> must not be garbage collected if there are any event listeners registered for <a
 event><code>open</code></a> events, <a event><code>message</code></a> events, <a
 event><code>error</code></a> events, or <a event><code>close</code></a> events.
@@ -785,7 +785,7 @@ event><code>message</code></a> events, <a event><code>error</code></a>, or <a
 event><code>close</code></a> events.
 
 A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
-<code><a>CLOSING</a></code> (2) as of the last time the [=event loop=] reached
+<code>[=CLOSING=]</code> (2) as of the last time the [=event loop=] reached
 <a for="event loop">step 1</a> must not be garbage collected if there are any event listeners
 registered for <a event><code>error</code></a> or <a event><code>close</code></a> events.
 
