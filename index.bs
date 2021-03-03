@@ -98,11 +98,11 @@ through a custom server.</p>
 ## Connections ## {#websocket-connections}
 
 To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</dfn>, given a
-<var>url</var>, run these steps:
+|url|, run these steps:
 
-1. Let <var ignore>host</var> be <var>url</var>'s <a for=url>host</a>.
-1. Let <var ignore>port</var> be <var>url</var>'s <a for=url>port</a>.
-1. Let <var ignore>secure</var> be false, if <var>url</var>'s <a for=url>scheme</a> is
+1. Let <var ignore>host</var> be |url|'s <a for=url>host</a>.
+1. Let <var ignore>port</var> be |url|'s <a for=url>port</a>.
+1. Let <var ignore>secure</var> be false, if |url|'s <a for=url>scheme</a> is
  "<code>http</code>", and true otherwise.
 1. Follow the requirements stated in step 2 to 5, inclusive, of the first set of steps in
  <a href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol
@@ -118,10 +118,10 @@ therefore not shareable, a WebSocket connection is very close to identical to an
 ## Opening handshake ## {#websocket-opening-handshake}
 
 To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, given a
-<var>url</var>, <var>protocols</var>, and <var>client</var>, run these steps:
+|url|, |protocols|, and |client|, run these steps:
 
-1. Let <var>requestURL</var> be a copy of <var>url</var>, with its <a for=url>scheme</a> set to
- "<code>http</code>", if <var>url</var>'s <a for=url>scheme</a> is "<code>ws</code>", and to
+1. Let |requestURL| be a copy of |url|, with its <a for=url>scheme</a> set to
+ "<code>http</code>", if |url|'s <a for=url>scheme</a> is "<code>ws</code>", and to
  "<code>https</code>" otherwise.
 
  <p class="note no-backref">This change of scheme is essential to integrate well with
@@ -129,9 +129,9 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
  reason for WebSocket to have distinct schemes, it's a legacy artefact.
  [[!HSTS]]
 
-1. Let <var>request</var> be a new <a for=/>request</a>, whose
- <a for=request>URL</a> is <var>requestURL</var>,
- <a for=request>client</a> is <var>client</var>,
+1. Let |request| be a new <a for=/>request</a>, whose
+ <a for=request>URL</a> is |requestURL|,
+ <a for=request>client</a> is |client|,
  <a>service-workers mode</a> is "<code>none</code>",
  <a for=request>referrer</a> is "<code>no-referrer</code>",
  <a for=request>mode</a> is "<code>websocket</code>",
@@ -140,43 +140,43 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
  <a for=request>cache mode</a> is "<code>no-store</code>", and
  <a for=request>redirect mode</a> is "<code>error</code>".
 
-1. <a for="header list">Append</a> \``Upgrade`\`/\``websocket`\` to <var>request</var>'s
+1. <a for="header list">Append</a> \``Upgrade`\`/\``websocket`\` to |request|'s
  <a for=request>header list</a>.
-1. <a for="header list">Append</a> \``Connection`\`/\``Upgrade`\` to <var>request</var>'s
+1. <a for="header list">Append</a> \``Connection`\`/\``Upgrade`\` to |request|'s
  <a for=request>header list</a>.
-1. Let <var>keyValue</var> be a nonce consisting of a randomly selected 16-byte value that has
+1. Let |keyValue| be a nonce consisting of a randomly selected 16-byte value that has
  been <a lt="forgiving-base64 encode">forgiving-base64-encoded</a> and <a>isomorphic encoded</a>.
 
  <p id=example-random-value class=example>If the randomly selected value was the byte sequence 0x01
-  0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0a 0x0b 0x0c 0x0d 0x0e 0x0f 0x10, <var>keyValue</var>
+  0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0a 0x0b 0x0c 0x0d 0x0e 0x0f 0x10, |keyValue|
   would be forgiving-base64-encoded to "`AQIDBAUGBwgJCgsMDQ4PEC==`" and isomorphic encoded to
   \``AQIDBAUGBwgJCgsMDQ4PEC==`\`.
 
-1. <a for="header list">Append</a> \``Sec-WebSocket-Key`\`/<var>keyValue</var> to
- <var>request</var>'s <a for=request>header list</a>.
-1. <a for="header list">Append</a> \``Sec-WebSocket-Version`\`/\``13`\` to <var>request</var>'s
+1. <a for="header list">Append</a> \``Sec-WebSocket-Key`\`/|keyValue| to
+ |request|'s <a for=request>header list</a>.
+1. <a for="header list">Append</a> \``Sec-WebSocket-Version`\`/\``13`\` to |request|'s
  <a for=request>header list</a>.
-1. For each <var>protocol</var> in <var>protocols</var>, <a for="header list">combine</a>
- \``Sec-WebSocket-Protocol`\`/<var>protocol</var> in <var>request</var>'s <a for=request>header
+1. For each |protocol| in |protocols|, <a for="header list">combine</a>
+ \``Sec-WebSocket-Protocol`\`/|protocol| in |request|'s <a for=request>header
  list</a>.
 
-1. Let <var>permessageDeflate</var> be a user-agent defined "<code>permessage-deflate</code>"
+1. Let |permessageDeflate| be a user-agent defined "<code>permessage-deflate</code>"
  extension <a for=/>header</a> <a for=header>value</a>. [[!WSP]]
 
  <p id=example-permessage-deflate class=example>\``permessage-deflate; client_max_window_bits`\`
 
-1. <a for="header list">Append</a> \``Sec-WebSocket-Extensions`\`/<var>permessageDeflate</var> to
- <var>request</var>'s <a for=request>header list</a>.
+1. <a for="header list">Append</a> \``Sec-WebSocket-Extensions`\`/|permessageDeflate| to
+ |request|'s <a for=request>header list</a>.
 
-1. <a lt=fetch for=/>Fetch</a> <var>request</var> with <a for=fetch><i>useParallelQueue</i></a>
- set to true, and <a for=fetch><i>processResponse</i></a> given <var>response</var> being these
+1. <a lt=fetch for=/>Fetch</a> |request| with <a for=fetch><i>useParallelQueue</i></a>
+ set to true, and <a for=fetch><i>processResponse</i></a> given |response| being these
  steps:
 
- 1. If <var>response</var> is a <a>network error</a> or its <a for=response>status</a> is not
+ 1. If |response| is a <a>network error</a> or its <a for=response>status</a> is not
   101, <a>fail the WebSocket connection</a>.
 
- 1. If <var>protocols</var> is not the empty list and <a>extracting header list values</a> given
-   \``Sec-WebSocket-Protocol`\` and <var>response</var>'s <a for=request>header list</a>
+ 1. If |protocols| is not the empty list and <a>extracting header list values</a> given
+   \``Sec-WebSocket-Protocol`\` and |response|'s <a for=request>header list</a>
    results in null, failure, or the empty byte sequence, then <a>fail the WebSocket connection</a>.
 
   <p class=note>This is different from the check on this header defined by The WebSocket Protocol.
@@ -185,7 +185,7 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
 
  1. Follow the requirements stated step 2 to step 6, inclusive, of the last set of steps in
   <a href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol
-  to validate <var>response</var>. This either results in <a>fail the WebSocket connection</a>
+  to validate |response|. This either results in <a>fail the WebSocket connection</a>
   or <a>the WebSocket connection is established</a>.
 
 <dfn>Fail the WebSocket connection</dfn> and <dfn>the WebSocket connection is established</dfn>
@@ -239,46 +239,46 @@ interface WebSocket : EventTarget {
 Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
 
 <dl class="domintro non-normative">
- <dt><code><var>socket</var> = new {{WebSocket/constructor(url, protocols)|WebSocket}}(<var>url</var> [, <var>protocols</var> ] )</code>
+ <dt><code>|socket| = new {{WebSocket/constructor(url, protocols)|WebSocket}}(|url| [, |protocols| ] )</code>
  <dd>
   <p>Creates a new {{WebSocket}} object, immediately establishing the associated
   WebSocket connection.
 
-  <p><var>url</var> is a string giving the <a dfn spec=url>URL</a> over which the connection is
+  <p>|url| is a string giving the <a dfn spec=url>URL</a> over which the connection is
   established. Only "<code>ws</code>" or "<code>wss</code>" schemes are allowed; others will cause a
   "{{SyntaxError}}" {{DOMException}}. URLs with [=fragments=] will also cause such an exception.
 
-  <p><var>protocols</var> is either a string or an array of strings. If it is a string, it is
+  <p>|protocols| is either a string or an array of strings. If it is a string, it is
   equivalent to an array consisting of just that string; if it is omitted, it is equivalent to the
   empty array. Each string in the array is a subprotocol name. The connection will only be
   established if the server reports that it has selected one of these subprotocols. The subprotocol
   names have to match the requirements for elements that comprise the value of
   <code>[=Sec-WebSocket-Protocol=]</code> fields as defined by The WebSocket protocol. [[!WSP]]
 
- <dt><code><var>socket</var> . <a method for=WebSocket data-lt=send()>send</a>( <var>data</var> )</code>
+ <dt><code>|socket| . <a method for=WebSocket data-lt=send()>send</a>( |data| )</code>
 
  <dd>
-  <p>Transmits <var>data</var> using the WebSocket connection. <var>data</var> can be a string, a
+  <p>Transmits |data| using the WebSocket connection. |data| can be a string, a
   {{Blob}}, an {{ArrayBuffer}}, or an {{ArrayBufferView}}.
 
- <dt><code><var>socket</var> . <a method for=WebSocket>close</a>( [ <var>code</var> ] [, <var>reason</var> ] )</code>
+ <dt><code>|socket| . <a method for=WebSocket>close</a>( [ |code| ] [, |reason| ] )</code>
 
  <dd>
-  <p>Closes the WebSocket connection, optionally using <var>code</var> as the [=the WebSocket
-  connection close code=] and <var>reason</var> as the [=the WebSocket connection close reason=].
+  <p>Closes the WebSocket connection, optionally using |code| as the [=the WebSocket
+  connection close code=] and |reason| as the [=the WebSocket connection close reason=].
 
- <dt><code><var>socket</var> . <a attribute for=WebSocket>url</a></code>
+ <dt><code>|socket| . <a attribute for=WebSocket>url</a></code>
 
  <dd>
   <p>Returns the <a lt="url">URL that was used</a> to establish the WebSocket connection.
 
- <dt><code><var>socket</var> . <a attribute for=WebSocket>readyState</a></code>
+ <dt><code>|socket| . <a attribute for=WebSocket>readyState</a></code>
 
  <dd>
   <p>Returns the state of the {{WebSocket}} object's connection. It can have the values
   described below.
 
- <dt><code><var>socket</var> . <a attribute>bufferedAmount</a></code>
+ <dt><code>|socket| . <a attribute>bufferedAmount</a></code>
 
  <dd>
   <p>Returns the number of bytes of application data (UTF-8 text and binary data) that have been
@@ -288,18 +288,18 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
   to the {{WebSocket/send()}} method. (The number does not reset to zero once the connection
   closes.)
 
- <dt><code><var>socket</var> . <a attribute>extensions</a></code>
+ <dt><code>|socket| . <a attribute>extensions</a></code>
 
  <dd>
   <p>Returns the extensions selected by the server, if any.
 
- <dt><code><var>socket</var> . <a attribute>protocol</a></code>
+ <dt><code>|socket| . <a attribute>protocol</a></code>
 
  <dd>
   <p>Returns the subprotocol selected by the server, if any. It can be used in conjunction with the
   array form of the constructor's second argument to perform subprotocol negotiation.
 
- <dt><code><var>socket</var> . <a attribute>binaryType</a> [ = <var ignore>value</var> ]</code>
+ <dt><code>|socket| . <a attribute>binaryType</a> [ = <var ignore>value</var> ]</code>
 
  <dd>
   <p>Returns a string that indicates how binary data from the {{WebSocket}} object is
@@ -321,7 +321,7 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
 
 <div algorithm>
 
- <p>The <dfn constructor for=WebSocket><code>WebSocket(<var>url</var>, <var>protocols</var>)</code></dfn>
+ <p>The <dfn constructor for=WebSocket><code>WebSocket(|url|, |protocols|)</code></dfn>
  constructor, when invoked, must run these steps:
 
  1. Let |urlRecord| be the result of applying the [=URL parser=] to |url|.
@@ -378,7 +378,7 @@ below.
 
 <div algorithm>
 
- <p>The <dfn method for=WebSocket><code>close(<var>code</var>, <var>reason</var>)</code></dfn>
+ <p>The <dfn method for=WebSocket><code>close(|code|, |reason|)</code></dfn>
  method, when invoked, must run these steps:
 
  1. If |code| is present, but is neither an integer equal to 1000 nor an integer in the range 3000
@@ -493,7 +493,7 @@ script to change the attribute at the last minute. This latter aspect is importa
 because it is quite possible for the attribute to be changed after the user agent has received the
 data but before the user agent has fired the event for it.
 
-The <dfn method for=WebSocket><code>send(<var>data</var>)</code></dfn> method transmits data
+The <dfn method for=WebSocket><code>send(|data|)</code></dfn> method transmits data
 using the connection. If the {{WebSocket/readyState}} attribute is <code>CONNECTING</code>, it must
 throw an "{{InvalidStateError}}" {{DOMException}}. Otherwise, the user agent must run the
 appropriate set of steps from the following list:
