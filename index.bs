@@ -70,7 +70,7 @@ spec:html; type:dfn; urlPrefix: https://html.spec.whatwg.org/multipage/webappapi
 <em>This section is non-normative.</em>
 
 To enable web applications to maintain bidirectional communications with server-side processes,
-this specification introduces the <code>WebSocket</code> interface.
+this specification introduces the `WebSocket` interface.
 
 <p class="note">This interface does not allow for raw access to the underlying network. For
 example, this interface could not be used to implement an IRC client without proxying messages
@@ -103,7 +103,7 @@ To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</df
 1. Let <var ignore>host</var> be |url|'s <a for=url>host</a>.
 1. Let <var ignore>port</var> be |url|'s <a for=url>port</a>.
 1. Let <var ignore>secure</var> be false, if |url|'s <a for=url>scheme</a> is
- "<code>http</code>", and true otherwise.
+ "`http`", and true otherwise.
 1. Follow the requirements stated in step 2 to 5, inclusive, of the first set of steps in
  <a href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol
  to establish a <a lt="obtain a WebSocket connection">WebSocket connection</a>.
@@ -121,8 +121,8 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
 |url|, |protocols|, and |client|, run these steps:
 
 1. Let |requestURL| be a copy of |url|, with its <a for=url>scheme</a> set to
- "<code>http</code>", if |url|'s <a for=url>scheme</a> is "<code>ws</code>", and to
- "<code>https</code>" otherwise.
+ "`http`", if |url|'s <a for=url>scheme</a> is "`ws`", and to
+ "`https`" otherwise.
 
  <p class="note no-backref">This change of scheme is essential to integrate well with
  <a lt=fetch for=/>fetching</a>. E.g., HSTS would not work without it. There is no real
@@ -132,13 +132,13 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
 1. Let |request| be a new <a for=/>request</a>, whose
  <a for=request>URL</a> is |requestURL|,
  <a for=request>client</a> is |client|,
- [=service-workers mode=] is "<code>none</code>",
- <a for=request>referrer</a> is "<code>no-referrer</code>",
- <a for=request>mode</a> is "<code>websocket</code>",
+ [=service-workers mode=] is "`none`",
+ <a for=request>referrer</a> is "`no-referrer`",
+ <a for=request>mode</a> is "`websocket`",
  <a for=request>credentials mode</a> is
- "<code>include</code>",
- <a for=request>cache mode</a> is "<code>no-store</code>", and
- <a for=request>redirect mode</a> is "<code>error</code>".
+ "`include`",
+ <a for=request>cache mode</a> is "`no-store`", and
+ <a for=request>redirect mode</a> is "`error`".
 
 1. <a for="header list">Append</a> \``Upgrade`\`/\``websocket`\` to |request|'s
  <a for=request>header list</a>.
@@ -160,7 +160,7 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
  \``Sec-WebSocket-Protocol`\`/|protocol| in |request|'s <a for=request>header
  list</a>.
 
-1. Let |permessageDeflate| be a user-agent defined "<code>permessage-deflate</code>"
+1. Let |permessageDeflate| be a user-agent defined "`permessage-deflate`"
  extension <a for=/>header</a> <a for=header>value</a>. [[!WSP]]
 
  <p id=example-permessage-deflate class=example>\``permessage-deflate; client_max_window_bits`\`
@@ -245,7 +245,7 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
   WebSocket connection.
 
   <p>|url| is a string giving the <a dfn spec=url>URL</a> over which the connection is
-  established. Only "<code>ws</code>" or "<code>wss</code>" schemes are allowed; others will cause a
+  established. Only "`ws`" or "`wss`" schemes are allowed; others will cause a
   "{{SyntaxError}}" {{DOMException}}. URLs with [=fragments=] will also cause such an exception.
 
   <p>|protocols| is either a string or an array of strings. If it is a string, it is
@@ -306,16 +306,16 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
   exposed to scripts:
 
    <dl>
-    <dt>"<a dfn><code>blob</code></a>"
+    <dt>"<a dfn>`blob`</a>"
     <dd>
      <p>Binary data is returned in {{Blob}} form.
 
-    <dt>"<a dfn><code>arraybuffer</code></a>"
+    <dt>"<a dfn>`arraybuffer`</a>"
     <dd>
      <p>Binary data is returned in {{ArrayBuffer}} form.
    </dl>
 
-  <p>Can be set, to change how binary data is returned. The default is "<code>blob</code>"
+  <p>Can be set, to change how binary data is returned. The default is "`blob`"
 
 </dl>
 
@@ -331,7 +331,7 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
  1. If |urlRecord|'s [=fragment=] is non-null, then throw a "{{SyntaxError}}" {{DOMException}}.
  1. If |protocols| is a string, set |protocols| to a sequence consisting of just that string.
  1. If any of the values in |protocols| occur more than once or otherwise fail to match the
-    requirements for elements that comprise the value of <a dfn><code>Sec-WebSocket-Protocol</code></a>
+    requirements for elements that comprise the value of <a dfn>`Sec-WebSocket-Protocol`</a>
     fields as defined by The WebSocket protocol, then throw a "{{SyntaxError}}" {{DOMException}}.
     [[!WSP]]
  1. Run this step [=in parallel=]:
@@ -342,37 +342,37 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
      fails, it triggers the [=fail the WebSocket connection=] algorithm, which
      then invokes the [=close the WebSocket connection=] algorithm, which then
      establishes that [=the WebSocket connection is closed=], which fires the
-     <a event><code>close</code></a> event <a href="#closeWebSocket">as described below</a>.
+     <a event>`close`</a> event <a href="#closeWebSocket">as described below</a>.
  1. Return a new {{WebSocket}} object whose [=url=] is |urlRecord|.
 
 </div>
 
 <hr>
 
-The <dfn attribute for=WebSocket><code>url</code></dfn> attribute's getter must return this
+The <dfn attribute for=WebSocket>`url`</dfn> attribute's getter must return this
 {{WebSocket}} object's [=url=], <a dfn lt="URL serializer">serialized</a>.
 
-The <dfn attribute for=WebSocket><code>readyState</code></dfn> attribute represents the state of
+The <dfn attribute for=WebSocket>`readyState`</dfn> attribute represents the state of
 the connection. It can have the following values:
 
-: <dfn><code>CONNECTING</code></dfn> (numeric value 0)
+: <dfn>`CONNECTING`</dfn> (numeric value 0)
 :: The connection has not yet been established.
-: <dfn><code>OPEN</code></dfn> (numeric value 1)
+: <dfn>`OPEN`</dfn> (numeric value 1)
 :: [=The WebSocket connection is established=] and communication is possible.
-: <dfn><code>CLOSING</code></dfn> (numeric value 2)
+: <dfn>`CLOSING`</dfn> (numeric value 2)
 :: The connection is going through the
  closing handshake, or the {{WebSocket/close()}} method has been invoked.
-: <dfn><code>CLOSED</code></dfn> (numeric value 3)
+: <dfn>`CLOSED`</dfn> (numeric value 3)
 :: The connection has been closed or could not be opened.
 
 When the object is created its {{WebSocket/readyState}} must be set to {{WebSocket/CONNECTING}}
 (0).
 
-The <dfn attribute for=WebSocket><code>extensions</code></dfn> attribute must initially return
+The <dfn attribute for=WebSocket>`extensions`</dfn> attribute must initially return
 the empty string. After [=the WebSocket connection is established=], its value might change, as
 defined below.</p>
 
-The <dfn attribute for=WebSocket><code>protocol</code></dfn> attribute must initially return the
+The <dfn attribute for=WebSocket>`protocol`</dfn> attribute must initially return the
 empty string. After [=the WebSocket connection is established=], its value might change, as defined
 below.
 
@@ -392,7 +392,7 @@ below.
   ::
    <p>Do nothing.
    <p class="note">The connection is already closing or is already closed. If it has not already, a
-   <a event><code>close</code></a> event will eventually fire <a href="#closeWebSocket">as described
+   <a event>`close`</a> event will eventually fire <a href="#closeWebSocket">as described
    below</a>.
   : If the WebSocket connection is not yet [=established=] [[!WSP]]
   ::
@@ -401,7 +401,7 @@ below.
 
    <p class="note">The [=fail the WebSocket connection=] algorithm invokes the [=close the WebSocket
    connection=] algorithm, which then establishes that [=the WebSocket connection is closed=], which
-   fires the <a event><code>close</code></a> event <a href="#closeWebSocket">as described below</a>.
+   fires the <a event>`close`</a> event <a href="#closeWebSocket">as described below</a>.
 
   : If the WebSocket closing handshake has not yet been <a lt="the WebSocket closing handshake is
     started">started</a>. [[!WSP]]
@@ -423,7 +423,7 @@ below.
 
    <p class="note">The [=start the WebSocket closing handshake=] algorithm eventually invokes the
    [=close the WebSocket connection=] algorithm, which then establishes that [=the WebSocket
-   connection is closed=], which fires the <a event><code>close</code></a> event <a
+   connection is closed=], which fires the <a event>`close`</a> event <a
    href="#closeWebSocket">as described below</a>.
 
   : Otherwise
@@ -432,7 +432,7 @@ below.
 
    <p class="note">[=The WebSocket closing handshake
    is started=], and will eventually invoke the [=close the
-   WebSocket connection=] algorithm, which will establish that [=the WebSocket connection is closed=], and thus the <a event><code>close</code></a> event will fire, <a href="#closeWebSocket">as described
+   WebSocket connection=] algorithm, which will establish that [=the WebSocket connection is closed=], and thus the <a event>`close`</a> event will fire, <a href="#closeWebSocket">as described
    below</a>.
    </dl>
 </div>
@@ -445,7 +445,7 @@ do it. -->
 
 <hr>
 
-The <dfn attribute for=WebSocket><code>bufferedAmount</code></dfn> attribute must return the number of bytes of
+The <dfn attribute for=WebSocket>`bufferedAmount`</dfn> attribute must return the number of bytes of
 application data (UTF-8 text and binary data) that have been queued using {{WebSocket/send()}} but
 that, as of the last time the [=event loop=] reached <a for="event loop">step 1</a>, had not yet
 been transmitted to the network. (This thus includes any text sent during the execution of the
@@ -480,7 +480,7 @@ handle, though this requires more careful monitoring of the value of the attribu
 <div>
 
 When a {{WebSocket}} object is created, its <dfn attribute
-for=WebSocket><code>binaryType</code></dfn> IDL attribute must be set to the string
+for=WebSocket>`binaryType`</dfn> IDL attribute must be set to the string
 "<code>[=blob=]</code>". On getting, it must return the last value it was set to. On setting, the
 user agent must set the IDL attribute to the new value.
 
@@ -494,7 +494,7 @@ because it is quite possible for the attribute to be changed after the user agen
 data but before the user agent has fired the event for it.
 
 The <dfn method for=WebSocket><code>send(|data|)</code></dfn> method transmits data
-using the connection. If the {{WebSocket/readyState}} attribute is <code>CONNECTING</code>, it must
+using the connection. If the {{WebSocket/readyState}} attribute is `CONNECTING`, it must
 throw an "{{InvalidStateError}}" {{DOMException}}. Otherwise, the user agent must run the
 appropriate set of steps from the following list:
 
@@ -559,10 +559,10 @@ attributes=], by all objects implementing the {{WebSocket}} interface:
 <thead>
 <tr><th>[=Event handler=] <th>[=Event handler event type=]
 <tbody>
-<tr><td><dfn attribute for=WebSocket><code>onopen</code></dfn> <td> <a event><code>open</code></a>
-<tr><td><dfn attribute for=WebSocket><code>onmessage</code></dfn> <td> <a event><code>message</code></a>
-<tr><td><dfn attribute for=WebSocket><code>onerror</code></dfn> <td> <a event><code>error</code></a>
-<tr><td><dfn attribute for=WebSocket><code>onclose</code></dfn> <td> <a event><code>close</code></a>
+<tr><td><dfn attribute for=WebSocket>`onopen`</dfn> <td> <a event>`open`</a>
+<tr><td><dfn attribute for=WebSocket>`onmessage`</dfn> <td> <a event>`message`</a>
+<tr><td><dfn attribute for=WebSocket>`onerror`</dfn> <td> <a event>`error`</a>
+<tr><td><dfn attribute for=WebSocket>`onclose`</dfn> <td> <a event>`close`</a>
 </table>
 
 
@@ -579,11 +579,11 @@ user agent must [=queue a task=] to run these steps:
     use=], if it is not the null value. [[!WSP]]
  1. Change the {{WebSocket/protocol}} attribute's value to the [=subprotocol in
     use=], if it is not the null value. [[!WSP]]
- 1. [=Fire an event=] named <a event><code>open</code></a> at the {{WebSocket}} object.
+ 1. [=Fire an event=] named <a event>`open`</a> at the {{WebSocket}} object.
 
 <p class="note">Since the algorithm above is <a lt="queue a task">queued as a task</a>, there is no
 race condition between <a lt="the WebSocket connection is established">the WebSocket connection
-being established</a> and the script setting up an event listener for the <a event><code>open</code></a> event.
+being established</a> and the script setting up an event listener for the <a event>`open`</a> event.
 
 <hr>
 
@@ -601,17 +601,17 @@ to follow these steps: [[!WSP]]
    :: a new {{DOMString}} containing |data|
 
    : |type| indicates that the data is Binary and {{WebSocket/binaryType}} is
-     "<dfn><code>blob</code></dfn>"
+     "<dfn>`blob`</dfn>"
    :: a new {{Blob}} object, created in the [=relevant Realm=] of the {{WebSocket}}
       object, that represents |data| as its raw data [[!FILEAPI]]
 
    : |type| indicates that the data is Binary and {{WebSocket/binaryType}} is
-     "<dfn><code>arraybuffer</code></dfn>"
+     "<dfn>`arraybuffer`</dfn>"
    :: a new {{ArrayBuffer}} object, created in the [=relevant Realm=] of the {{WebSocket}} object,
       whose contents are |data|
   </dl>
 
- 1. [=Fire an event=] named <a event><code>message</code></a> at the {{WebSocket}} object,
+ 1. [=Fire an event=] named <a event>`message`</a> at the {{WebSocket}} object,
     using {{MessageEvent}}, with the {{MessageEvent/origin}} attribute initialized to the
     <a lt="URL serializer">serialization</a> of the {{WebSocket}} object's [=url=]'s [=origin=], and
     the {{MessageEvent/data}} attribute initialized to |dataForEvent|.
@@ -619,9 +619,9 @@ to follow these steps: [[!WSP]]
 <p class="note">User agents are encouraged to check if they can perform the above steps efficiently
 before they run the task, picking tasks from other [=task queues=] while they prepare the buffers if
 not. For example, if the {{WebSocket/binaryType}} attribute was set to "<a
-dfn><code>blob</code></a>" when the data arrived, and the user agent spooled all the data to disk,
+dfn>`blob`</a>" when the data arrived, and the user agent spooled all the data to disk,
 but just before running the above [=task=] for this particular message the script switched
-{{WebSocket/binaryType}} to "<a dfn><code>arraybuffer</code></a>", the user agent would want to page
+{{WebSocket/binaryType}} to "<a dfn>`arraybuffer`</a>", the user agent would want to page
 the data back to RAM before running this [=task=] so as to avoid stalling the main thread while it
 created the {{ArrayBuffer}} object.
 
@@ -629,7 +629,7 @@ created the {{ArrayBuffer}} object.
 
 <div class="example" id="message-example">
 
-Here is an example of how to define a handler for the <a event><code>message</code></a>
+Here is an example of how to define a handler for the <a event>`message`</a>
 event in the case of text frames:
 
 <xmp highlight="js">
@@ -661,9 +661,9 @@ When [=the websocket closing handshake is started=], the user agent must [=queue
     <code>[=CLOSED=]</code> (3).
  1. If the user agent was required to [=fail the WebSocket connection=], or if the <a lt="the
     WebSocket connection is closed">the WebSocket connection was closed</a> after being <dfn>flagged
-    as full</dfn>, [=fire an event=] named <a event><code>error</code></a> at the {{WebSocket}}
+    as full</dfn>, [=fire an event=] named <a event>`error`</a> at the {{WebSocket}}
     object. [[!WSP]]
-1. [=Fire an event=] named <a event><code>close</code></a> at the {{WebSocket}} object, using
+1. [=Fire an event=] named <a event>`close`</a> at the {{WebSocket}} object, using
    {{CloseEvent}}, with the {{CloseEvent/wasClean}} attribute initialized to true if the connection
    closed [=cleanly=] and false otherwise, the {{CloseEvent/code}} attribute initialized to [=the
    WebSocket connection close code=], and the {{CloseEvent/reason}} attribute initialized to the
@@ -726,7 +726,7 @@ https://www.w3.org/Bugs/Public/show_bug.cgi?id=17264 -->
 
 # The {{CloseEvent}} interface # {#the-closeevent-interface}
 
-{{WebSocket}} objects use the {{CloseEvent}} interface for their <a event><code>close</code></a>
+{{WebSocket}} objects use the {{CloseEvent}} interface for their <a event>`close`</a>
 events:
 
 <xmp class="idl">
@@ -759,13 +759,13 @@ dictionary CloseEventInit : EventInit {
 
 <div>
 
-The <dfn attribute for=CloseEvent><code>wasClean</code></dfn> attribute must return the value it was initialized
+The <dfn attribute for=CloseEvent>`wasClean`</dfn> attribute must return the value it was initialized
  to. It represents whether the connection closed cleanly or not.
 
-The <dfn attribute for=CloseEvent><code>code</code></dfn> attribute must return the value it was initialized to.
+The <dfn attribute for=CloseEvent>`code`</dfn> attribute must return the value it was initialized to.
  It represents the WebSocket connection close code provided by the server.
 
-The <dfn attribute for=CloseEvent><code>reason</code></dfn> attribute must return the value it was initialized
+The <dfn attribute for=CloseEvent>`reason`</dfn> attribute must return the value it was initialized
 to. It represents the WebSocket connection close reason provided by the server.
 
 
@@ -775,19 +775,19 @@ to. It represents the WebSocket connection close reason provided by the server.
 A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
 <code>[=CONNECTING=]</code> (0) as of the last time the [=event loop=] reached <a for="event
 loop">step 1</a> must not be garbage collected if there are any event listeners registered for <a
-event><code>open</code></a> events, <a event><code>message</code></a> events, <a
-event><code>error</code></a> events, or <a event><code>close</code></a> events.
+event>`open`</a> events, <a event>`message`</a> events, <a
+event>`error`</a> events, or <a event>`close`</a> events.
 
 A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
 <code>[=OPEN=]</code> (1) as of the last time the [=event loop=] reached <a for="event loop">step
 1</a> must not be garbage collected if there are any event listeners registered for <a
-event><code>message</code></a> events, <a event><code>error</code></a>, or <a
-event><code>close</code></a> events.
+event>`message`</a> events, <a event>`error`</a>, or <a
+event>`close`</a> events.
 
 A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
 <code>[=CLOSING=]</code> (2) as of the last time the [=event loop=] reached
 <a for="event loop">step 1</a> must not be garbage collected if there are any event listeners
-registered for <a event><code>error</code></a> or <a event><code>close</code></a> events.
+registered for <a event>`error`</a> or <a event>`close`</a> events.
 
 A {{WebSocket}} object with <a lt="the WebSocket connection is established">an established
 connection</a> that has data queued to be transmitted to the network must not be garbage collected.
