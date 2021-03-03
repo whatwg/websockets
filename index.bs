@@ -80,13 +80,13 @@ through a custom server.</p>
 # WebSocket protocol alterations # {#websocket-protocol}
 
 <div class=note>
- <p>This section replaces part of the WebSocket protocol opening handshake client requirement to
+ This section replaces part of the WebSocket protocol opening handshake client requirement to
  integrate it with algorithms defined in Fetch. This way CSP, cookies, HSTS, and other Fetch-related
  protocols are handled in a single location. Ideally the RFC would be updated with this language,
  but it is never that easy. The WebSocket API, defined in the HTML Standard, has been updated to use
  this language. [[!WSP]] [[!HTML]]
 
- <p>The way this works is by replacing The WebSocket Protocol's "establish a WebSocket connection"
+ The way this works is by replacing The WebSocket Protocol's "establish a WebSocket connection"
  algorithm with a new one that integrates with Fetch. "Establish a WebSocket connection" consists of
  three algorithms: setting up a connection, creating and transmiting a handshake request, and
  validating the handshake response. That layering is different from Fetch, which first creates a
@@ -100,21 +100,15 @@ through a custom server.</p>
 To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</dfn>, given a
 <var>url</var>, run these steps:
 
-<ol>
- <li><p>Let <var ignore>host</var> be <var>url</var>'s <a for=url>host</a>.
-
- <li><p>Let <var ignore>port</var> be <var>url</var>'s <a for=url>port</a>.
-
- <li><p>Let <var ignore>secure</var> be false, if <var>url</var>'s <a for=url>scheme</a> is
+1. Let <var ignore>host</var> be <var>url</var>'s <a for=url>host</a>.
+1. Let <var ignore>port</var> be <var>url</var>'s <a for=url>port</a>.
+1. Let <var ignore>secure</var> be false, if <var>url</var>'s <a for=url>scheme</a> is
  "<code>http</code>", and true otherwise.
-
- <li><p>Follow the requirements stated in step 2 to 5, inclusive, of the first set of steps in
+1. Follow the requirements stated in step 2 to 5, inclusive, of the first set of steps in
  <a href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol
  to establish a <a lt="obtain a WebSocket connection">WebSocket connection</a>.
  [[!WSP]]
-
- <li><p>If that established a connection, return it, and return failure otherwise.
-</ol>
+1. If that established a connection, return it, and return failure otherwise.
 
 <p class=note>Although structured a little differently, carrying different properties, and
 therefore not shareable, a WebSocket connection is very close to identical to an "ordinary"
@@ -126,20 +120,16 @@ therefore not shareable, a WebSocket connection is very close to identical to an
 To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, given a
 <var>url</var>, <var>protocols</var>, and <var>client</var>, run these steps:
 
-<ol>
- <li>
-  <p>Let <var>requestURL</var> be a copy of <var>url</var>, with its
-  <a for=url>scheme</a> set to
-  "<code>http</code>", if <var>url</var>'s
-  <a for=url>scheme</a> is "<code>ws</code>", and
-  to "<code>https</code>" otherwise.
+1. Let <var>requestURL</var> be a copy of <var>url</var>, with its <a for=url>scheme</a> set to
+ "<code>http</code>", if <var>url</var>'s <a for=url>scheme</a> is "<code>ws</code>", and to
+ "<code>https</code>" otherwise.
 
-  <p class="note no-backref">This change of scheme is essential to integrate well with
-  <a lt=fetch for=/>fetching</a>. E.g., HSTS would not work without it. There is no real
-  reason for WebSocket to have distinct schemes, it's a legacy artefact.
-  [[!HSTS]]
+ <p class="note no-backref">This change of scheme is essential to integrate well with
+ <a lt=fetch for=/>fetching</a>. E.g., HSTS would not work without it. There is no real
+ reason for WebSocket to have distinct schemes, it's a legacy artefact.
+ [[!HSTS]]
 
- <li><p>Let <var>request</var> be a new <a for=/>request</a>, whose
+1. Let <var>request</var> be a new <a for=/>request</a>, whose
  <a for=request>URL</a> is <var>requestURL</var>,
  <a for=request>client</a> is <var>client</var>,
  <a>service-workers mode</a> is "<code>none</code>",
@@ -150,57 +140,42 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
  <a for=request>cache mode</a> is "<code>no-store</code>", and
  <a for=request>redirect mode</a> is "<code>error</code>".
 
- <li><p><a for="header list">Append</a>
- \``Upgrade`\`/\``websocket`\` to
- <var>request</var>'s <a for=request>header list</a>.
-
- <li><p><a for="header list">Append</a>
- \``Connection`\`/\``Upgrade`\` to
- <var>request</var>'s <a for=request>header list</a>.
-
- <li>
-  <p>Let <var>keyValue</var> be a nonce consisting of a randomly selected 16-byte value that has
-  been <a lt="forgiving-base64 encode">forgiving-base64-encoded</a> and <a>isomorphic encoded</a>.
-
- <p id=example-random-value class=example>If the randomly selected value was the byte sequence 0x01 0x02 0x03 0x04 0x05
-  0x06 0x07 0x08 0x09 0x0a 0x0b 0x0c 0x0d 0x0e 0x0f 0x10, <var>keyValue</var> would be
-  forgiving-base64-encoded to "`AQIDBAUGBwgJCgsMDQ4PEC==`" and isomorphic encoded
-  to \``AQIDBAUGBwgJCgsMDQ4PEC==`\`.
-
- <li><p><a for="header list">Append</a>
- \``Sec-WebSocket-Key`\`/<var>keyValue</var> to
- <var>request</var>'s <a for=request>header list</a>.
-
- <li><p><a for="header list">Append</a>
- \``Sec-WebSocket-Version`\`/\``13`\` to
- <var>request</var>'s <a for=request>header list</a>.
-
- <li><p>For each <var>protocol</var> in <var>protocols</var>, <a for="header list">combine</a>
- \``Sec-WebSocket-Protocol`\`/<var>protocol</var> in <var>request</var>'s
+1. <a for="header list">Append</a> \``Upgrade`\`/\``websocket`\` to <var>request</var>'s
  <a for=request>header list</a>.
+1. <a for="header list">Append</a> \``Connection`\`/\``Upgrade`\` to <var>request</var>'s
+ <a for=request>header list</a>.
+1. Let <var>keyValue</var> be a nonce consisting of a randomly selected 16-byte value that has
+ been <a lt="forgiving-base64 encode">forgiving-base64-encoded</a> and <a>isomorphic encoded</a>.
 
- <li>
-  <p>Let <var>permessageDeflate</var> be a user-agent defined
-  "<code>permessage-deflate</code>" extension <a for=/>header</a>
-  <a for=header>value</a>. [[!WSP]]
+ <p id=example-random-value class=example>If the randomly selected value was the byte sequence 0x01
+  0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0a 0x0b 0x0c 0x0d 0x0e 0x0f 0x10, <var>keyValue</var>
+  would be forgiving-base64-encoded to "`AQIDBAUGBwgJCgsMDQ4PEC==`" and isomorphic encoded to
+  \``AQIDBAUGBwgJCgsMDQ4PEC==`\`.
 
-  <p id=example-permessage-deflate class=example>\``permessage-deflate; client_max_window_bits`\`
+1. <a for="header list">Append</a> \``Sec-WebSocket-Key`\`/<var>keyValue</var> to
+ <var>request</var>'s <a for=request>header list</a>.
+1. <a for="header list">Append</a> \``Sec-WebSocket-Version`\`/\``13`\` to <var>request</var>'s
+ <a for=request>header list</a>.
+1. For each <var>protocol</var> in <var>protocols</var>, <a for="header list">combine</a>
+ \``Sec-WebSocket-Protocol`\`/<var>protocol</var> in <var>request</var>'s <a for=request>header
+ list</a>.
 
- <li><p><a for="header list">Append</a>
- \``Sec-WebSocket-Extensions`\`/<var>permessageDeflate</var>
- to <var>request</var>'s <a for=request>header list</a>.
+1. Let <var>permessageDeflate</var> be a user-agent defined "<code>permessage-deflate</code>"
+ extension <a for=/>header</a> <a for=header>value</a>. [[!WSP]]
 
- <li>
-  <p><a lt=fetch for=/>Fetch</a> <var>request</var> with <a for=fetch><i>useParallelQueue</i></a>
-  set to true, and <a for=fetch><i>processResponse</i></a> given <var>response</var> being these
-  steps:
+ <p id=example-permessage-deflate class=example>\``permessage-deflate; client_max_window_bits`\`
 
- <ol>
-  <li><p>If <var>response</var> is a <a>network error</a> or its <a for=response>status</a> is not
+1. <a for="header list">Append</a> \``Sec-WebSocket-Extensions`\`/<var>permessageDeflate</var> to
+ <var>request</var>'s <a for=request>header list</a>.
+
+1. <a lt=fetch for=/>Fetch</a> <var>request</var> with <a for=fetch><i>useParallelQueue</i></a>
+ set to true, and <a for=fetch><i>processResponse</i></a> given <var>response</var> being these
+ steps:
+
+ 1. If <var>response</var> is a <a>network error</a> or its <a for=response>status</a> is not
   101, <a>fail the WebSocket connection</a>.
 
-  <li>
-   <p>If <var>protocols</var> is not the empty list and <a>extracting header list values</a> given
+ 1. If <var>protocols</var> is not the empty list and <a>extracting header list values</a> given
    \``Sec-WebSocket-Protocol`\` and <var>response</var>'s <a for=request>header list</a>
    results in null, failure, or the empty byte sequence, then <a>fail the WebSocket connection</a>.
 
@@ -208,12 +183,10 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
   That only covers a subprotocol not requested by the client. This covers a subprotocol requested
   by the client, but not acknowledged by the server.
 
-  <li><p>Follow the requirements stated step 2 to step 6, inclusive, of the last set of steps in
+ 1. Follow the requirements stated step 2 to step 6, inclusive, of the last set of steps in
   <a href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol
   to validate <var>response</var>. This either results in <a>fail the WebSocket connection</a>
   or <a>the WebSocket connection is established</a>.
- </ol>
-</ol>
 
 <dfn>Fail the WebSocket connection</dfn> and <dfn>the WebSocket connection is established</dfn>
 are defined by The WebSocket Protocol. [[!WSP]]

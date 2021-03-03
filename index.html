@@ -11,7 +11,7 @@
 <script async crossorigin src="https://resources.whatwg.org/file-issue.js"></script>
 <script async crossorigin src="https://resources.whatwg.org/commit-snapshot-shortcut-key.js"></script>
   <meta content="Bikeshed version 40de15f9, updated Thu Jun 11 17:47:04 2020 -0700" name="generator">
-  <meta content="f00b6f14f472b825afa8bb6d9febd4ed86012931" name="document-revision">
+  <meta content="5a76bb4766549d740cf422b369f4a9db19d39159" name="document-revision">
 <style>/* style-dfn-panel */
 
 .dfn-panel {
@@ -133,87 +133,87 @@ through a custom server.</p>
    </div>
    <h2 class="heading settled" data-level="2" id="websocket-protocol"><span class="secno">2. </span><span class="content">WebSocket protocol alterations</span><a class="self-link" href="#websocket-protocol"></a></h2>
    <div class="note" role="note">
-    <p>This section replaces part of the WebSocket protocol opening handshake client requirement to
+     This section replaces part of the WebSocket protocol opening handshake client requirement to
  integrate it with algorithms defined in Fetch. This way CSP, cookies, HSTS, and other Fetch-related
  protocols are handled in a single location. Ideally the RFC would be updated with this language,
  but it is never that easy. The WebSocket API, defined in the HTML Standard, has been updated to use
- this language. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a> </p>
+ this language. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> <a data-link-type="biblio" href="#biblio-html">[HTML]</a> 
     <p>The way this works is by replacing The WebSocket Protocol’s "establish a WebSocket connection"
  algorithm with a new one that integrates with Fetch. "Establish a WebSocket connection" consists of
  three algorithms: setting up a connection, creating and transmiting a handshake request, and
  validating the handshake response. That layering is different from Fetch, which first creates a
  handshake, then sets up a connection and transmits the handshake, and finally validates the
- response. Keep that in mind while reading these alterations. </p>
+ response. Keep that in mind while reading these alterations.</p>
    </div>
    <h3 class="heading settled" data-level="2.1" id="websocket-connections"><span class="secno">2.1. </span><span class="content">Connections</span><a class="self-link" href="#websocket-connections"></a></h3>
    <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="concept-websocket-connection-obtain">obtain a WebSocket connection</dfn>, given a <var>url</var>, run these steps:</p>
    <ol>
-    <li>
-     <p>Let <var>host</var> be <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host" id="ref-for-concept-url-host">host</a>. </p>
-    <li>
-     <p>Let <var>port</var> be <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port">port</a>. </p>
-    <li>
+    <li data-md>
+     <p>Let <var>host</var> be <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-host" id="ref-for-concept-url-host">host</a>.</p>
+    <li data-md>
+     <p>Let <var>port</var> be <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port">port</a>.</p>
+    <li data-md>
      <p>Let <var>secure</var> be false, if <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme">scheme</a> is
- "<code>http</code>", and true otherwise. </p>
-    <li>
+"<code>http</code>", and true otherwise.</p>
+    <li data-md>
      <p>Follow the requirements stated in step 2 to 5, inclusive, of the first set of steps in <a href="http://tools.ietf.org/html/rfc6455#section-4.1">section 4.1</a> of The WebSocket Protocol
- to establish a <a data-link-type="dfn" href="#concept-websocket-connection-obtain" id="ref-for-concept-websocket-connection-obtain">WebSocket connection</a>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> </p>
-    <li>
-     <p>If that established a connection, return it, and return failure otherwise. </p>
+to establish a <a data-link-type="dfn" href="#concept-websocket-connection-obtain" id="ref-for-concept-websocket-connection-obtain">WebSocket connection</a>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+    <li data-md>
+     <p>If that established a connection, return it, and return failure otherwise.</p>
    </ol>
    <p class="note" role="note">Although structured a little differently, carrying different properties, and
 therefore not shareable, a WebSocket connection is very close to identical to an "ordinary" <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-connection" id="ref-for-concept-connection">connection</a>. </p>
    <h3 class="heading settled" data-level="2.2" id="websocket-opening-handshake"><span class="secno">2.2. </span><span class="content">Opening handshake</span><a class="self-link" href="#websocket-opening-handshake"></a></h3>
    <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="concept-websocket-establish">establish a WebSocket connection</dfn>, given a <var>url</var>, <var>protocols</var>, and <var>client</var>, run these steps:</p>
    <ol>
-    <li>
+    <li data-md>
      <p>Let <var>requestURL</var> be a copy of <var>url</var>, with its <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme①">scheme</a> set to
-  "<code>http</code>", if <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme②">scheme</a> is "<code>ws</code>", and
-  to "<code>https</code>" otherwise. </p>
+"<code>http</code>", if <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme②">scheme</a> is "<code>ws</code>", and to
+"<code>https</code>" otherwise.</p>
      <p class="note no-backref" role="note">This change of scheme is essential to integrate well with <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch">fetching</a>. E.g., HSTS would not work without it. There is no real
-  reason for WebSocket to have distinct schemes, it’s a legacy artefact. <a data-link-type="biblio" href="#biblio-hsts">[HSTS]</a> </p>
-    <li>
+reason for WebSocket to have distinct schemes, it’s a legacy artefact. <a data-link-type="biblio" href="#biblio-hsts">[HSTS]</a> </p>
+    <li data-md>
      <p>Let <var>request</var> be a new <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request" id="ref-for-concept-request">request</a>, whose <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-url" id="ref-for-concept-request-url">URL</a> is <var>requestURL</var>, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-client" id="ref-for-concept-request-client">client</a> is <var>client</var>, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#request-service-workers-mode" id="ref-for-request-service-workers-mode">service-workers mode</a> is "<code>none</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-referrer" id="ref-for-concept-request-referrer">referrer</a> is "<code>no-referrer</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-mode" id="ref-for-concept-request-mode">mode</a> is "<code>websocket</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-credentials-mode" id="ref-for-concept-request-credentials-mode">credentials mode</a> is
- "<code>include</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-cache-mode" id="ref-for-concept-request-cache-mode">cache mode</a> is "<code>no-store</code>", and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-redirect-mode" id="ref-for-concept-request-redirect-mode">redirect mode</a> is "<code>error</code>". </p>
-    <li>
-     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append">Append</a> `<code>Upgrade</code>`/`<code>websocket</code>` to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list">header list</a>. </p>
-    <li>
-     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append①">Append</a> `<code>Connection</code>`/`<code>Upgrade</code>` to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list①">header list</a>. </p>
-    <li>
+"<code>include</code>", <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-cache-mode" id="ref-for-concept-request-cache-mode">cache mode</a> is "<code>no-store</code>", and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-redirect-mode" id="ref-for-concept-request-redirect-mode">redirect mode</a> is "<code>error</code>".</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append">Append</a> `<code>Upgrade</code>`/`<code>websocket</code>` to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list">header list</a>.</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append①">Append</a> `<code>Connection</code>`/`<code>Upgrade</code>` to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list①">header list</a>.</p>
+    <li data-md>
      <p>Let <var>keyValue</var> be a nonce consisting of a randomly selected 16-byte value that has
-  been <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#forgiving-base64-encode" id="ref-for-forgiving-base64-encode">forgiving-base64-encoded</a> and <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#isomorphic-encode" id="ref-for-isomorphic-encode">isomorphic encoded</a>. </p>
-     <p class="example" id="example-random-value"><a class="self-link" href="#example-random-value"></a>If the randomly selected value was the byte sequence 0x01 0x02 0x03 0x04 0x05
-  0x06 0x07 0x08 0x09 0x0a 0x0b 0x0c 0x0d 0x0e 0x0f 0x10, <var>keyValue</var> would be
-  forgiving-base64-encoded to "<code>AQIDBAUGBwgJCgsMDQ4PEC==</code>" and isomorphic encoded
-  to `<code>AQIDBAUGBwgJCgsMDQ4PEC==</code>`. </p>
-    <li>
-     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append②">Append</a> `<code>Sec-WebSocket-Key</code>`/<var>keyValue</var> to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list②">header list</a>. </p>
-    <li>
-     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append③">Append</a> `<code>Sec-WebSocket-Version</code>`/`<code>13</code>` to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list③">header list</a>. </p>
-    <li>
-     <p>For each <var>protocol</var> in <var>protocols</var>, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-combine" id="ref-for-concept-header-list-combine">combine</a> `<code>Sec-WebSocket-Protocol</code>`/<var>protocol</var> in <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list④">header list</a>. </p>
-    <li>
-     <p>Let <var>permessageDeflate</var> be a user-agent defined
-  "<code>permessage-deflate</code>" extension <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header" id="ref-for-concept-header">header</a> <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-value" id="ref-for-concept-header-value">value</a>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> </p>
+been <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#forgiving-base64-encode" id="ref-for-forgiving-base64-encode">forgiving-base64-encoded</a> and <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#isomorphic-encode" id="ref-for-isomorphic-encode">isomorphic encoded</a>.</p>
+     <p class="example" id="example-random-value"><a class="self-link" href="#example-random-value"></a>If the randomly selected value was the byte sequence 0x01
+ 0x02 0x03 0x04 0x05 0x06 0x07 0x08 0x09 0x0a 0x0b 0x0c 0x0d 0x0e 0x0f 0x10, <var>keyValue</var> would be forgiving-base64-encoded to "<code>AQIDBAUGBwgJCgsMDQ4PEC==</code>" and isomorphic encoded to
+ `<code>AQIDBAUGBwgJCgsMDQ4PEC==</code>`. </p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append②">Append</a> `<code>Sec-WebSocket-Key</code>`/<var>keyValue</var> to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list②">header list</a>.</p>
+    <li data-md>
+     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append③">Append</a> `<code>Sec-WebSocket-Version</code>`/`<code>13</code>` to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list③">header list</a>.</p>
+    <li data-md>
+     <p>For each <var>protocol</var> in <var>protocols</var>, <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-combine" id="ref-for-concept-header-list-combine">combine</a> `<code>Sec-WebSocket-Protocol</code>`/<var>protocol</var> in <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list④">header
+list</a>.</p>
+    <li data-md>
+     <p>Let <var>permessageDeflate</var> be a user-agent defined "<code>permessage-deflate</code>"
+extension <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header" id="ref-for-concept-header">header</a> <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-value" id="ref-for-concept-header-value">value</a>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <p class="example" id="example-permessage-deflate"><a class="self-link" href="#example-permessage-deflate"></a>`<code>permessage-deflate; client_max_window_bits</code>` </p>
-    <li>
-     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append④">Append</a> `<code>Sec-WebSocket-Extensions</code>`/<var>permessageDeflate</var> to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list⑤">header list</a>. </p>
-    <li>
+    <li data-md>
+     <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-header-list-append" id="ref-for-concept-header-list-append④">Append</a> `<code>Sec-WebSocket-Extensions</code>`/<var>permessageDeflate</var> to <var>request</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list⑤">header list</a>.</p>
+    <li data-md>
      <p><a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch①">Fetch</a> <var>request</var> with <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#fetch-useparallelqueue" id="ref-for-fetch-useparallelqueue"><i>useParallelQueue</i></a> set to true, and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#process-response" id="ref-for-process-response"><i>processResponse</i></a> given <var>response</var> being these
-  steps: </p>
+steps:</p>
      <ol>
-      <li>
+      <li data-md>
        <p>If <var>response</var> is a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error" id="ref-for-concept-network-error">network error</a> or its <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response-status" id="ref-for-concept-response-status">status</a> is not
-  101, <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection">fail the WebSocket connection</a>. </p>
-      <li>
+101, <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection">fail the WebSocket connection</a>.</p>
+      <li data-md>
        <p>If <var>protocols</var> is not the empty list and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#extract-header-list-values" id="ref-for-extract-header-list-values">extracting header list values</a> given
-   `<code>Sec-WebSocket-Protocol</code>` and <var>response</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list⑥">header list</a> results in null, failure, or the empty byte sequence, then <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection①">fail the WebSocket connection</a>. </p>
+ `<code>Sec-WebSocket-Protocol</code>` and <var>response</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list⑥">header list</a> results in null, failure, or the empty byte sequence, then <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection①">fail the WebSocket connection</a>.</p>
        <p class="note" role="note">This is different from the check on this header defined by The WebSocket Protocol.
-  That only covers a subprotocol not requested by the client. This covers a subprotocol requested
-  by the client, but not acknowledged by the server. </p>
-      <li>
+That only covers a subprotocol not requested by the client. This covers a subprotocol requested
+by the client, but not acknowledged by the server. </p>
+      <li data-md>
        <p>Follow the requirements stated step 2 to step 6, inclusive, of the last set of steps in <a href="http://tools.ietf.org/html/rfc6455#section-4.1">section 4.1</a> of The WebSocket Protocol
-  to validate <var>response</var>. This either results in <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection②">fail the WebSocket connection</a> or <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established">the WebSocket connection is established</a>. </p>
+to validate <var>response</var>. This either results in <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection②">fail the WebSocket connection</a> or <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established">the WebSocket connection is established</a>.</p>
      </ol>
    </ol>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fail-the-websocket-connection">Fail the WebSocket connection</dfn> and <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="the-websocket-connection-is-established">the WebSocket connection is established</dfn> are defined by The WebSocket Protocol. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
