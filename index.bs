@@ -280,9 +280,9 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
  :: Returns a string that indicates how binary data from the {{WebSocket}} object is exposed to
   scripts:
 
-  : "{{blob}}"
+  : "{{BinaryType/blob}}"
   :: Binary data is returned in {{Blob}} form.
-  : "{{arraybuffer}}"
+  : "{{BinaryType/arraybuffer}}"
   :: Binary data is returned in {{ArrayBuffer}} form.
 
   Can be set, to change how binary data is returned. The default is "{{blob}}"
@@ -561,12 +561,12 @@ to follow these steps: [[!WSP]]
    :: a new {{DOMString}} containing |data|
 
    : |type| indicates that the data is Binary and {{WebSocket/binaryType}} is
-     "{{BinaryType/blob}}"
+     <dfn enum-value for=BinaryType>"blob"</a>
    :: a new {{Blob}} object, created in the [=relevant Realm=] of the {{WebSocket}}
       object, that represents |data| as its raw data [[!FILEAPI]]
 
    : |type| indicates that the data is Binary and {{WebSocket/binaryType}} is
-     "{{BinaryType/arraybuffer}}"
+     <dfn enum-value for=BinaryType>"arraybuffer"</dfn>
    :: a new {{ArrayBuffer}} object, created in the [=relevant Realm=] of the {{WebSocket}} object,
       whose contents are |data|
   </dl>
