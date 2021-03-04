@@ -70,7 +70,7 @@ spec:html; type:dfn; urlPrefix: https://html.spec.whatwg.org/multipage/webappapi
 <em>This section is non-normative.</em>
 
 To enable web applications to maintain bidirectional communications with server-side processes,
-this specification introduces the `WebSocket` interface.
+this specification introduces the {{WebSocket}} interface.
 
 <p class="note">This interface does not allow for raw access to the underlying network. For
 example, this interface could not be used to implement an IRC client without proxying messages
