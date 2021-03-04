@@ -64,6 +64,7 @@ spec:html; type:dfn; urlPrefix: https://html.spec.whatwg.org/multipage/webappapi
  for:event loop; text:step 1; url:step1
 </pre>
 
+
 # Introduction # {#network-intro}
 
 <div class="non-normative">
@@ -77,6 +78,7 @@ this specification introduces the {{WebSocket}} interface.
 example, this interface could not be used to implement an IRC client without proxying messages
 through a custom server.</p>
 </div>
+
 
 # WebSocket protocol alterations # {#websocket-protocol}
 
@@ -98,6 +100,8 @@ through a custom server.</p>
 
 ## Connections ## {#websocket-connections}
 
+<div algorithm>
+
 To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</dfn>, given a
 |url|, run these steps:
 
@@ -115,8 +119,12 @@ To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</df
 therefore not shareable, a WebSocket connection is very close to identical to an "ordinary"
 [=connection=].
 
+</div>
+
 
 ## Opening handshake ## {#websocket-opening-handshake}
+
+<div algorithm>
 
 To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, given a
 |url|, |protocols|, and |client|, run these steps:
@@ -177,6 +185,8 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
   <a href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol
   to validate |response|. This either results in [=fail the WebSocket connection=]
   or [=the WebSocket connection is established=].
+
+</div>
 
 <dfn>Fail the WebSocket connection</dfn> and <dfn>the WebSocket connection is established</dfn>
 are defined by The WebSocket Protocol. [[!WSP]]
@@ -523,8 +533,10 @@ that must be supported, as [=event handler IDL attributes=], by all objects impl
 
 # Feedback from the protocol # {#feedback-from-the-protocol}
 
-When [=the WebSocket connection is established=], the
-user agent must [=queue a task=] to run these steps:
+When [=the WebSocket connection is established=], the user agent must [=queue a task=] to run these
+steps:
+
+<div algorithm="handle connection establishment">
 
  1. Change the {{WebSocket/readyState}} attribute's value to {{WebSocket/OPEN}}
     (1).
@@ -538,7 +550,11 @@ user agent must [=queue a task=] to run these steps:
 race condition between <a lt="the WebSocket connection is established">the WebSocket connection
 being established</a> and the script setting up an event listener for the {{open!!event}} event.
 
+</div>
+
 <hr>
+
+<div algorithm="handle a WebSocket message">
 
 When [=a WebSocket message has been received=] with type |type| and data |data|, the user agent must
 [=queue a task=] to follow these steps: [[!WSP]]
@@ -575,6 +591,8 @@ but just before running the above [=task=] for this particular message the scrip
 the data back to RAM before running this [=task=] so as to avoid stalling the main thread while it
 created the {{ArrayBuffer}} object.
 
+</div>
+
 <div class="example" id="message-example">
 
 Here is an example of how to define a handler for the {{message!!event}}
@@ -606,6 +624,8 @@ be set to {{WebSocket/CLOSING}} (2) when this task runs.) [[!WSP]]
 <p id="closeWebSocket">When [=the WebSocket connection is closed=], possibly [=cleanly=], the user
  agent must [=queue a task=] to run the following substeps:
 
+<div algorithm="handle connection close">
+
  1. Change the {{WebSocket/readyState}} attribute's value to {{WebSocket/CLOSED}} (3).
  1. If the user agent was required to [=fail the WebSocket connection=], or if the <a lt="the
     WebSocket connection is closed">the WebSocket connection was closed</a> after being <dfn>flagged
@@ -615,6 +635,8 @@ be set to {{WebSocket/CLOSING}} (2) when this task runs.) [[!WSP]]
    and false otherwise, the {{CloseEvent/code}} attribute initialized to [=the WebSocket connection
    close code=], and the {{CloseEvent/reason}} attribute initialized to the result of applying
    [=UTF-8 decode without BOM=] to [=the WebSocket connection close reason=].  [[!WSP]]
+
+</div>
 
 <div class="warning">
 
@@ -740,6 +762,8 @@ message. [[!WSP]]
 If a user agent is to <dfn export>make disappear</dfn> a {{WebSocket}} object (this happens when a
 {{Document}} object goes away), the user agent must follow the first appropriate set of steps from
 the following list:
+
+<div algorithm="to make disappear">
 
 <dl class="switch">
 
