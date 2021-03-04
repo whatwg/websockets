@@ -188,7 +188,7 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
 
 </div>
 
-<dfn>Fail the WebSocket connection</dfn> and <dfn>the WebSocket connection is established</dfn>
+[=Fail the WebSocket connection=] and [=the WebSocket connection is established=]
 are defined by The WebSocket Protocol. [[!WSP]]
 
 <p class=warning>The reason redirects are not followed and this handshake is generally restricted is

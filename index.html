@@ -12,7 +12,7 @@
 <script async crossorigin src="https://resources.whatwg.org/commit-snapshot-shortcut-key.js"></script>
 <script crossorigin defer src="https://resources.whatwg.org/standard-mdn-annos.js"></script>
   <meta content="Bikeshed version b94c7e755, updated Fri Feb 19 16:28:59 2021 -0800" name="generator">
-  <meta content="e8d5971b2739c7e9c5bc99509875c7e3ed100231" name="document-revision">
+  <meta content="ff3be958313ff76137ba05d932afc248601251ed" name="document-revision">
 <style>/* style-var-click-highlighting */
 
     var { cursor: pointer; }
@@ -167,21 +167,21 @@ reason for WebSocket to have distinct schemes, it’s a legacy artefact. <a data
 and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#process-response" id="ref-for-process-response"><i>processResponse</i></a> given <var>response</var> being these steps:</p>
       <ol>
        <li data-md>
-        <p>If <var>response</var> is a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error" id="ref-for-concept-network-error">network error</a> or its <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response-status" id="ref-for-concept-response-status">status</a> is not 101, <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection">fail the
+        <p>If <var>response</var> is a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-network-error" id="ref-for-concept-network-error">network error</a> or its <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-response-status" id="ref-for-concept-response-status">status</a> is not 101, <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7">fail the
 WebSocket connection</a>.</p>
        <li data-md>
         <p>If <var>protocols</var> is not the empty list and <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#extract-header-list-values" id="ref-for-extract-header-list-values">extracting header list values</a> given
- `<code>Sec-WebSocket-Protocol</code>` and <var>response</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list⑥">header list</a> results in null, failure, or the empty byte sequence, then <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection①">fail the WebSocket connection</a>.</p>
+ `<code>Sec-WebSocket-Protocol</code>` and <var>response</var>’s <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-request-header-list" id="ref-for-concept-request-header-list⑥">header list</a> results in null, failure, or the empty byte sequence, then <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7①">fail the WebSocket connection</a>.</p>
         <p class="note" role="note">This is different from the check on this header defined by The WebSocket Protocol.
 That only covers a subprotocol not requested by the client. This covers a subprotocol requested
 by the client, but not acknowledged by the server. </p>
        <li data-md>
         <p>Follow the requirements stated step 2 to step 6, inclusive, of the last set of steps in <a href="http://tools.ietf.org/html/rfc6455#section-4.1">section 4.1</a> of The WebSocket Protocol
-to validate <var>response</var>. This either results in <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection②">fail the WebSocket connection</a> or <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established">the WebSocket connection is established</a>.</p>
+to validate <var>response</var>. This either results in <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7②">fail the WebSocket connection</a> or <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and">the WebSocket connection is established</a>.</p>
       </ol>
     </ol>
    </div>
-   <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fail-the-websocket-connection">Fail the WebSocket connection</dfn> and <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="the-websocket-connection-is-established">the WebSocket connection is established</dfn> are defined by The WebSocket Protocol. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+   <p><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7③">Fail the WebSocket connection</a> and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①">the WebSocket connection is established</a> are defined by The WebSocket Protocol. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
    <p class="warning">The reason redirects are not followed and this handshake is generally restricted is
 because it could introduce serious security problems in a web browser context. For example, consider
 a host with a WebSocket server at one path and an open HTTP redirector at another. Suddenly, any
@@ -300,7 +300,7 @@ scripts:</p>
         <p><a data-link-type="dfn" href="#concept-websocket-establish" id="ref-for-concept-websocket-establish">Establish a WebSocket connection</a> given <var>urlRecord</var>, <var>protocols</var>, and the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object" id="ref-for-entry-settings-object">entry settings
   object</a>.</p>
         <p class="note" role="note">If the <a data-link-type="dfn" href="#concept-websocket-establish" id="ref-for-concept-websocket-establish①">establish a WebSocket connection</a> algorithm
-  fails, it triggers the <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection③">fail the WebSocket connection</a> algorithm, which
+  fails, it triggers the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7④">fail the WebSocket connection</a> algorithm, which
   then invokes the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1">close the WebSocket connection</a> algorithm, which then
   establishes that <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.4" id="ref-for-section-7.1.4">the WebSocket connection is closed</a>, which fires the <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close">close</a></code> event <a href="#closeWebSocket">as described below</a>. </p>
       </ol>
@@ -318,7 +318,7 @@ connection. It can have the following values:</p>
      <p>The connection has not yet been established.</p>
     <dt data-md><dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="const" data-export id="dom-websocket-open"><code>OPEN</code></dfn> (numeric value 1)
     <dd data-md>
-     <p><a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established①">The WebSocket connection is established</a> and communication is possible.</p>
+     <p><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and②">The WebSocket connection is established</a> and communication is possible.</p>
     <dt data-md><dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="const" data-export id="dom-websocket-closing"><code>CLOSING</code></dfn> (numeric value 2)
     <dd data-md>
      <p>The connection is going through the
@@ -329,11 +329,11 @@ closing handshake, or the <code class="idl"><a data-link-type="idl" href="#dom-w
    </dl>
    <p>When the object is created its <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate②">readyState</a></code> must be set to <code class="idl"><a data-link-type="idl" href="#dom-websocket-connecting" id="ref-for-dom-websocket-connecting①">CONNECTING</a></code> (0).</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="attribute" data-export id="dom-websocket-extensions"><code>extensions</code></dfn> attribute must initially return the empty
-string. After <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established②">the WebSocket connection is established</a>, its value might change, as defined
+string. After <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and③">the WebSocket connection is established</a>, its value might change, as defined
 below.</p>
    <p></p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="attribute" data-export id="dom-websocket-protocol"><code>protocol</code></dfn> attribute must initially return the empty
-string. After <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established③">the WebSocket connection is established</a>, its value might change, as defined below.</p>
+string. After <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and④">the WebSocket connection is established</a>, its value might change, as defined below.</p>
    <div class="algorithm" data-algorithm="close(code, reason)" data-algorithm-for="WebSocket">
     <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="method" data-export data-lt="close(code, reason)|close(code)|close()" id="dom-websocket-close"><code>close(<var>code</var>, <var>reason</var>)</code></dfn> method, when invoked, must run these
  steps:</p>
@@ -356,10 +356,10 @@ string. After <a data-link-type="dfn" href="#the-websocket-connection-is-establi
        <dd data-md>
         <p>Do nothing.</p>
         <p class="note" role="note">The connection is already closing or is already closed. If it has not already, a <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close①">close</a></code> event will eventually fire <a href="#closeWebSocket">as described below</a>. </p>
-       <dt data-md>If the WebSocket connection is not yet <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and">established</a> <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a>
+       <dt data-md>If the WebSocket connection is not yet <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and⑤">established</a> <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a>
        <dd data-md>
-        <p><a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection④">Fail the WebSocket connection</a> and set the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate④">readyState</a></code> attribute’s value to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing②">CLOSING</a></code> (2). <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
-        <p class="note" role="note">The <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection⑤">fail the WebSocket connection</a> algorithm invokes the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1①">close the WebSocket
+        <p><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7⑤">Fail the WebSocket connection</a> and set the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate④">readyState</a></code> attribute’s value to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing②">CLOSING</a></code> (2). <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+        <p class="note" role="note">The <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7⑥">fail the WebSocket connection</a> algorithm invokes the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1①">close the WebSocket
 connection</a> algorithm, which then establishes that <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.4" id="ref-for-section-7.1.4①">the WebSocket connection is closed</a>, which
 fires the <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close②">close</a></code> event <a href="#closeWebSocket">as described below</a>. </p>
        <dt data-md>If the WebSocket closing handshake has not yet been <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3">started</a>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a>
@@ -429,7 +429,7 @@ steps from the following list:</p>
    <dl>
     <dt data-md>If the argument is a string
     <dd data-md>
-     <p>If <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established④">the WebSocket connection is established</a> and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3②">the WebSocket closing handshake has not yet started</a>, then the user agent must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_" id="ref-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_">send a
+     <p>If <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and⑥">the WebSocket connection is established</a> and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3②">the WebSocket closing handshake has not yet started</a>, then the user agent must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_" id="ref-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_">send a
 WebSocket Message</a> comprised of the <var>data</var> argument using a text frame opcode; if the data cannot
 be sent, e.g. because it would need to be buffered but the buffer is full, the user agent must <a data-link-type="dfn" href="#flagged-as-full" id="ref-for-flagged-as-full">flag the WebSocket as full</a> and then <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1④">close the WebSocket connection</a>.
 Any invocation of this method with a string argument that does not throw an exception must increase
@@ -437,14 +437,14 @@ the <code class="idl"><a data-link-type="idl" href="#dom-websocket-bufferedamoun
 UTF-8. <a data-link-type="biblio" href="#biblio-unicode">[UNICODE]</a> <a data-link-type="biblio" href="#biblio-encoding">[ENCODING]</a> <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
     <dt data-md>If the argument is a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob③">Blob</a></code> object
     <dd data-md>
-     <p>If <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established⑤">the WebSocket connection is established</a>, and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3③">the WebSocket closing handshake has not yet started</a>, then the user agent must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_" id="ref-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_①">send a
+     <p>If <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and⑦">the WebSocket connection is established</a>, and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3③">the WebSocket closing handshake has not yet started</a>, then the user agent must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_" id="ref-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_①">send a
 WebSocket Message</a> comprised of <var>data</var> using a binary frame opcode; if the data cannot be sent,
 e.g. because it would need to be buffered but the buffer is full, the user agent must <a data-link-type="dfn" href="#flagged-as-full" id="ref-for-flagged-as-full①">flag the WebSocket as full</a> and then <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1⑤">close the WebSocket connection</a>.
 The data to be sent is the raw data represented by the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob④">Blob</a></code> object. 
 Any invocation of this method with a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑤">Blob</a></code> argument that does not throw an exception must increase the <code class="idl"><a data-link-type="idl" href="#dom-websocket-bufferedamount" id="ref-for-dom-websocket-bufferedamount⑤">bufferedAmount</a></code> attribute by the size of the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑥">Blob</a></code> object’s raw data, in bytes. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a> <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a></p>
     <dt data-md>If the argument is an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer②">ArrayBuffer</a></code> object
     <dd data-md>
-     <p>If <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established⑥">the WebSocket connection is established</a>, and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3④">the WebSocket closing handshake has not yet started</a>, then the user agent must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_" id="ref-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_②">send a
+     <p>If <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and⑧">the WebSocket connection is established</a>, and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3④">the WebSocket closing handshake has not yet started</a>, then the user agent must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_" id="ref-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_②">send a
 WebSocket Message</a> comprised of <var>data</var> using a binary frame opcode; if the data cannot be sent,
 e.g. because it would need to be buffered but the buffer is full, the user agent must <a data-link-type="dfn" href="#flagged-as-full" id="ref-for-flagged-as-full②">flag the WebSocket as full</a> and then <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1⑥">close the WebSocket connection</a>.
 The data to be sent is the data stored in the buffer described by the <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer③">ArrayBuffer</a></code> object. Any
@@ -452,7 +452,7 @@ invocation of this method with an <code class="idl"><a data-link-type="idl" href
 increase the <code class="idl"><a data-link-type="idl" href="#dom-websocket-bufferedamount" id="ref-for-dom-websocket-bufferedamount⑥">bufferedAmount</a></code> attribute by the length of the <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑤">ArrayBuffer</a></code> in bytes. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
     <dt data-md>If the argument is an object that matches the <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#ArrayBufferView" id="ref-for-ArrayBufferView①">ArrayBufferView</a></code> type definition
     <dd data-md>
-     <p>If <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established⑦">the WebSocket connection is established</a>, and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3⑤">the WebSocket closing handshake has not yet started</a>, then the user agent must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_" id="ref-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_③">send a
+     <p>If <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and⑨">the WebSocket connection is established</a>, and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3⑤">the WebSocket closing handshake has not yet started</a>, then the user agent must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_" id="ref-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_③">send a
 WebSocket Message</a> comprised of <var>data</var> using a binary frame opcode; if the data cannot be sent,
 e.g. because it would need to be buffered but the buffer is full, the user agent must <a data-link-type="dfn" href="#flagged-as-full" id="ref-for-flagged-as-full③">flag the WebSocket as full</a> and then <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1⑦">close the WebSocket connection</a>.
 The data to be sent is the data stored in the section of the buffer described by the <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑥">ArrayBuffer</a></code> object that <var>data</var> references. Any invocation of this method with this kind of
@@ -482,14 +482,14 @@ that must be supported, as <a data-link-type="dfn" href="https://html.spec.whatw
       <td> <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close⑤">close</a></code> 
    </table>
    <h2 class="heading settled" data-level="4" id="feedback-from-the-protocol"><span class="secno">4. </span><span class="content">Feedback from the protocol</span><a class="self-link" href="#feedback-from-the-protocol"></a></h2>
-   <p>When <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established⑧">the WebSocket connection is established</a>, the user agent must <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task">queue a task</a> to run these
+   <p>When <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①⓪">the WebSocket connection is established</a>, the user agent must <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task">queue a task</a> to run these
 steps:</p>
    <div class="algorithm" data-algorithm="handle connection establishment">
     <ol>
      <li data-md>
       <p>Change the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate⑧">readyState</a></code> attribute’s value to <code class="idl"><a data-link-type="idl" href="#dom-websocket-open" id="ref-for-dom-websocket-open①">OPEN</a></code> (1).</p>
      <li data-md>
-      <p>Change the <code class="idl"><a data-link-type="idl" href="#dom-websocket-extensions" id="ref-for-dom-websocket-extensions②">extensions</a></code> attribute’s value to the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①">extensions in
+      <p>Change the <code class="idl"><a data-link-type="idl" href="#dom-websocket-extensions" id="ref-for-dom-websocket-extensions②">extensions</a></code> attribute’s value to the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①①">extensions in
   use</a>, if it is not the null value. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <li data-md>
       <p>Change the <code class="idl"><a data-link-type="idl" href="#dom-websocket-protocol" id="ref-for-dom-websocket-protocol②">protocol</a></code> attribute’s value to the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_Subprotocol%20In,Use_" id="ref-for-page-19:~:text=_Subprotocol%20In,Use_">subprotocol in
@@ -498,7 +498,7 @@ steps:</p>
       <p><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire">Fire an event</a> named <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-open" id="ref-for-event-open①">open</a></code> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①①">WebSocket</a></code> object.</p>
     </ol>
     <p class="note" role="note">Since the algorithm above is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task①">queued as a task</a>, there is no
-race condition between <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established⑨">the WebSocket connection
+race condition between <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①②">the WebSocket connection
 being established</a> and the script setting up an event listener for the <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-open" id="ref-for-event-open②">open</a></code> event. </p>
    </div>
    <hr>
@@ -559,7 +559,7 @@ be set to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing
      <li data-md>
       <p>Change the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate①②">readyState</a></code> attribute’s value to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closed" id="ref-for-dom-websocket-closed②">CLOSED</a></code> (3).</p>
      <li data-md>
-      <p>If the user agent was required to <a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection⑥">fail the WebSocket connection</a>, or if the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.4" id="ref-for-section-7.1.4⑤">the WebSocket connection was closed</a> after being <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="flagged as full" data-noexport id="flagged-as-full">flagged
+      <p>If the user agent was required to <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7⑦">fail the WebSocket connection</a>, or if the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.4" id="ref-for-section-7.1.4⑤">the WebSocket connection was closed</a> after being <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="flagged as full" data-noexport id="flagged-as-full">flagged
   as full</dfn>, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire②">fire an event</a> named <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-error" id="ref-for-event-error①">error</a></code> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑥">WebSocket</a></code> object. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <li data-md>
       <p><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire③">Fire an event</a> named <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close⑥">close</a></code> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑦">WebSocket</a></code> object, using <code class="idl"><a data-link-type="idl" href="#closeevent" id="ref-for-closeevent">CloseEvent</a></code>, with
@@ -647,7 +647,7 @@ to. It represents the WebSocket connection close reason provided by the server.<
    <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②⓪">WebSocket</a></code> object whose <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate①④">readyState</a></code> attribute’s value was set to <code class="idl"><a data-link-type="idl" href="#dom-websocket-open" id="ref-for-dom-websocket-open③">OPEN</a></code> (1) as of the last time the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" id="ref-for-event-loop②">event loop</a> reached <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#step1" id="ref-for-step1②">step 1</a> must not be garbage collected if there are any event listeners registered for <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-message" id="ref-for-event-message④">message</a></code> events, <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-error" id="ref-for-event-error③">error</a></code>, or <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close⑨">close</a></code> events.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②①">WebSocket</a></code> object whose <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate①⑤">readyState</a></code> attribute’s value was set to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing⑦">CLOSING</a></code> (2) as of the last time the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" id="ref-for-event-loop③">event loop</a> reached <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#step1" id="ref-for-step1③">step
 1</a> must not be garbage collected if there are any event listeners registered for <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-error" id="ref-for-event-error④">error</a></code> or <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close①⓪">close</a></code> events.</p>
-   <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②②">WebSocket</a></code> object with <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established①⓪">an established
+   <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②②">WebSocket</a></code> object with <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①③">an established
 connection</a> that has data queued to be transmitted to the network must not be garbage collected. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
    <p>If a <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②③">WebSocket</a></code> object is garbage collected while its connection is still open, the user agent
 must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.2" id="ref-for-section-7.1.2③">start the WebSocket closing handshake</a>, with no status code for the Close
@@ -657,9 +657,9 @@ message. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
 the following list:</p>
    <div class="algorithm" data-algorithm="to make disappear">
     <dl class="switch">
-     <dt data-md>If the WebSocket connection is not yet <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and②">established</a> <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a>
+     <dt data-md>If the WebSocket connection is not yet <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①④">established</a> <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a>
      <dd data-md>
-      <p><a data-link-type="dfn" href="#fail-the-websocket-connection" id="ref-for-fail-the-websocket-connection⑦">Fail the WebSocket connection</a>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+      <p><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7⑧">Fail the WebSocket connection</a>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <dt data-md>If the WebSocket closing handshake has not yet been <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.3" id="ref-for-section-7.1.3⑦">started</a> <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a>
      <dd data-md>
       <p><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.2" id="ref-for-section-7.1.2④">Start the WebSocket closing handshake</a>, with the status code to use in the
@@ -709,7 +709,6 @@ if ("serviceWorker" in navigator) {
    <li><a href="#dom-websocket-websocket">constructor(url, protocols)</a><span>, in §3.1</span>
    <li><a href="#concept-websocket-establish">establish a WebSocket connection</a><span>, in §2.2</span>
    <li><a href="#dom-websocket-extensions">extensions</a><span>, in §3.1</span>
-   <li><a href="#fail-the-websocket-connection">Fail the WebSocket connection</a><span>, in §2.2</span>
    <li><a href="#flagged-as-full">flagged as full</a><span>, in §4</span>
    <li><a href="#make-disappear">make disappear</a><span>, in §7</span>
    <li><a href="#concept-websocket-connection-obtain">obtain a WebSocket connection</a><span>, in §2.1</span>
@@ -727,7 +726,6 @@ if ("serviceWorker" in navigator) {
      <li><a href="#dom-closeeventinit-reason">dict-member for CloseEventInit</a><span>, in §6</span>
     </ul>
    <li><a href="#dom-websocket-send">send(data)</a><span>, in §3.1</span>
-   <li><a href="#the-websocket-connection-is-established">the WebSocket connection is established</a><span>, in §2.2</span>
    <li>
     url
     <ul>
@@ -1243,17 +1241,28 @@ if ("serviceWorker" in navigator) {
   <aside class="dfn-panel" data-for="term-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and">
    <a href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and">https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and">3.1. Interface definition</a>
-    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①">4. Feedback from the protocol</a>
-    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and②">7. Garbage collection</a>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and">2.2. Opening handshake</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①">(2)</a>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and②">3.1. Interface definition</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and③">(2)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and④">(3)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑤">(4)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑥">(5)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑦">(6)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑧">(7)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑨">(8)</a>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①⓪">4. Feedback from the protocol</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①①">(2)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①②">(3)</a>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①③">7. Garbage collection</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and">
    <a href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and">https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and">3.1. Interface definition</a>
-    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①">4. Feedback from the protocol</a>
-    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and②">7. Garbage collection</a>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and">2.2. Opening handshake</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①">(2)</a>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and②">3.1. Interface definition</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and③">(2)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and④">(3)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑤">(4)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑥">(5)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑦">(6)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑧">(7)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑨">(8)</a>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①⓪">4. Feedback from the protocol</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①①">(2)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①②">(3)</a>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①③">7. Garbage collection</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①④">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-section-7.1.7">
+   <a href="https://tools.ietf.org/html/rfc6455#section-7.1.7">https://tools.ietf.org/html/rfc6455#section-7.1.7</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-section-7.1.7">2.2. Opening handshake</a> <a href="#ref-for-section-7.1.7①">(2)</a> <a href="#ref-for-section-7.1.7②">(3)</a> <a href="#ref-for-section-7.1.7③">(4)</a>
+    <li><a href="#ref-for-section-7.1.7④">3.1. Interface definition</a> <a href="#ref-for-section-7.1.7⑤">(2)</a> <a href="#ref-for-section-7.1.7⑥">(3)</a>
+    <li><a href="#ref-for-section-7.1.7⑦">4. Feedback from the protocol</a>
+    <li><a href="#ref-for-section-7.1.7⑧">7. Garbage collection</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-section-11.3.4">
@@ -1308,6 +1317,15 @@ if ("serviceWorker" in navigator) {
    <ul>
     <li><a href="#ref-for-section-7.1.4">3.1. Interface definition</a> <a href="#ref-for-section-7.1.4①">(2)</a> <a href="#ref-for-section-7.1.4②">(3)</a> <a href="#ref-for-section-7.1.4③">(4)</a>
     <li><a href="#ref-for-section-7.1.4④">4. Feedback from the protocol</a> <a href="#ref-for-section-7.1.4⑤">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and">
+   <a href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and">https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and">2.2. Opening handshake</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①">(2)</a>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and②">3.1. Interface definition</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and③">(2)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and④">(3)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑤">(4)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑥">(5)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑦">(6)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑧">(7)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and⑨">(8)</a>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①⓪">4. Feedback from the protocol</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①①">(2)</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①②">(3)</a>
+    <li><a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①③">7. Garbage collection</a> <a href="#ref-for-page-19:~:text=_The%2520WebSocket%2520Connection%2520is%2520Established_,-and①④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-section-11.1.1">
@@ -1440,6 +1458,7 @@ if ("serviceWorker" in navigator) {
      <li><span class="dfn-paneled" id="term-for-section-7.1.1">close the websocket connection</span>
      <li><span class="dfn-paneled" id="term-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and">established</span>
      <li><span class="dfn-paneled" id="term-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①">extensions in use</span>
+     <li><span class="dfn-paneled" id="term-for-section-7.1.7">fail the websocket connection</span>
      <li><span class="dfn-paneled" id="term-for-section-11.3.4">sec-websocket-protocol</span>
      <li><span class="dfn-paneled" id="term-for-page-66:~:text=needs%20to-,_Send%20a%20WebSocket%20Message_">send a websocket message</span>
      <li><span class="dfn-paneled" id="term-for-section-7.1.2">start the websocket closing handshake</span>
@@ -1448,6 +1467,7 @@ if ("serviceWorker" in navigator) {
      <li><span class="dfn-paneled" id="term-for-section-7.1.5">the websocket connection close code</span>
      <li><span class="dfn-paneled" id="term-for-section-7.1.6">the websocket connection close reason</span>
      <li><span class="dfn-paneled" id="term-for-section-7.1.4">the websocket connection is closed</span>
+     <li><span class="dfn-paneled" id="term-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and②">the websocket connection is established</span>
      <li><span class="dfn-paneled" id="term-for-section-11.1.1">ws</span>
      <li><span class="dfn-paneled" id="term-for-section-11.1.2">wss</span>
     </ul>
@@ -1534,24 +1554,6 @@ if ("serviceWorker" in navigator) {
    <b><a href="#concept-websocket-establish">#concept-websocket-establish</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-websocket-establish">3.1. Interface definition</a> <a href="#ref-for-concept-websocket-establish①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="fail-the-websocket-connection">
-   <b><a href="#fail-the-websocket-connection">#fail-the-websocket-connection</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-fail-the-websocket-connection">2.2. Opening handshake</a> <a href="#ref-for-fail-the-websocket-connection①">(2)</a> <a href="#ref-for-fail-the-websocket-connection②">(3)</a>
-    <li><a href="#ref-for-fail-the-websocket-connection③">3.1. Interface definition</a> <a href="#ref-for-fail-the-websocket-connection④">(2)</a> <a href="#ref-for-fail-the-websocket-connection⑤">(3)</a>
-    <li><a href="#ref-for-fail-the-websocket-connection⑥">4. Feedback from the protocol</a>
-    <li><a href="#ref-for-fail-the-websocket-connection⑦">7. Garbage collection</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="the-websocket-connection-is-established">
-   <b><a href="#the-websocket-connection-is-established">#the-websocket-connection-is-established</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-the-websocket-connection-is-established">2.2. Opening handshake</a>
-    <li><a href="#ref-for-the-websocket-connection-is-established①">3.1. Interface definition</a> <a href="#ref-for-the-websocket-connection-is-established②">(2)</a> <a href="#ref-for-the-websocket-connection-is-established③">(3)</a> <a href="#ref-for-the-websocket-connection-is-established④">(4)</a> <a href="#ref-for-the-websocket-connection-is-established⑤">(5)</a> <a href="#ref-for-the-websocket-connection-is-established⑥">(6)</a> <a href="#ref-for-the-websocket-connection-is-established⑦">(7)</a>
-    <li><a href="#ref-for-the-websocket-connection-is-established⑧">4. Feedback from the protocol</a> <a href="#ref-for-the-websocket-connection-is-established⑨">(2)</a>
-    <li><a href="#ref-for-the-websocket-connection-is-established①⓪">7. Garbage collection</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="enumdef-binarytype">
