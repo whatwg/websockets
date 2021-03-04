@@ -12,7 +12,7 @@
 <script async crossorigin src="https://resources.whatwg.org/commit-snapshot-shortcut-key.js"></script>
 <script crossorigin defer src="https://resources.whatwg.org/standard-mdn-annos.js"></script>
   <meta content="Bikeshed version b94c7e755, updated Fri Feb 19 16:28:59 2021 -0800" name="generator">
-  <meta content="601190c401fae6d3651eb7dcb49ccf5a4135d8b6" name="document-revision">
+  <meta content="a5e9f20369dd08cdcc355641c26ecaa105a41857" name="document-revision">
 <style>/* style-var-click-highlighting */
 
     var { cursor: pointer; }
@@ -272,8 +272,8 @@ scripts:</p>
      <p>Can be set, to change how binary data is returned. The default is "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob②">blob</a></code>"</p>
    </dl>
    <div class="algorithm" data-algorithm="WebSocket(url, protocols)" data-algorithm-for="WebSocket">
-    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="constructor" data-export data-lt="WebSocket(url, protocols)|constructor(url, protocols)|WebSocket(url)|constructor(url)" id="dom-websocket-websocket"><code>WebSocket(<var>url</var>, <var>protocols</var>)</code></dfn> constructor,
- when invoked, must run these steps:</p>
+    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="constructor" data-export data-lt="WebSocket(url, protocols)|constructor(url, protocols)|WebSocket(url)|constructor(url)" id="dom-websocket-websocket"><code>WebSocket(<var>url</var>, <var>protocols</var>)</code></dfn> constructor, when invoked,
+ must run these steps:</p>
     <ol>
      <li data-md>
       <p>Let <var>urlRecord</var> be the result of applying the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser">URL parser</a> to <var>url</var>.</p>
@@ -331,8 +331,8 @@ below.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="attribute" data-export id="dom-websocket-protocol"><code>protocol</code></dfn> attribute must initially return the empty
 string. After <a data-link-type="dfn" href="#the-websocket-connection-is-established" id="ref-for-the-websocket-connection-is-established③">the WebSocket connection is established</a>, its value might change, as defined below.</p>
    <div class="algorithm" data-algorithm="close(code, reason)" data-algorithm-for="WebSocket">
-    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="method" data-export data-lt="close(code, reason)|close(code)|close()" id="dom-websocket-close"><code>close(<var>code</var>, <var>reason</var>)</code></dfn> method, when invoked, must
- run these steps:</p>
+    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="method" data-export data-lt="close(code, reason)|close(code)|close()" id="dom-websocket-close"><code>close(<var>code</var>, <var>reason</var>)</code></dfn> method, when invoked, must run these
+ steps:</p>
     <ol>
      <li data-md>
       <p>If <var>code</var> is present, but is neither an integer equal to 1000 nor an integer in the range 3000
@@ -420,8 +420,7 @@ memory or not, e.g. based on how big the data is or how common it is for a scrip
 attribute at the last minute. This latter aspect is important in particular because it is quite
 possible for the attribute to be changed after the user agent has received the data but before the
 user agent has fired the event for it. </p>
-    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="method" data-export id="dom-websocket-send"><code>send(<var>data</var>)</code></dfn> method transmits data using the
-connection. If the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate⑦">readyState</a></code> attribute is <code class="idl"><a data-link-type="idl" href="#dom-websocket-connecting" id="ref-for-dom-websocket-connecting②">CONNECTING</a></code>, it must throw an
+    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="method" data-export id="dom-websocket-send"><code>send(<var>data</var>)</code></dfn> method transmits data using the connection. If the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate⑦">readyState</a></code> attribute is <code class="idl"><a data-link-type="idl" href="#dom-websocket-connecting" id="ref-for-dom-websocket-connecting②">CONNECTING</a></code>, it must throw an
 "<code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror" id="ref-for-invalidstateerror">InvalidStateError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException⑦">DOMException</a></code>. Otherwise, the user agent must run the appropriate set of
 steps from the following list:</p>
     <dl>

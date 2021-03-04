@@ -288,8 +288,8 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
 
 <div algorithm>
 
- The <dfn constructor for=WebSocket><code>WebSocket(|url|, |protocols|)</code></dfn> constructor,
- when invoked, must run these steps:
+ The <dfn constructor for=WebSocket>WebSocket(|url|, |protocols|)</dfn> constructor, when invoked,
+ must run these steps:
 
  1. Let |urlRecord| be the result of applying the [=URL parser=] to |url|.
  1. If |urlRecord| is failure, then throw a "{{SyntaxError}}" {{DOMException}}.
@@ -343,8 +343,8 @@ string. After [=the WebSocket connection is established=], its value might chang
 
 <div algorithm>
 
- The <dfn method for=WebSocket><code>close(|code|, |reason|)</code></dfn> method, when invoked, must
- run these steps:
+ The <dfn method for=WebSocket>close(|code|, |reason|)</dfn> method, when invoked, must run these
+ steps:
 
  1. If |code| is present, but is neither an integer equal to 1000 nor an integer in the range 3000
     to 4999, inclusive, throw an "{{InvalidAccessError}}" {{DOMException}}.
@@ -456,8 +456,8 @@ attribute at the last minute. This latter aspect is important in particular beca
 possible for the attribute to be changed after the user agent has received the data but before the
 user agent has fired the event for it.
 
-The <dfn method for=WebSocket><code>send(|data|)</code></dfn> method transmits data using the
-connection. If the {{WebSocket/readyState}} attribute is {{WebSocket/CONNECTING}}, it must throw an
+The <dfn method for=WebSocket>send(|data|)</dfn> method transmits data using the connection. If the
+{{WebSocket/readyState}} attribute is {{WebSocket/CONNECTING}}, it must throw an
 "{{InvalidStateError}}" {{DOMException}}. Otherwise, the user agent must run the appropriate set of
 steps from the following list:
 
