@@ -11,9 +11,9 @@ Text Macro: TWITTER whatsockets
 
 <pre class=biblio>
 {
-	"WSP": {
+    "WSP": {
         "aliasOf": "RFC6455"
-	},
+    },
     "HSTS": {
         "aliasOf": "RFC6797"
     }
