@@ -441,8 +441,6 @@ of the value of the attribute over time.
 
 <hr>
 
-<div>
-
 When a {{WebSocket}} object is created, its <dfn attribute for=WebSocket>binaryType</dfn> IDL
 attribute must be set to the string "{{blob}}". On getting, it must return the last value it was set
 to. On setting, the user agent must set the IDL attribute to the new value.
@@ -506,8 +504,6 @@ steps from the following list:
  argument that does not throw an exception must increase the {{WebSocket/bufferedAmount}} attribute
  by the length of |data|'s buffer in bytes. [[!WSP]]
 
-</div>
-
 <hr>
 
 The following are the [=event handlers=] (and their corresponding [=event handler event types=])
@@ -524,8 +520,6 @@ that must be supported, as [=event handler IDL attributes=], by all objects impl
 <tr><td><dfn attribute for=WebSocket>onclose</dfn> <td> {{close!!event}}
 </table>
 
-
-<div>
 
 # Feedback from the protocol # {#feedback-from-the-protocol}
 
@@ -581,8 +575,6 @@ but just before running the above [=task=] for this particular message the scrip
 the data back to RAM before running this [=task=] so as to avoid stalling the main thread while it
 created the {{ArrayBuffer}} object.
 
-</div>
-
 <div class="example" id="message-example">
 
 Here is an example of how to define a handler for the {{message!!event}}
@@ -603,8 +595,6 @@ The protocol here is a trivial one, with the server just sending "on" or "off" m
 </div>
 
 <hr>
-
-<div>
 
 When [=the websocket closing handshake is started=], the user agent must [=queue a task=] to change
 the {{WebSocket/readyState}} attribute's value to {{WebSocket/CLOSING}} (2). (If the
@@ -660,8 +650,6 @@ server erroneously uses it in its close frame, of course).
 The [=task source=] for all [=tasks=] <a lt="queue a task">queued</a> in this section is the
 <dfn export>WebSocket task source</dfn>.
 
-</div>
-
 
 # Ping and Pong frames # {#ping-and-pong-frames}
 
@@ -710,8 +698,6 @@ dictionary CloseEventInit : EventInit {
  :: Returns the WebSocket connection close reason provided by the server.
 
 </dl>
-
-<div>
 
 The <dfn attribute for=CloseEvent>wasClean</dfn> attribute must return the value it was initialized
 to. It represents whether the connection closed cleanly or not.
