@@ -317,10 +317,10 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
 
 <hr>
 
-The <dfn attribute for=WebSocket>`url`</dfn> attribute's getter must return this
+The <dfn attribute for=WebSocket>url</dfn> attribute's getter must return this
 {{WebSocket}} object's [=url=], <a dfn lt="URL serializer">serialized</a>.
 
-The <dfn attribute for=WebSocket>`readyState`</dfn> attribute represents the state of
+The <dfn attribute for=WebSocket>readyState</dfn> attribute represents the state of
 the connection. It can have the following values:
 
 : <dfn>`CONNECTING`</dfn> (numeric value 0)
@@ -336,11 +336,11 @@ the connection. It can have the following values:
 When the object is created its {{WebSocket/readyState}} must be set to {{WebSocket/CONNECTING}}
 (0).
 
-The <dfn attribute for=WebSocket>`extensions`</dfn> attribute must initially return
+The <dfn attribute for=WebSocket>extensions</dfn> attribute must initially return
 the empty string. After [=the WebSocket connection is established=], its value might change, as
 defined below.</p>
 
-The <dfn attribute for=WebSocket>`protocol`</dfn> attribute must initially return the
+The <dfn attribute for=WebSocket>protocol</dfn> attribute must initially return the
 empty string. After [=the WebSocket connection is established=], its value might change, as defined
 below.
 
@@ -411,7 +411,7 @@ do it. -->
 
 <hr>
 
-The <dfn attribute for=WebSocket>`bufferedAmount`</dfn> attribute must return the number of bytes of
+The <dfn attribute for=WebSocket>bufferedAmount</dfn> attribute must return the number of bytes of
 application data (UTF-8 text and binary data) that have been queued using {{WebSocket/send()}} but
 that, as of the last time the [=event loop=] reached <a for="event loop">step 1</a>, had not yet
 been transmitted to the network. (This thus includes any text sent during the execution of the
@@ -445,7 +445,7 @@ of the value of the attribute over time.
 
 <div>
 
-When a {{WebSocket}} object is created, its <dfn attribute for=WebSocket>`binaryType`</dfn> IDL
+When a {{WebSocket}} object is created, its <dfn attribute for=WebSocket>binaryType</dfn> IDL
 attribute must be set to the string "<code>[=blob=]</code>". On getting, it must return the last
 value it was set to. On setting, the user agent must set the IDL attribute to the new value.
 
@@ -520,10 +520,10 @@ that must be supported, as [=event handler IDL attributes=], by all objects impl
 <thead>
 <tr><th>[=Event handler=] <th>[=Event handler event type=]
 <tbody>
-<tr><td><dfn attribute for=WebSocket>`onopen`</dfn> <td> <a event>`open`</a>
-<tr><td><dfn attribute for=WebSocket>`onmessage`</dfn> <td> <a event>`message`</a>
-<tr><td><dfn attribute for=WebSocket>`onerror`</dfn> <td> <a event>`error`</a>
-<tr><td><dfn attribute for=WebSocket>`onclose`</dfn> <td> <a event>`close`</a>
+<tr><td><dfn attribute for=WebSocket>onopen</dfn> <td> <a event>`open`</a>
+<tr><td><dfn attribute for=WebSocket>onmessage</dfn> <td> <a event>`message`</a>
+<tr><td><dfn attribute for=WebSocket>onerror</dfn> <td> <a event>`error`</a>
+<tr><td><dfn attribute for=WebSocket>onclose</dfn> <td> <a event>`close`</a>
 </table>
 
 
@@ -720,13 +720,13 @@ dictionary CloseEventInit : EventInit {
 
 <div>
 
-The <dfn attribute for=CloseEvent>`wasClean`</dfn> attribute must return the value it was
+The <dfn attribute for=CloseEvent>wasClean</dfn> attribute must return the value it was
  initialized to. It represents whether the connection closed cleanly or not.
 
-The <dfn attribute for=CloseEvent>`code`</dfn> attribute must return the value it was initialized
+The <dfn attribute for=CloseEvent>code</dfn> attribute must return the value it was initialized
  to. It represents the WebSocket connection close code provided by the server.
 
-The <dfn attribute for=CloseEvent>`reason`</dfn> attribute must return the value it was initialized
+The <dfn attribute for=CloseEvent>reason</dfn> attribute must return the value it was initialized
 to. It represents the WebSocket connection close reason provided by the server.
 
 
