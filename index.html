@@ -11,7 +11,7 @@
 <script async crossorigin src="https://resources.whatwg.org/file-issue.js"></script>
 <script async crossorigin src="https://resources.whatwg.org/commit-snapshot-shortcut-key.js"></script>
   <meta content="Bikeshed version 40de15f9, updated Thu Jun 11 17:47:04 2020 -0700" name="generator">
-  <meta content="6824373669eaa1a94c50abb3cc3daecc3957b1ac" name="document-revision">
+  <meta content="c06f6491b17773b5a7bbc2370a12d0594a2dce65" name="document-revision">
 <style>/* style-dfn-panel */
 
 .dfn-panel {
@@ -265,7 +265,7 @@ Only "<code>ws</code>" or "<code>wss</code>" schemes are allowed; others will ca
 equivalent to an array consisting of just that string; if it is omitted, it is equivalent to the
 empty array. Each string in the array is a subprotocol name. The connection will only be
 established if the server reports that it has selected one of these subprotocols. The subprotocol
-names have to match the requirements for elements that comprise the value of <code><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-11.3.4" id="ref-for-section-11.3.4">Sec-WebSocket-Protocol</a></code> fields as defined by The WebSocket protocol. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+names have to match the requirements for elements that comprise the value of <a data-link-type="http-header" href="https://tools.ietf.org/html/rfc6455#section-11.3.4" id="ref-for-section-11.3.4"><code>Sec-WebSocket-Protocol</code></a> fields as defined by The WebSocket protocol. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
     <dt data-md><code><var>socket</var> . <a class="idl-code" data-link-type="method" href="#dom-websocket-send" id="ref-for-dom-websocket-send①">send</a>( <var>data</var> )</code>
     <dd data-md>
      <p>Transmits <var>data</var> using the WebSocket connection. <var>data</var> can be a string, a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob①">Blob</a></code>, an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer">ArrayBuffer</a></code>, or an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#ArrayBufferView" id="ref-for-ArrayBufferView">ArrayBufferView</a></code>.</p>
@@ -299,14 +299,14 @@ array form of the constructor’s second argument to perform subprotocol negotia
      <p>Returns a string that indicates how binary data from the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket⑥">WebSocket</a></code> object is exposed to
 scripts:</p>
      <dl>
-      <dt data-md>"<dfn class="idl-code" data-dfn-type="enum" data-export id="enumdef-blob"><code>blob"</code><a class="self-link" href="#enumdef-blob"></a></dfn>
+      <dt data-md>"<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob">blob</a></code>"
       <dd data-md>
        <p>Binary data is returned in <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob②">Blob</a></code> form.</p>
-      <dt data-md>"<dfn class="idl-code" data-dfn-type="enum" data-export id="enumdef-arraybuffer"><code>arraybuffer"</code><a class="self-link" href="#enumdef-arraybuffer"></a></dfn>
+      <dt data-md>"<code class="idl"><a data-link-type="idl" href="#dom-binarytype-arraybuffer" id="ref-for-dom-binarytype-arraybuffer">arraybuffer</a></code>"
       <dd data-md>
        <p>Binary data is returned in <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer①">ArrayBuffer</a></code> form.</p>
      </dl>
-     <p>Can be set, to change how binary data is returned. The default is "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob">blob</a></code>"</p>
+     <p>Can be set, to change how binary data is returned. The default is "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob①">blob</a></code>"</p>
    </dl>
    <div class="algorithm" data-algorithm="WebSocket(url, protocols)" data-algorithm-for="WebSocket">
     <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="constructor" data-export data-lt="WebSocket(url, protocols)|constructor(url, protocols)|WebSocket(url)|constructor(url)" id="dom-websocket-websocket"><code>WebSocket(<var>url</var>, <var>protocols</var>)</code></dfn> constructor, when invoked, must run these steps:</p>
@@ -324,7 +324,7 @@ scripts:</p>
       <p>If <var>protocols</var> is a string, set <var>protocols</var> to a sequence consisting of just that string.</p>
      <li data-md>
       <p>If any of the values in <var>protocols</var> occur more than once or otherwise fail to match the
-  requirements for elements that comprise the value of <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-11.3.4" id="ref-for-section-11.3.4①"><code>Sec-WebSocket-Protocol</code></a> fields as defined by The WebSocket protocol, then throw a "<code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#syntaxerror" id="ref-for-syntaxerror④">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+  requirements for elements that comprise the value of <a data-link-type="http-header" href="https://tools.ietf.org/html/rfc6455#section-11.3.4" id="ref-for-section-11.3.4①"><code>Sec-WebSocket-Protocol</code></a> fields as defined by The WebSocket protocol, then throw a "<code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#syntaxerror" id="ref-for-syntaxerror④">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <li data-md>
       <p>Run this step <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel">in parallel</a>:</p>
       <ol>
@@ -445,11 +445,11 @@ of the value of the attribute over time.</p>
    <hr>
    <div>
     <p>When a <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket⑨">WebSocket</a></code> object is created, its <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="attribute" data-export id="dom-websocket-binarytype"><code>binaryType</code></dfn> IDL
-attribute must be set to the string "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob①">blob</a></code>". On getting, it must return the last
+attribute must be set to the string "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob②">blob</a></code>". On getting, it must return the last
 value it was set to. On setting, the user agent must set the IDL attribute to the new value.</p>
     <p class="note" role="note">User agents can use the <code class="idl"><a data-link-type="idl" href="#dom-websocket-binarytype" id="ref-for-dom-websocket-binarytype②">binaryType</a></code> attribute as a hint for how to handle
-incoming binary data: if the attribute is set to "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob②">blob</a></code>", it is safe to spool it to
-disk, and if it is set to "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-arraybuffer" id="ref-for-dom-binarytype-arraybuffer">arraybuffer</a></code>", it is likely more efficient to keep the
+incoming binary data: if the attribute is set to "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob③">blob</a></code>", it is safe to spool it to
+disk, and if it is set to "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-arraybuffer" id="ref-for-dom-binarytype-arraybuffer①">arraybuffer</a></code>", it is likely more efficient to keep the
 data in memory. Naturally, user agents are encouraged to use more subtle heuristics to decide
 whether to keep incoming data in memory or not, e.g. based on how big the data is or how common it
 is for a script to change the attribute at the last minute. This latter aspect is important in
@@ -548,11 +548,11 @@ being established</a> and the script setting up an event listener for the <a cla
        <dd data-md>
         <p>a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString④">DOMString</a></code> containing <var>data</var></p>
        <dt data-md><var>type</var> indicates that the data is Binary and <code class="idl"><a data-link-type="idl" href="#dom-websocket-binarytype" id="ref-for-dom-websocket-binarytype④">binaryType</a></code> is
- "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob③">blob</a></code>"
+ "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob④">blob</a></code>"
        <dd data-md>
         <p>a new <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑦">Blob</a></code> object, created in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm">relevant Realm</a> of the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①②">WebSocket</a></code> object, that represents <var>data</var> as its raw data <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a></p>
        <dt data-md><var>type</var> indicates that the data is Binary and <code class="idl"><a data-link-type="idl" href="#dom-websocket-binarytype" id="ref-for-dom-websocket-binarytype⑤">binaryType</a></code> is
- "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-arraybuffer" id="ref-for-dom-binarytype-arraybuffer①">arraybuffer</a></code>"
+ "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-arraybuffer" id="ref-for-dom-binarytype-arraybuffer②">arraybuffer</a></code>"
        <dd data-md>
         <p>a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑦">ArrayBuffer</a></code> object, created in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm①">relevant Realm</a> of the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①③">WebSocket</a></code> object,
   whose contents are <var>data</var></p>
@@ -564,8 +564,8 @@ being established</a> and the script setting up an event listener for the <a cla
     </ol>
     <p class="note" role="note">User agents are encouraged to check if they can perform the above steps efficiently
 before they run the task, picking tasks from other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#task-queue" id="ref-for-task-queue">task queues</a> while they prepare the buffers if
-not. For example, if the <code class="idl"><a data-link-type="idl" href="#dom-websocket-binarytype" id="ref-for-dom-websocket-binarytype⑥">binaryType</a></code> attribute was set to "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob④">blob</a></code>" when the data arrived, and the user agent spooled all the data to disk,
-but just before running the above <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task" id="ref-for-concept-task">task</a> for this particular message the script switched <code class="idl"><a data-link-type="idl" href="#dom-websocket-binarytype" id="ref-for-dom-websocket-binarytype⑦">binaryType</a></code> to "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-arraybuffer" id="ref-for-dom-binarytype-arraybuffer②">arraybuffer</a></code>", the user agent would want to page
+not. For example, if the <code class="idl"><a data-link-type="idl" href="#dom-websocket-binarytype" id="ref-for-dom-websocket-binarytype⑥">binaryType</a></code> attribute was set to "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob⑤">blob</a></code>" when the data arrived, and the user agent spooled all the data to disk,
+but just before running the above <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task" id="ref-for-concept-task">task</a> for this particular message the script switched <code class="idl"><a data-link-type="idl" href="#dom-websocket-binarytype" id="ref-for-dom-websocket-binarytype⑦">binaryType</a></code> to "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-arraybuffer" id="ref-for-dom-binarytype-arraybuffer③">arraybuffer</a></code>", the user agent would want to page
 the data back to RAM before running this <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task" id="ref-for-concept-task①">task</a> so as to avoid stalling the main thread while it
 created the <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑧">ArrayBuffer</a></code> object. </p>
    </div>
@@ -719,11 +719,9 @@ if ("serviceWorker" in navigator) {
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
    <li><a href="#dom-binarytype-arraybuffer">"arraybuffer"</a><span>, in §3.1</span>
-   <li><a href="#enumdef-arraybuffer">arraybuffer"</a><span>, in §3.1</span>
    <li><a href="#enumdef-binarytype">BinaryType</a><span>, in §3.1</span>
    <li><a href="#dom-websocket-binarytype">binaryType</a><span>, in §3.1</span>
    <li><a href="#dom-binarytype-blob">"blob"</a><span>, in §3.1</span>
-   <li><a href="#enumdef-blob">blob"</a><span>, in §3.1</span>
    <li><a href="#dom-websocket-bufferedamount">bufferedAmount</a><span>, in §3.1</span>
    <li><a href="#dom-websocket-close">close()</a><span>, in §3.1</span>
    <li><a href="#dom-websocket-close">close(code)</a><span>, in §3.1</span>
@@ -1590,15 +1588,15 @@ if ("serviceWorker" in navigator) {
   <aside class="dfn-panel" data-for="dom-binarytype-blob">
    <b><a href="#dom-binarytype-blob">#dom-binarytype-blob</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-binarytype-blob">3.1. Interface definition</a> <a href="#ref-for-dom-binarytype-blob①">(2)</a> <a href="#ref-for-dom-binarytype-blob②">(3)</a>
-    <li><a href="#ref-for-dom-binarytype-blob③">4. Feedback from the protocol</a> <a href="#ref-for-dom-binarytype-blob④">(2)</a>
+    <li><a href="#ref-for-dom-binarytype-blob">3.1. Interface definition</a> <a href="#ref-for-dom-binarytype-blob①">(2)</a> <a href="#ref-for-dom-binarytype-blob②">(3)</a> <a href="#ref-for-dom-binarytype-blob③">(4)</a>
+    <li><a href="#ref-for-dom-binarytype-blob④">4. Feedback from the protocol</a> <a href="#ref-for-dom-binarytype-blob⑤">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-binarytype-arraybuffer">
    <b><a href="#dom-binarytype-arraybuffer">#dom-binarytype-arraybuffer</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-binarytype-arraybuffer">3.1. Interface definition</a>
-    <li><a href="#ref-for-dom-binarytype-arraybuffer①">4. Feedback from the protocol</a> <a href="#ref-for-dom-binarytype-arraybuffer②">(2)</a>
+    <li><a href="#ref-for-dom-binarytype-arraybuffer">3.1. Interface definition</a> <a href="#ref-for-dom-binarytype-arraybuffer①">(2)</a>
+    <li><a href="#ref-for-dom-binarytype-arraybuffer②">4. Feedback from the protocol</a> <a href="#ref-for-dom-binarytype-arraybuffer③">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="websocket">
