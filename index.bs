@@ -279,12 +279,12 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
  :: Returns a string that indicates how binary data from the {{WebSocket}} object is exposed to
   scripts:
 
-  : "<a dfn>`blob`</a>"
+  : "{{blob}}"
   :: Binary data is returned in {{Blob}} form.
-  : "<a dfn>`arraybuffer`</a>"
+  : "{{arraybuffer}}"
   :: Binary data is returned in {{ArrayBuffer}} form.
 
-  Can be set, to change how binary data is returned. The default is "`blob`"
+  Can be set, to change how binary data is returned. The default is "{{blob}}"
 </dl>
 
 <div algorithm>
@@ -323,14 +323,14 @@ The <dfn attribute for=WebSocket>url</dfn> attribute's getter must return this
 The <dfn attribute for=WebSocket>readyState</dfn> attribute represents the state of
 the connection. It can have the following values:
 
-: <dfn>`CONNECTING`</dfn> (numeric value 0)
+: <dfn const for=WebSocket>CONNECTING</dfn> (numeric value 0)
 :: The connection has not yet been established.
-: <dfn>`OPEN`</dfn> (numeric value 1)
+: <dfn const for=WebSocket>OPEN</dfn> (numeric value 1)
 :: [=The WebSocket connection is established=] and communication is possible.
-: <dfn>`CLOSING`</dfn> (numeric value 2)
+: <dfn const for=WebSocket>CLOSING</dfn> (numeric value 2)
 :: The connection is going through the
  closing handshake, or the {{WebSocket/close()}} method has been invoked.
-: <dfn>`CLOSED`</dfn> (numeric value 3)
+: <dfn const for=WebSocket>CLOSED</dfn> (numeric value 3)
 :: The connection has been closed or could not be opened.
 
 When the object is created its {{WebSocket/readyState}} must be set to {{WebSocket/CONNECTING}}
@@ -446,12 +446,12 @@ of the value of the attribute over time.
 <div>
 
 When a {{WebSocket}} object is created, its <dfn attribute for=WebSocket>binaryType</dfn> IDL
-attribute must be set to the string "<code>[=blob=]</code>". On getting, it must return the last
+attribute must be set to the string "{{blob}}". On getting, it must return the last
 value it was set to. On setting, the user agent must set the IDL attribute to the new value.
 
 <p class="note">User agents can use the {{binaryType}} attribute as a hint for how to handle
-incoming binary data: if the attribute is set to "<code>[=blob=]</code>", it is safe to spool it to
-disk, and if it is set to "<code>[=arraybuffer=]</code>", it is likely more efficient to keep the
+incoming binary data: if the attribute is set to "{{blob}}", it is safe to spool it to
+disk, and if it is set to "{{arraybuffer}}", it is likely more efficient to keep the
 data in memory. Naturally, user agents are encouraged to use more subtle heuristics to decide
 whether to keep incoming data in memory or not, e.g. based on how big the data is or how common it
 is for a script to change the attribute at the last minute. This latter aspect is important in
@@ -459,7 +459,7 @@ particular because it is quite possible for the attribute to be changed after th
 received the data but before the user agent has fired the event for it.
 
 The <dfn method for=WebSocket><code>send(|data|)</code></dfn> method transmits data using the
-connection. If the {{WebSocket/readyState}} attribute is `CONNECTING`, it must throw an
+connection. If the {{WebSocket/readyState}} attribute is {{WebSocket/CONNECTING}}, it must throw an
 "{{InvalidStateError}}" {{DOMException}}. Otherwise, the user agent must run the appropriate set of
 steps from the following list:
 
@@ -534,7 +534,7 @@ that must be supported, as [=event handler IDL attributes=], by all objects impl
 When [=the WebSocket connection is established=], the
 user agent must [=queue a task=] to run these steps:
 
- 1. Change the {{WebSocket/readyState}} attribute's value to <code>[=OPEN=]</code>
+ 1. Change the {{WebSocket/readyState}} attribute's value to {{WebSocket/OPEN}}
     (1).
  1. Change the {{WebSocket/extensions}} attribute's value to the [=extensions in
     use=], if it is not the null value. [[!WSP]]
@@ -552,7 +552,7 @@ When [=a WebSocket message has been received=]
 with type |type| and data |data|, the user agent must [=queue a task=]
 to follow these steps: [[!WSP]]
 
- 1. If the {{WebSocket/readyState}} attribute's value is not <code>[=OPEN=]</code> (1), then return.
+ 1. If the {{WebSocket/readyState}} attribute's value is not {{WebSocket/OPEN}}</code> (1), then return.
  1. Let |dataForEvent| be determined by switching on |type| and {{WebSocket/binaryType}}:
 
   <dl class="switch">
@@ -560,12 +560,12 @@ to follow these steps: [[!WSP]]
    :: a new {{DOMString}} containing |data|
 
    : |type| indicates that the data is Binary and {{WebSocket/binaryType}} is
-     "<dfn>`blob`</dfn>"
+     "{{BinaryType/blob}}"
    :: a new {{Blob}} object, created in the [=relevant Realm=] of the {{WebSocket}}
       object, that represents |data| as its raw data [[!FILEAPI]]
 
    : |type| indicates that the data is Binary and {{WebSocket/binaryType}} is
-     "<dfn>`arraybuffer`</dfn>"
+     "{{BinaryType/arraybuffer}}"
    :: a new {{ArrayBuffer}} object, created in the [=relevant Realm=] of the {{WebSocket}} object,
       whose contents are |data|
   </dl>
@@ -577,10 +577,9 @@ to follow these steps: [[!WSP]]
 
 <p class="note">User agents are encouraged to check if they can perform the above steps efficiently
 before they run the task, picking tasks from other [=task queues=] while they prepare the buffers if
-not. For example, if the {{WebSocket/binaryType}} attribute was set to "<a
-dfn>`blob`</a>" when the data arrived, and the user agent spooled all the data to disk,
+not. For example, if the {{WebSocket/binaryType}} attribute was set to "{{blob}}" when the data arrived, and the user agent spooled all the data to disk,
 but just before running the above [=task=] for this particular message the script switched
-{{WebSocket/binaryType}} to "<a dfn>`arraybuffer`</a>", the user agent would want to page
+{{WebSocket/binaryType}} to "{{arraybuffer}}", the user agent would want to page
 the data back to RAM before running this [=task=] so as to avoid stalling the main thread while it
 created the {{ArrayBuffer}} object.
 
@@ -610,9 +609,9 @@ The protocol here is a trivial one, with the server just sending "on" or "off" m
 <div>
 
 When [=the websocket closing handshake is started=], the user agent must [=queue a task=] to change
-the {{WebSocket/readyState}} attribute's value to <code>[=CLOSING=]</code> (2). (If the
+the {{WebSocket/readyState}} attribute's value to {{WebSocket/CLOSING}} (2). (If the
 {{WebSocket/close()}} method was called, the {{WebSocket/readyState}} attribute's value will already
-be set to <code>[=CLOSING=]</code> (2) when this task runs.) [[!WSP]]
+be set to {{WebSocket/CLOSING}} (2) when this task runs.) [[!WSP]]
 
 <hr>
 
@@ -620,7 +619,7 @@ be set to <code>[=CLOSING=]</code> (2) when this task runs.) [[!WSP]]
  [=cleanly=], the user agent must [=queue a task=] to run the following substeps:
 
  1. Change the {{WebSocket/readyState}} attribute's value to
-    <code>[=CLOSED=]</code> (3).
+    {{WebSocket/CLOSED}} (3).
  1. If the user agent was required to [=fail the WebSocket connection=], or if the <a lt="the
     WebSocket connection is closed">the WebSocket connection was closed</a> after being <dfn>flagged
     as full</dfn>, [=fire an event=] named <a event>`error`</a> at the {{WebSocket}}
@@ -734,19 +733,19 @@ to. It represents the WebSocket connection close reason provided by the server.
 # Garbage collection # {#garbage-collection}
 
 A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
-<code>[=CONNECTING=]</code> (0) as of the last time the [=event loop=] reached <a for="event
+{{WebSocket/CONNECTING}} (0) as of the last time the [=event loop=] reached <a for="event
 loop">step 1</a> must not be garbage collected if there are any event listeners registered for <a
 event>`open`</a> events, <a event>`message`</a> events, <a
 event>`error`</a> events, or <a event>`close`</a> events.
 
 A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
-<code>[=OPEN=]</code> (1) as of the last time the [=event loop=] reached <a for="event loop">step
+{{WebSocket/OPEN}} (1) as of the last time the [=event loop=] reached <a for="event loop">step
 1</a> must not be garbage collected if there are any event listeners registered for <a
 event>`message`</a> events, <a event>`error`</a>, or <a
 event>`close`</a> events.
 
 A {{WebSocket}} object whose {{WebSocket/readyState}} attribute's value was set to
-<code>[=CLOSING=]</code> (2) as of the last time the [=event loop=] reached
+{{WebSocket/CLOSING}} (2) as of the last time the [=event loop=] reached
 <a for="event loop">step 1</a> must not be garbage collected if there are any event listeners
 registered for <a event>`error`</a> or <a event>`close`</a> events.
 
