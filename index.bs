@@ -105,14 +105,17 @@ through a custom server.</p>
 To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</dfn>, given a
 |url|, run these steps:
 
-1. Let <var ignore>host</var> be |url|'s <a for=url>host</a>.
-1. Let <var ignore>port</var> be |url|'s <a for=url>port</a>.
-1. Let <var ignore>secure</var> be false, if |url|'s <a for=url>scheme</a> is
- "`http`", and true otherwise.
-1. Follow the requirements stated in step 2 to 5, inclusive, of the first set of steps in
- <a href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol
- to establish a <a lt="obtain a WebSocket connection">WebSocket connection</a>.
- [[!WSP]]
+1. Let |host| be |url|'s <a for=url>host</a>.
+1. Let |port| be |url|'s <a for=url>port</a>.
+1. Let |resource name| be U+002F (/), followed by the strings in |url|'s <a for=url>path</a>
+   (including empty strings), if any, separated from each other by U+002F (/).
+1. If |url|'s <a for=url>query</a> is non-empty, append U+003F (?), followed by |url|'s
+   <a for=url>query</a>, to |resource name|.
+1. Let |secure| be false, if |url|'s <a for=url>scheme</a> is "`http`", and true otherwise.
+1. Follow the requirements stated in step 2 to 5, inclusive, of the first set of steps in <a
+ href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol to
+ establish a <a lt="obtain a WebSocket connection">WebSocket connection</a>, passing |host|, |port|,
+ |resource name| and |secure|.  [[!WSP]]
 1. If that established a connection, return it, and return failure otherwise.
 
 <p class=note>Although structured a little differently, carrying different properties, and

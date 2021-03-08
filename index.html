@@ -12,7 +12,7 @@
 <script async crossorigin src="https://resources.whatwg.org/commit-snapshot-shortcut-key.js"></script>
 <script crossorigin defer src="https://resources.whatwg.org/standard-mdn-annos.js"></script>
   <meta content="Bikeshed version b94c7e755, updated Fri Feb 19 16:28:59 2021 -0800" name="generator">
-  <meta content="20481df353f21a7d2411fb1b60ab1ccbc88d8f3b" name="document-revision">
+  <meta content="79061b60d698a2e8a6d8dccff1b0a04de5ec2c32" name="document-revision">
 <style>/* style-var-click-highlighting */
 
     var { cursor: pointer; }
@@ -119,11 +119,14 @@ through a custom server.</p>
      <li data-md>
       <p>Let <var>port</var> be <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-port" id="ref-for-concept-url-port">port</a>.</p>
      <li data-md>
-      <p>Let <var>secure</var> be false, if <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme">scheme</a> is
-"<code>http</code>", and true otherwise.</p>
+      <p>Let <var>resource name</var> be U+002F (/), followed by the strings in <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-path" id="ref-for-concept-url-path">path</a> (including empty strings), if any, separated from each other by U+002F (/).</p>
      <li data-md>
-      <p>Follow the requirements stated in step 2 to 5, inclusive, of the first set of steps in <a href="http://tools.ietf.org/html/rfc6455#section-4.1">section 4.1</a> of The WebSocket Protocol
-to establish a <a data-link-type="dfn" href="#concept-websocket-connection-obtain" id="ref-for-concept-websocket-connection-obtain">WebSocket connection</a>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+      <p>If <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-query" id="ref-for-concept-url-query">query</a> is non-empty, append U+003F (?), followed by <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-query" id="ref-for-concept-url-query①">query</a>, to <var>resource name</var>.</p>
+     <li data-md>
+      <p>Let <var>secure</var> be false, if <var>url</var>’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-scheme" id="ref-for-concept-url-scheme">scheme</a> is "<code>http</code>", and true otherwise.</p>
+     <li data-md>
+      <p>Follow the requirements stated in step 2 to 5, inclusive, of the first set of steps in <a href="http://tools.ietf.org/html/rfc6455#section-4.1">section 4.1</a> of The WebSocket Protocol to
+establish a <a data-link-type="dfn" href="#concept-websocket-connection-obtain" id="ref-for-concept-websocket-connection-obtain">WebSocket connection</a>, passing <var>host</var>, <var>port</var>, <var>resource name</var> and <var>secure</var>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <li data-md>
       <p>If that established a connection, return it, and return failure otherwise.</p>
     </ol>
@@ -1083,10 +1086,22 @@ if ("serviceWorker" in navigator) {
     <li><a href="#ref-for-concept-url-origin">4. Feedback from the protocol</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-url-path">
+   <a href="https://url.spec.whatwg.org/#concept-url-path">https://url.spec.whatwg.org/#concept-url-path</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-url-path">2.1. Connections</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-port">
    <a href="https://url.spec.whatwg.org/#concept-url-port">https://url.spec.whatwg.org/#concept-url-port</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-url-port">2.1. Connections</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-url-query">
+   <a href="https://url.spec.whatwg.org/#concept-url-query">https://url.spec.whatwg.org/#concept-url-query</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-url-query">2.1. Connections</a> <a href="#ref-for-concept-url-query①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-scheme">
@@ -1427,7 +1442,9 @@ if ("serviceWorker" in navigator) {
      <li><span class="dfn-paneled" id="term-for-concept-url-fragment">fragment</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-host">host</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-origin">origin</span>
+     <li><span class="dfn-paneled" id="term-for-concept-url-path">path</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-port">port</span>
+     <li><span class="dfn-paneled" id="term-for-concept-url-query">query</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-scheme">scheme</span>
      <li><span class="dfn-paneled" id="term-for-concept-url">url</span>
      <li><span class="dfn-paneled" id="term-for-concept-url-parser">url parser</span>
