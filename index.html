@@ -12,7 +12,7 @@
 <script async crossorigin src="https://resources.whatwg.org/commit-snapshot-shortcut-key.js"></script>
 <script crossorigin defer src="https://resources.whatwg.org/standard-mdn-annos.js"></script>
   <meta content="Bikeshed version b94c7e755, updated Fri Feb 19 16:28:59 2021 -0800" name="generator">
-  <meta content="ff3be958313ff76137ba05d932afc248601251ed" name="document-revision">
+  <meta content="227809abaf0082e77e31813a5ac38900af08f974" name="document-revision">
 <style>/* style-var-click-highlighting */
 
     var { cursor: pointer; }
@@ -29,7 +29,7 @@
     <a class="logo" href="https://whatwg.org/"> <img alt="WHATWG" crossorigin height="100" src="https://resources.whatwg.org/logo-websockets.svg"> </a> 
    <hgroup>
     <h1 class="p-name no-ref" id="title">WebSockets</h1>
-    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2021-03-04">4 March 2021</time></span></h2>
+    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard — Last Updated <time class="dt-updated" datetime="2021-03-08">8 March 2021</time></span></h2>
    </hgroup>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -181,7 +181,8 @@ to validate <var>response</var>. This either results in <a data-link-type="dfn" 
       </ol>
     </ol>
    </div>
-   <p><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7③">Fail the WebSocket connection</a> and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①">the WebSocket connection is established</a> are defined by The WebSocket Protocol. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+   <p><a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7③">Fail the WebSocket connection</a> and <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①">the WebSocket connection is established</a> are defined by The
+WebSocket Protocol. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
    <p class="warning">The reason redirects are not followed and this handshake is generally restricted is
 because it could introduce serious security problems in a web browser context. For example, consider
 a host with a WebSocket server at one path and an open HTTP redirector at another. Suddenly, any
@@ -232,7 +233,8 @@ Only "<code>ws</code>" or "<code>wss</code>" schemes are allowed; others will ca
 array consisting of just that string; if it is omitted, it is equivalent to the empty array. Each
 string in the array is a subprotocol name. The connection will only be established if the server
 reports that it has selected one of these subprotocols. The subprotocol names have to match the
-requirements for elements that comprise the value of <a data-link-type="http-header" href="https://tools.ietf.org/html/rfc6455#section-11.3.4" id="ref-for-section-11.3.4"><code>Sec-WebSocket-Protocol</code></a> fields as defined by The WebSocket protocol. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+requirements for elements that comprise the value of
+`<a data-link-type="http-header" href="https://tools.ietf.org/html/rfc6455#section-11.3.4" id="ref-for-section-11.3.4"><code>Sec-WebSocket-Protocol</code></a>` fields as defined by The WebSocket protocol. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
     <dt data-md><code><var>socket</var> . <a class="idl-code" data-link-type="method" href="#dom-websocket-send" id="ref-for-dom-websocket-send①">send</a>( <var>data</var> )</code>
     <dd data-md>
      <p>Transmits <var>data</var> using the WebSocket connection. <var>data</var> can be a string, a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob①">Blob</a></code>, an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer">ArrayBuffer</a></code>, or an <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#ArrayBufferView" id="ref-for-ArrayBufferView">ArrayBufferView</a></code>.</p>
@@ -292,7 +294,9 @@ scripts:</p>
       <p>If <var>protocols</var> is a string, set <var>protocols</var> to a sequence consisting of just that string.</p>
      <li data-md>
       <p>If any of the values in <var>protocols</var> occur more than once or otherwise fail to match the
-  requirements for elements that comprise the value of <a data-link-type="http-header" href="https://tools.ietf.org/html/rfc6455#section-11.3.4" id="ref-for-section-11.3.4①"><code>Sec-WebSocket-Protocol</code></a> fields as defined by The WebSocket protocol, then throw a "<code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#syntaxerror" id="ref-for-syntaxerror④">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+  requirements for elements that comprise the value of
+  `<a data-link-type="http-header" href="https://tools.ietf.org/html/rfc6455#section-11.3.4" id="ref-for-section-11.3.4①"><code>Sec-WebSocket-Protocol</code></a>` fields as defined by The WebSocket protocol,
+  then throw a "<code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#syntaxerror" id="ref-for-syntaxerror④">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <li data-md>
       <p>Run this step <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel">in parallel</a>:</p>
       <ol>

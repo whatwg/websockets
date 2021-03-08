@@ -251,8 +251,9 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
   array consisting of just that string; if it is omitted, it is equivalent to the empty array. Each
   string in the array is a subprotocol name. The connection will only be established if the server
   reports that it has selected one of these subprotocols. The subprotocol names have to match the
-  requirements for elements that comprise the value of <a http-header>`Sec-WebSocket-Protocol`</a>
-  fields as defined by The WebSocket protocol. [[!WSP]]
+  requirements for elements that comprise the value of
+  \`<a http-header>`Sec-WebSocket-Protocol`</a>\` fields as defined by The WebSocket protocol.
+  [[!WSP]]
 
  : <code>|socket| . <a method for=WebSocket data-lt=send()>send</a>( |data| )</code>
  :: Transmits |data| using the WebSocket connection. |data| can be a string, a {{Blob}}, an
@@ -308,9 +309,9 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
  1. If |urlRecord|'s [=fragment=] is non-null, then throw a "{{SyntaxError}}" {{DOMException}}.
  1. If |protocols| is a string, set |protocols| to a sequence consisting of just that string.
  1. If any of the values in |protocols| occur more than once or otherwise fail to match the
-    requirements for elements that comprise the value of <a http-header>`Sec-WebSocket-Protocol`</a>
-    fields as defined by The WebSocket protocol, then throw a "{{SyntaxError}}" {{DOMException}}.
-    [[!WSP]]
+    requirements for elements that comprise the value of
+    \`<a http-header>`Sec-WebSocket-Protocol`</a>\` fields as defined by The WebSocket protocol,
+    then throw a "{{SyntaxError}}" {{DOMException}}.  [[!WSP]]
  1. Run this step [=in parallel=]:
   1. [=Establish a WebSocket connection=] given |urlRecord|, |protocols|, and the [=entry settings
      object=].
