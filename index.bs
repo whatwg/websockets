@@ -258,7 +258,7 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
   \`<a http-header>`Sec-WebSocket-Protocol`</a>\` fields as defined by The WebSocket protocol.
   [[!WSP]]
 
- : <code>|socket| . <a method for=WebSocket data-lt=send()>send</a>( |data| )</code>
+ : <code>|socket| . <a method for=WebSocket lt=send()>send</a>( |data| )</code>
  :: Transmits |data| using the WebSocket connection. |data| can be a string, a {{Blob}}, an
   {{ArrayBuffer}}, or an {{ArrayBufferView}}.
 
