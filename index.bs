@@ -294,7 +294,7 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
   : "{{BinaryType/arraybuffer}}"
   :: Binary data is returned in {{ArrayBuffer}} form.
 
-  Can be set, to change how binary data is returned. The default is "{{blob}}"
+  Can be set, to change how binary data is returned. The default is "{{BinaryType/blob}}"
 </dl>
 
 <div algorithm>
@@ -453,17 +453,17 @@ of the value of the attribute over time.
 <hr>
 
 When a {{WebSocket}} object is created, its <dfn attribute for=WebSocket>binaryType</dfn> IDL
-attribute must be set to the string "{{blob}}". On getting, it must return the last value it was set
-to. On setting, the user agent must set the IDL attribute to the new value.
+attribute must be set to the string "{{BinaryType/blob}}". On getting, it must return the last value
+it was set to. On setting, the user agent must set the IDL attribute to the new value.
 
 <p class="note">User agents can use the {{binaryType}} attribute as a hint for how to handle
-incoming binary data: if the attribute is set to "{{blob}}", it is safe to spool it to disk, and if
-it is set to "{{arraybuffer}}", it is likely more efficient to keep the data in memory. Naturally,
-user agents are encouraged to use more subtle heuristics to decide whether to keep incoming data in
-memory or not, e.g. based on how big the data is or how common it is for a script to change the
-attribute at the last minute. This latter aspect is important in particular because it is quite
-possible for the attribute to be changed after the user agent has received the data but before the
-user agent has fired the event for it.
+incoming binary data: if the attribute is set to "{{BinaryType/blob}}", it is safe to spool it to
+disk, and if it is set to "{{BinaryType/arraybuffer}}", it is likely more efficient to keep the data
+in memory. Naturally, user agents are encouraged to use more subtle heuristics to decide whether to
+keep incoming data in memory or not, e.g. based on how big the data is or how common it is for a
+script to change the attribute at the last minute. This latter aspect is important in particular
+because it is quite possible for the attribute to be changed after the user agent has received the
+data but before the user agent has fired the event for it.
 
 The <dfn method for=WebSocket>send(|data|)</dfn> method transmits data using the connection. If the
 {{WebSocket/readyState}} attribute is {{WebSocket/CONNECTING}}, it must throw an
@@ -586,11 +586,11 @@ When [=a WebSocket message has been received=] with type |type| and data |data|,
 
 <p class="note">User agents are encouraged to check if they can perform the above steps efficiently
 before they run the task, picking tasks from other [=task queues=] while they prepare the buffers if
-not. For example, if the {{WebSocket/binaryType}} attribute was set to "{{blob}}" when the data arrived, and the user agent spooled all the data to disk,
-but just before running the above [=task=] for this particular message the script switched
-{{WebSocket/binaryType}} to "{{arraybuffer}}", the user agent would want to page
-the data back to RAM before running this [=task=] so as to avoid stalling the main thread while it
-created the {{ArrayBuffer}} object.
+not. For example, if the {{WebSocket/binaryType}} attribute was set to "{{BinaryType/blob}}" when
+the data arrived, and the user agent spooled all the data to disk, but just before running the above
+[=task=] for this particular message the script switched {{WebSocket/binaryType}} to
+"{{BinaryType/arraybuffer}}", the user agent would want to page the data back to RAM before running
+this [=task=] so as to avoid stalling the main thread while it created the {{ArrayBuffer}} object.
 
 </div>
 
