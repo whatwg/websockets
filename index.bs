@@ -27,7 +27,6 @@ spec:url; type:dfn;
  text:fragment
  text:scheme
 spec:html; type:dfn;
- text:entry settings object
  text:task queues
  for:/; text:event loop
 spec:html; type:idl; text:MessageEvent
@@ -239,7 +238,8 @@ interface WebSocket : EventTarget {
 };
 </xmp>
 
-Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
+Each {{WebSocket}} object has an associated <dfn for="WebSocket" lt="internal-url">url</dfn>
+(a [=URL record=]).
 
 <dl class="domintro non-normative">
  : <code>|socket| = new {{WebSocket/constructor(url, protocols)|WebSocket}}(|url| [, |protocols| ] )</code>
@@ -302,8 +302,9 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
 
 <div algorithm>
 
- The <dfn constructor for=WebSocket>WebSocket(|url|, |protocols|)</dfn> constructor, when invoked,
- must run these steps:
+ The <dfn constructor for="WebSocket" data-lt="WebSocket(url, protocols)"><code>new
+ WebSocket(|url|, |protocols|)</code></dfn>
+ constructor steps are:
 
  1. Let |urlRecord| be the result of applying the [=URL parser=] to |url|.
  1. If |urlRecord| is failure, then throw a "{{SyntaxError}}" {{DOMException}}.
@@ -315,23 +316,22 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
     requirements for elements that comprise the value of
     \`<a http-header>`Sec-WebSocket-Protocol`</a>\` fields as defined by The WebSocket protocol,
     then throw a "{{SyntaxError}}" {{DOMException}}.  [[!WSP]]
+ 1. Set [=this=]'s [=WebSocket/internal-url|url=] to |urlRecord|.
+ 1. Let |client| be [=this=]'s [=relevant settings object=].
  1. Run this step [=in parallel=]:
-  1. [=Establish a WebSocket connection=] given |urlRecord|, |protocols|, and the [=entry settings
-     object=].
+  1. [=Establish a WebSocket connection=] given |urlRecord|, |protocols|, and |client|. [[!FETCH]]
 
      <p class="note">If the [=establish a WebSocket connection=] algorithm
      fails, it triggers the [=fail the WebSocket connection=] algorithm, which
      then invokes the [=close the WebSocket connection=] algorithm, which then
      establishes that [=the WebSocket connection is closed=], which fires the
      {{close!!event}} event <a href="#closeWebSocket">as described below</a>.
- 1. Return a new {{WebSocket}} object whose [=url=] is |urlRecord|.
-
 </div>
 
 <hr>
 
 The <dfn attribute for=WebSocket>url</dfn> attribute's getter must return this {{WebSocket}}
-object's [=url=], <a dfn lt="URL serializer">serialized</a>.
+object's [=WebSocket/internal-url|url=], <a dfn lt="URL serializer">serialized</a>.
 
 The <dfn attribute for=WebSocket>readyState</dfn> attribute represents the state of the
 connection. It can have the following values:
