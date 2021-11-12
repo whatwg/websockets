@@ -27,7 +27,6 @@ spec:url; type:dfn;
  text:fragment
  text:scheme
 spec:html; type:dfn;
- text:entry settings object
  text:task queues
  for:/; text:event loop
 spec:html; type:idl; text:MessageEvent
@@ -303,8 +302,8 @@ Each {{WebSocket}} object has an associated <dfn for="WebSocket" lt="internal-ur
 
 <div algorithm>
 
- The <dfn constructor for="WebSocket" data-lt="WebSocket(url, protocols)"><code
- data-x="dom-WebSocket">new WebSocket(<var>url</var>, <var>protocols</var>)</code></dfn>
+ The <dfn constructor for="WebSocket" data-lt="WebSocket(url, protocols)"><code>new
+ WebSocket(|url|, |protocols|)</code></dfn>
  constructor steps are:
 
  1. Let |urlRecord| be the result of applying the [=URL parser=] to |url|.
