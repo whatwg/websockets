@@ -263,7 +263,7 @@ Each {{WebSocket}} object has an associated <dfn>url</dfn> (a [=URL record=]).
   {{ArrayBuffer}}, or an {{ArrayBufferView}}.
 
  : <code>|socket| . <a method for=WebSocket>close</a>( [ |code| ] [, |reason| ] )</code>
- :: Closes the WebSocket connection, optionally using |code| as the [=the WebSocket connection
+ :: Closes the WebSocket connection, optionally using |code| as [=the WebSocket connection
   close code=] and |reason| as the [=the WebSocket connection close reason=].
 
  : <code>|socket| . <a attribute for=WebSocket>url</a></code>
@@ -383,7 +383,7 @@ string. After [=the WebSocket connection is established=], its value might chang
    fires the {{close!!event}} event <a href="#closeWebSocket">as described below</a>.
 
   : If the WebSocket closing handshake has not yet been <a lt="the WebSocket closing handshake is
-    started">started</a>. [[!WSP]]
+    started">started</a> [[!WSP]]
   :: [=Start the WebSocket closing handshake=] and set the {{WebSocket/readyState}} attribute's
    value to {{WebSocket/CLOSING}} (2). [[!WSP]]
 
@@ -631,7 +631,7 @@ be set to {{WebSocket/CLOSING}} (2) when this task runs.) [[!WSP]]
 <div algorithm="handle connection close">
 
  1. Change the {{WebSocket/readyState}} attribute's value to {{WebSocket/CLOSED}} (3).
- 1. If the user agent was required to [=fail the WebSocket connection=], or if the <a lt="the
+ 1. If the user agent was required to [=fail the WebSocket connection=], or if <a lt="the
     WebSocket connection is closed">the WebSocket connection was closed</a> after being <dfn>flagged
     as full</dfn>, [=fire an event=] named {{error!!event}} at the {{WebSocket}} object. [[!WSP]]
  1. [=Fire an event=] named {{close!!event}} at the {{WebSocket}} object, using {{CloseEvent}}, with
@@ -660,7 +660,7 @@ script to distinguish the following situations:
  * A WebSocket server that abruptly closed the connection after successfully completing the
    opening handshake.
 
-In all of these cases, the [=the WebSocket connection close code=] would be 1006, as required by
+In all of these cases, [=the WebSocket connection close code=] would be 1006, as required by
 <cite>WebSocket Protocol</cite>. [[!WSP]]
 
 Allowing a script to distinguish these cases would allow a script to probe the user's local network
