@@ -233,7 +233,7 @@ has the right hostname. </p>
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined①"><c- b>undefined</c-></a> <a class="idl-code" data-link-type="method" href="#dom-websocket-send" id="ref-for-dom-websocket-send"><c- g>send</c-></a>((<a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#BufferSource" id="ref-for-BufferSource"><c- n>BufferSource</c-></a> <c- b>or</c-> <a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob"><c- n>Blob</c-></a> <c- b>or</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString③"><c- b>USVString</c-></a>) <dfn class="idl-code" data-dfn-for="WebSocket/send(data)" data-dfn-type="argument" data-export id="dom-websocket-send-data-data"><code><c- g>data</c-></code><a class="self-link" href="#dom-websocket-send-data-data"></a></dfn>);
 };
 </pre>
-   <p>Each <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket③">WebSocket</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="url">url</dfn> (a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url">URL record</a>).</p>
+   <p>Each <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket③">WebSocket</a></code> object has an associated <dfn class="dfn-paneled" data-dfn-for="WebSocket" data-dfn-type="dfn" data-lt="internal-url" data-noexport id="websocket-internal-url">url</dfn> (a <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url">URL record</a>).</p>
    <dl class="domintro non-normative">
     <dt data-md><code><var>socket</var> = new <code class="idl"><a data-link-type="idl" href="#dom-websocket-websocket" id="ref-for-dom-websocket-websocket①">WebSocket</a></code>(<var>url</var> [, <var>protocols</var> ] )</code>
     <dd data-md>
@@ -256,7 +256,7 @@ requirements for elements that comprise the value of
 close code</a> and <var>reason</var> as the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.6" id="ref-for-section-7.1.6">the WebSocket connection close reason</a>.</p>
     <dt data-md><code><var>socket</var> . <a class="idl-code" data-link-type="attribute" href="#dom-websocket-url" id="ref-for-dom-websocket-url①">url</a></code>
     <dd data-md>
-     <p>Returns the <a data-link-type="dfn" href="#url" id="ref-for-url">URL that was used</a> to establish the WebSocket connection.</p>
+     <p>Returns the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url②">URL that was used</a> to establish the WebSocket connection.</p>
     <dt data-md><code><var>socket</var> . <a class="idl-code" data-link-type="attribute" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate①">readyState</a></code>
     <dd data-md>
      <p>Returns the state of the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket⑤">WebSocket</a></code> object’s connection. It can have the values described
@@ -290,8 +290,7 @@ scripts:</p>
      <p>Can be set, to change how binary data is returned. The default is "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob②">blob</a></code>"</p>
    </dl>
    <div class="algorithm" data-algorithm="WebSocket(url, protocols)" data-algorithm-for="WebSocket">
-    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="constructor" data-export data-lt="WebSocket(url, protocols)|constructor(url, protocols)|WebSocket(url)|constructor(url)" id="dom-websocket-websocket"><code>WebSocket(<var>url</var>, <var>protocols</var>)</code></dfn> constructor, when invoked,
- must run these steps:</p>
+    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="constructor" data-export data-lt="WebSocket(url, protocols)|constructor(url, protocols)|WebSocket(url)|constructor(url)" id="dom-websocket-websocket"><code data-x="dom-WebSocket">new WebSocket(<var>url</var>, <var>protocols</var>)</code></dfn> constructor steps are:</p>
     <ol>
      <li data-md>
       <p>Let <var>urlRecord</var> be the result of applying the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser">URL parser</a> to <var>url</var>.</p>
@@ -310,22 +309,23 @@ scripts:</p>
   `<a data-link-type="http-header" href="https://tools.ietf.org/html/rfc6455#section-11.3.4" id="ref-for-section-11.3.4①"><code>Sec-WebSocket-Protocol</code></a>` fields as defined by The WebSocket protocol,
   then throw a "<code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#syntaxerror" id="ref-for-syntaxerror④">SyntaxError</a></code>" <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMException" id="ref-for-idl-DOMException④">DOMException</a></code>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <li data-md>
+      <p>Set <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this">this</a>'s <a data-link-type="dfn" href="#websocket-internal-url" id="ref-for-websocket-internal-url">url</a> to <var>urlRecord</var>.</p>
+     <li data-md>
+      <p>Let <var>client</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this①">this</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object">relevant settings object</a>.</p>
+     <li data-md>
       <p>Run this step <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-in-parallel">in parallel</a>:</p>
       <ol>
        <li data-md>
-        <p><a data-link-type="dfn" href="#concept-websocket-establish" id="ref-for-concept-websocket-establish">Establish a WebSocket connection</a> given <var>urlRecord</var>, <var>protocols</var>, and the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object" id="ref-for-entry-settings-object">entry settings
-  object</a>.</p>
+        <p><a data-link-type="dfn" href="#concept-websocket-establish" id="ref-for-concept-websocket-establish">Establish a WebSocket connection</a> given <var>urlRecord</var>, <var>protocols</var>, and <var>client</var>. <a data-link-type="biblio" href="#biblio-fetch">[FETCH]</a></p>
         <p class="note" role="note">If the <a data-link-type="dfn" href="#concept-websocket-establish" id="ref-for-concept-websocket-establish①">establish a WebSocket connection</a> algorithm
   fails, it triggers the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7④">fail the WebSocket connection</a> algorithm, which
   then invokes the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.1" id="ref-for-section-7.1.1">close the WebSocket connection</a> algorithm, which then
   establishes that <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.4" id="ref-for-section-7.1.4">the WebSocket connection is closed</a>, which fires the <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close">close</a></code> event <a href="#closeWebSocket">as described below</a>. </p>
       </ol>
-     <li data-md>
-      <p>Return a new <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket⑦">WebSocket</a></code> object whose <a data-link-type="dfn" href="#url" id="ref-for-url①">url</a> is <var>urlRecord</var>.</p>
     </ol>
    </div>
    <hr>
-   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="attribute" data-export id="dom-websocket-url"><code>url</code></dfn> attribute’s getter must return this <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket⑧">WebSocket</a></code> object’s <a data-link-type="dfn" href="#url" id="ref-for-url②">url</a>, <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-serializer" id="ref-for-concept-url-serializer">serialized</a>.</p>
+   <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="attribute" data-export id="dom-websocket-url"><code>url</code></dfn> attribute’s getter must return this <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket⑦">WebSocket</a></code> object’s <a data-link-type="dfn" href="#websocket-internal-url" id="ref-for-websocket-internal-url①">url</a>, <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-serializer" id="ref-for-concept-url-serializer">serialized</a>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="attribute" data-export id="dom-websocket-readystate"><code>readyState</code></dfn> attribute represents the state of the
 connection. It can have the following values:</p>
    <dl>
@@ -428,7 +428,7 @@ the data at a higher rate than the network can handle, though this requires more
 of the value of the attribute over time.</p>
    </div>
    <hr>
-   <p>When a <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket⑨">WebSocket</a></code> object is created, its <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="attribute" data-export id="dom-websocket-binarytype"><code>binaryType</code></dfn> IDL
+   <p>When a <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket⑧">WebSocket</a></code> object is created, its <dfn class="dfn-paneled idl-code" data-dfn-for="WebSocket" data-dfn-type="attribute" data-export id="dom-websocket-binarytype"><code>binaryType</code></dfn> IDL
 attribute must be set to the string "<code class="idl"><a data-link-type="idl" href="#dom-binarytype-blob" id="ref-for-dom-binarytype-blob③">blob</a></code>". On getting, it must return the last value
 it was set to. On setting, the user agent must set the IDL attribute to the new value.</p>
    <p class="note" role="note">User agents can use the <code class="idl"><a data-link-type="idl" href="#dom-websocket-binarytype" id="ref-for-dom-websocket-binarytype②">binaryType</a></code> attribute as a hint for how to handle
@@ -477,7 +477,7 @@ by the length of <var>data</var>’s buffer in bytes. <a data-link-type="biblio"
    </dl>
    <hr>
    <p>The following are the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers" id="ref-for-event-handlers">event handlers</a> (and their corresponding <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-event-type" id="ref-for-event-handler-event-type">event handler event types</a>)
-that must be supported, as <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-idl-attributes" id="ref-for-event-handler-idl-attributes">event handler IDL attributes</a>, by all objects implementing the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⓪">WebSocket</a></code> interface:</p>
+that must be supported, as <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-idl-attributes" id="ref-for-event-handler-idl-attributes">event handler IDL attributes</a>, by all objects implementing the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket⑨">WebSocket</a></code> interface:</p>
    <table>
     <thead>
      <tr>
@@ -511,7 +511,7 @@ steps:</p>
       <p>Change the <code class="idl"><a data-link-type="idl" href="#dom-websocket-protocol" id="ref-for-dom-websocket-protocol②">protocol</a></code> attribute’s value to the <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_Subprotocol%20In,Use_" id="ref-for-page-19:~:text=_Subprotocol%20In,Use_">subprotocol in
   use</a>, if it is not the null value. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire">Fire an event</a> named <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-open" id="ref-for-event-open①">open</a></code> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①①">WebSocket</a></code> object.</p>
+      <p><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire">Fire an event</a> named <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-open" id="ref-for-event-open①">open</a></code> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⓪">WebSocket</a></code> object.</p>
     </ol>
     <p class="note" role="note">Since the algorithm above is <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-queue-a-task①">queued as a task</a>, there is no
 race condition between <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①②">the WebSocket connection
@@ -532,16 +532,16 @@ being established</a> and the script setting up an event listener for the <code 
         <p>a new <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString④">DOMString</a></code> containing <var>data</var></p>
        <dt data-md><var>type</var> indicates that the data is Binary and <code class="idl"><a data-link-type="idl" href="#dom-websocket-binarytype" id="ref-for-dom-websocket-binarytype④">binaryType</a></code> is <dfn class="dfn-paneled idl-code" data-dfn-for="BinaryType" data-dfn-type="enum-value" data-export id="dom-binarytype-blob"><code>"blob"</code></dfn>
        <dd data-md>
-        <p>a new <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑦">Blob</a></code> object, created in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm">relevant Realm</a> of the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①②">WebSocket</a></code> object, that
+        <p>a new <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob" id="ref-for-dfn-Blob⑦">Blob</a></code> object, created in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm">relevant Realm</a> of the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①①">WebSocket</a></code> object, that
   represents <var>data</var> as its raw data <a data-link-type="biblio" href="#biblio-fileapi">[FILEAPI]</a></p>
        <dt data-md><var>type</var> indicates that the data is Binary and <code class="idl"><a data-link-type="idl" href="#dom-websocket-binarytype" id="ref-for-dom-websocket-binarytype⑤">binaryType</a></code> is <dfn class="dfn-paneled idl-code" data-dfn-for="BinaryType" data-dfn-type="enum-value" data-export id="dom-binarytype-arraybuffer"><code>"arraybuffer"</code></dfn>
        <dd data-md>
-        <p>a new <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑦">ArrayBuffer</a></code> object, created in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm①">relevant Realm</a> of the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①③">WebSocket</a></code> object,
+        <p>a new <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer" id="ref-for-idl-ArrayBuffer⑦">ArrayBuffer</a></code> object, created in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm" id="ref-for-concept-relevant-realm①">relevant Realm</a> of the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①②">WebSocket</a></code> object,
   whose contents are <var>data</var></p>
       </dl>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire①">Fire an event</a> named <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-message" id="ref-for-event-message①">message</a></code> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①④">WebSocket</a></code> object, using <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#messageevent" id="ref-for-messageevent">MessageEvent</a></code>,
-  with the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#dom-messageevent-origin" id="ref-for-dom-messageevent-origin">origin</a></code> attribute initialized to the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-serializer" id="ref-for-concept-url-serializer①">serialization</a> of the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑤">WebSocket</a></code> object’s <a data-link-type="dfn" href="#url" id="ref-for-url③">url</a>'s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin" id="ref-for-concept-url-origin">origin</a>, and the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#dom-messageevent-data" id="ref-for-dom-messageevent-data">data</a></code> attribute initialized to <var>dataForEvent</var>.</p>
+      <p><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire①">Fire an event</a> named <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-message" id="ref-for-event-message①">message</a></code> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①③">WebSocket</a></code> object, using <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#messageevent" id="ref-for-messageevent">MessageEvent</a></code>,
+  with the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#dom-messageevent-origin" id="ref-for-dom-messageevent-origin">origin</a></code> attribute initialized to the <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-serializer" id="ref-for-concept-url-serializer①">serialization</a> of the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①④">WebSocket</a></code> object’s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url③">url</a>'s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-origin" id="ref-for-concept-url-origin">origin</a>, and the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/comms.html#dom-messageevent-data" id="ref-for-dom-messageevent-data">data</a></code> attribute initialized to <var>dataForEvent</var>.</p>
     </ol>
     <p class="note" role="note">User agents are encouraged to check if they can perform the above steps efficiently
 before they run the task, picking tasks from other <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#task-queue" id="ref-for-task-queue">task queues</a> while they prepare the buffers if
@@ -576,9 +576,9 @@ be set to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing
       <p>Change the <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate①②">readyState</a></code> attribute’s value to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closed" id="ref-for-dom-websocket-closed②">CLOSED</a></code> (3).</p>
      <li data-md>
       <p>If the user agent was required to <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.7" id="ref-for-section-7.1.7⑦">fail the WebSocket connection</a>, or if <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.4" id="ref-for-section-7.1.4⑤">the WebSocket connection was closed</a> after being <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="flagged as full" data-noexport id="flagged-as-full">flagged
-  as full</dfn>, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire②">fire an event</a> named <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-error" id="ref-for-event-error①">error</a></code> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑥">WebSocket</a></code> object. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
+  as full</dfn>, <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire②">fire an event</a> named <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-error" id="ref-for-event-error①">error</a></code> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑤">WebSocket</a></code> object. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
      <li data-md>
-      <p><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire③">Fire an event</a> named <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close⑥">close</a></code> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑦">WebSocket</a></code> object, using <code class="idl"><a data-link-type="idl" href="#closeevent" id="ref-for-closeevent">CloseEvent</a></code>, with
+      <p><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-event-fire" id="ref-for-concept-event-fire③">Fire an event</a> named <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close⑥">close</a></code> at the <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑥">WebSocket</a></code> object, using <code class="idl"><a data-link-type="idl" href="#closeevent" id="ref-for-closeevent">CloseEvent</a></code>, with
  the <code class="idl"><a data-link-type="idl" href="#dom-closeevent-wasclean" id="ref-for-dom-closeevent-wasclean">wasClean</a></code> attribute initialized to true if the connection closed <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-41:~:text=closed-,_cleanly_." id="ref-for-page-41:~:text=closed-,_cleanly_.①">cleanly</a> and false otherwise, the <code class="idl"><a data-link-type="idl" href="#dom-closeevent-code" id="ref-for-dom-closeevent-code">code</a></code> attribute initialized to <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.5" id="ref-for-section-7.1.5①">the WebSocket connection
  close code</a>, and the <code class="idl"><a data-link-type="idl" href="#dom-closeevent-reason" id="ref-for-dom-closeevent-reason">reason</a></code> attribute initialized to the result of applying <a data-link-type="dfn" href="https://encoding.spec.whatwg.org/#utf-8-decode-without-bom" id="ref-for-utf-8-decode-without-bom">UTF-8 decode without BOM</a> to <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.6" id="ref-for-section-7.1.6①">the WebSocket connection close reason</a>. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
     </ol>
@@ -624,7 +624,7 @@ maintain local network NAT mappings, to detect failed connections, or to display
 the user. User agents must not use pings or unsolicited pongs to aid the server; it is assumed that
 servers will solicit pongs whenever appropriate for the server’s needs.</p>
    <h2 class="heading settled" data-level="6" id="the-closeevent-interface"><span class="secno">6. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#closeevent" id="ref-for-closeevent①">CloseEvent</a></code> interface</span><a class="self-link" href="#the-closeevent-interface"></a></h2>
-   <p><code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑧">WebSocket</a></code> objects use the <code class="idl"><a data-link-type="idl" href="#closeevent" id="ref-for-closeevent②">CloseEvent</a></code> interface for their <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close⑦">close</a></code> events:</p>
+   <p><code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑦">WebSocket</a></code> objects use the <code class="idl"><a data-link-type="idl" href="#closeevent" id="ref-for-closeevent②">CloseEvent</a></code> interface for their <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close⑦">close</a></code> events:</p>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=(<c- n>Window</c->,<c- n>Worker</c->)]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="closeevent"><code><c- g>CloseEvent</c-></code></dfn> : <a data-link-type="idl-name" href="https://dom.spec.whatwg.org/#event" id="ref-for-event"><c- n>Event</c-></a> {
   <dfn class="idl-code" data-dfn-for="CloseEvent" data-dfn-type="constructor" data-export data-lt="CloseEvent(type, eventInitDict)|constructor(type, eventInitDict)|CloseEvent(type)|constructor(type)" id="dom-closeevent-closeevent"><code><c- g>constructor</c-></code><a class="self-link" href="#dom-closeevent-closeevent"></a></dfn>(<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-DOMString" id="ref-for-idl-DOMString⑤"><c- b>DOMString</c-></a> <dfn class="idl-code" data-dfn-for="CloseEvent/CloseEvent(type, eventInitDict), CloseEvent/constructor(type, eventInitDict), CloseEvent/CloseEvent(type), CloseEvent/constructor(type)" data-dfn-type="argument" data-export id="dom-closeevent-closeevent-type-eventinitdict-type"><code><c- g>type</c-></code><a class="self-link" href="#dom-closeevent-closeevent-type-eventinitdict-type"></a></dfn>, <c- b>optional</c-> <a data-link-type="idl-name" href="#dictdef-closeeventinit" id="ref-for-dictdef-closeeventinit"><c- n>CloseEventInit</c-></a> <dfn class="idl-code" data-dfn-for="CloseEvent/CloseEvent(type, eventInitDict), CloseEvent/constructor(type, eventInitDict), CloseEvent/CloseEvent(type), CloseEvent/constructor(type)" data-dfn-type="argument" data-export id="dom-closeevent-closeevent-type-eventinitdict-eventinitdict"><code><c- g>eventInitDict</c-></code><a class="self-link" href="#dom-closeevent-closeevent-type-eventinitdict-eventinitdict"></a></dfn> = {});
@@ -658,18 +658,18 @@ to. It represents the WebSocket connection close code provided by the server.</p
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="CloseEvent" data-dfn-type="attribute" data-export id="dom-closeevent-reason"><code>reason</code></dfn> attribute must return the value it was initialized
 to. It represents the WebSocket connection close reason provided by the server.</p>
    <h2 class="heading settled" data-level="7" id="garbage-collection"><span class="secno">7. </span><span class="content">Garbage collection</span><a class="self-link" href="#garbage-collection"></a></h2>
-   <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑨">WebSocket</a></code> object whose <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate①③">readyState</a></code> attribute’s value was set to <code class="idl"><a data-link-type="idl" href="#dom-websocket-connecting" id="ref-for-dom-websocket-connecting③">CONNECTING</a></code> (0) as of the last time the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" id="ref-for-event-loop①">event loop</a> reached <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#step1" id="ref-for-step1①">step
+   <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑧">WebSocket</a></code> object whose <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate①③">readyState</a></code> attribute’s value was set to <code class="idl"><a data-link-type="idl" href="#dom-websocket-connecting" id="ref-for-dom-websocket-connecting③">CONNECTING</a></code> (0) as of the last time the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" id="ref-for-event-loop①">event loop</a> reached <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#step1" id="ref-for-step1①">step
 1</a> must not be garbage collected if there are any event listeners registered for <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-open" id="ref-for-event-open③">open</a></code> events, <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-message" id="ref-for-event-message③">message</a></code> events, <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-error" id="ref-for-event-error②">error</a></code> events, or <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close⑧">close</a></code> events.</p>
-   <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②⓪">WebSocket</a></code> object whose <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate①④">readyState</a></code> attribute’s value was set to <code class="idl"><a data-link-type="idl" href="#dom-websocket-open" id="ref-for-dom-websocket-open③">OPEN</a></code> (1) as of the last time the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" id="ref-for-event-loop②">event loop</a> reached <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#step1" id="ref-for-step1②">step 1</a> must not be garbage collected if there are any event listeners registered for <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-message" id="ref-for-event-message④">message</a></code> events, <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-error" id="ref-for-event-error③">error</a></code>, or <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close⑨">close</a></code> events.</p>
-   <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②①">WebSocket</a></code> object whose <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate①⑤">readyState</a></code> attribute’s value was set to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing⑦">CLOSING</a></code> (2) as of the last time the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" id="ref-for-event-loop③">event loop</a> reached <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#step1" id="ref-for-step1③">step
+   <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket①⑨">WebSocket</a></code> object whose <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate①④">readyState</a></code> attribute’s value was set to <code class="idl"><a data-link-type="idl" href="#dom-websocket-open" id="ref-for-dom-websocket-open③">OPEN</a></code> (1) as of the last time the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" id="ref-for-event-loop②">event loop</a> reached <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#step1" id="ref-for-step1②">step 1</a> must not be garbage collected if there are any event listeners registered for <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-message" id="ref-for-event-message④">message</a></code> events, <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-error" id="ref-for-event-error③">error</a></code>, or <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close⑨">close</a></code> events.</p>
+   <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②⓪">WebSocket</a></code> object whose <code class="idl"><a data-link-type="idl" href="#dom-websocket-readystate" id="ref-for-dom-websocket-readystate①⑤">readyState</a></code> attribute’s value was set to <code class="idl"><a data-link-type="idl" href="#dom-websocket-closing" id="ref-for-dom-websocket-closing⑦">CLOSING</a></code> (2) as of the last time the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop" id="ref-for-event-loop③">event loop</a> reached <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#step1" id="ref-for-step1③">step
 1</a> must not be garbage collected if there are any event listeners registered for <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-error" id="ref-for-event-error④">error</a></code> or <code class="idl"><a class="idl-code" data-link-type="event" href="https://html.spec.whatwg.org/multipage/indices.html#event-close" id="ref-for-event-close①⓪">close</a></code> events.</p>
-   <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②②">WebSocket</a></code> object with <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①③">an established
+   <p>A <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②①">WebSocket</a></code> object with <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and" id="ref-for-page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and①③">an established
 connection</a> that has data queued to be transmitted to the network must not be garbage collected. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
-   <p>If a <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②③">WebSocket</a></code> object is garbage collected while its connection is still open, the user agent
+   <p>If a <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②②">WebSocket</a></code> object is garbage collected while its connection is still open, the user agent
 must <a data-link-type="dfn" href="https://tools.ietf.org/html/rfc6455#section-7.1.2" id="ref-for-section-7.1.2③">start the WebSocket closing handshake</a>, with no status code for the Close
 message. <a data-link-type="biblio" href="#biblio-wsp">[WSP]</a></p>
    <hr>
-   <p>If a user agent is to <dfn data-dfn-type="dfn" data-export id="make-disappear">make disappear<a class="self-link" href="#make-disappear"></a></dfn> a <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②④">WebSocket</a></code> object (this happens when a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document">Document</a></code> object goes away), the user agent must follow the first appropriate set of steps from
+   <p>If a user agent is to <dfn data-dfn-type="dfn" data-export id="make-disappear">make disappear<a class="self-link" href="#make-disappear"></a></dfn> a <code class="idl"><a data-link-type="idl" href="#websocket" id="ref-for-websocket②③">WebSocket</a></code> object (this happens when a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document">Document</a></code> object goes away), the user agent must follow the first appropriate set of steps from
 the following list:</p>
    <div class="algorithm" data-algorithm="to make disappear">
     <dl class="switch">
@@ -727,6 +727,7 @@ if ("serviceWorker" in navigator) {
    <li><a href="#concept-websocket-establish">establish a WebSocket connection</a><span>, in § 2.2</span>
    <li><a href="#dom-websocket-extensions">extensions</a><span>, in § 3.1</span>
    <li><a href="#flagged-as-full">flagged as full</a><span>, in § 4</span>
+   <li><a href="#websocket-internal-url">internal-url</a><span>, in § 3.1</span>
    <li><a href="#make-disappear">make disappear</a><span>, in § 7</span>
    <li><a href="#concept-websocket-connection-obtain">obtain a WebSocket connection</a><span>, in § 2.1</span>
    <li><a href="#dom-websocket-onclose">onclose</a><span>, in § 3.1</span>
@@ -743,12 +744,7 @@ if ("serviceWorker" in navigator) {
      <li><a href="#dom-closeeventinit-reason">dict-member for CloseEventInit</a><span>, in § 6</span>
     </ul>
    <li><a href="#dom-websocket-send">send(data)</a><span>, in § 3.1</span>
-   <li>
-    url
-    <ul>
-     <li><a href="#dom-websocket-url">attribute for WebSocket</a><span>, in § 3.1</span>
-     <li><a href="#url">definition of</a><span>, in § 3.1</span>
-    </ul>
+   <li><a href="#dom-websocket-url">url</a><span>, in § 3.1</span>
    <li>
     wasClean
     <ul>
@@ -956,12 +952,6 @@ if ("serviceWorker" in navigator) {
     <li><a href="#ref-for-dom-messageevent-data">4. Feedback from the protocol</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-entry-settings-object">
-   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object">https://html.spec.whatwg.org/multipage/webappapis.html#entry-settings-object</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-entry-settings-object">3.1. Interface definition</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="term-for-event-error">
    <a href="https://html.spec.whatwg.org/multipage/indices.html#event-error">https://html.spec.whatwg.org/multipage/indices.html#event-error</a><b>Referenced in:</b>
    <ul>
@@ -1033,6 +1023,12 @@ if ("serviceWorker" in navigator) {
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm">https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-realm</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-relevant-realm">4. Feedback from the protocol</a> <a href="#ref-for-concept-relevant-realm①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-relevant-settings-object">
+   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-relevant-settings-object">3.1. Interface definition</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-step1">
@@ -1119,7 +1115,8 @@ if ("serviceWorker" in navigator) {
   <aside class="dfn-panel" data-for="term-for-concept-url">
    <a href="https://url.spec.whatwg.org/#concept-url">https://url.spec.whatwg.org/#concept-url</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url">3.1. Interface definition</a> <a href="#ref-for-concept-url①">(2)</a>
+    <li><a href="#ref-for-concept-url">3.1. Interface definition</a> <a href="#ref-for-concept-url①">(2)</a> <a href="#ref-for-concept-url②">(3)</a>
+    <li><a href="#ref-for-concept-url③">4. Feedback from the protocol</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-parser">
@@ -1131,7 +1128,8 @@ if ("serviceWorker" in navigator) {
   <aside class="dfn-panel" data-for="term-for-concept-url">
    <a href="https://url.spec.whatwg.org/#concept-url">https://url.spec.whatwg.org/#concept-url</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url">3.1. Interface definition</a> <a href="#ref-for-concept-url①">(2)</a>
+    <li><a href="#ref-for-concept-url">3.1. Interface definition</a> <a href="#ref-for-concept-url①">(2)</a> <a href="#ref-for-concept-url②">(3)</a>
+    <li><a href="#ref-for-concept-url③">4. Feedback from the protocol</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-serializer">
@@ -1222,6 +1220,12 @@ if ("serviceWorker" in navigator) {
    <a href="https://webidl.spec.whatwg.org/#idl-sequence">https://webidl.spec.whatwg.org/#idl-sequence</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-idl-sequence">3.1. Interface definition</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-this">
+   <a href="https://webidl.spec.whatwg.org/#this">https://webidl.spec.whatwg.org/#this</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-this">3.1. Interface definition</a> <a href="#ref-for-this①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-undefined">
@@ -1416,7 +1420,6 @@ if ("serviceWorker" in navigator) {
      <li><span class="dfn-paneled" id="term-for-messageevent">MessageEvent</span>
      <li><span class="dfn-paneled" id="term-for-event-close">close</span>
      <li><span class="dfn-paneled" id="term-for-dom-messageevent-data">data</span>
-     <li><span class="dfn-paneled" id="term-for-entry-settings-object">entry settings object</span>
      <li><span class="dfn-paneled" id="term-for-event-error">error</span>
      <li><span class="dfn-paneled" id="term-for-event-handlers">event handler</span>
      <li><span class="dfn-paneled" id="term-for-event-handler-event-type">event handler event type</span>
@@ -1428,6 +1431,7 @@ if ("serviceWorker" in navigator) {
      <li><span class="dfn-paneled" id="term-for-dom-messageevent-origin">origin</span>
      <li><span class="dfn-paneled" id="term-for-queue-a-task">queue a task</span>
      <li><span class="dfn-paneled" id="term-for-concept-relevant-realm">relevant realm</span>
+     <li><span class="dfn-paneled" id="term-for-relevant-settings-object">relevant settings object</span>
      <li><span class="dfn-paneled" id="term-for-step1">step 1</span>
      <li><span class="dfn-paneled" id="term-for-concept-task">task</span>
      <li><span class="dfn-paneled" id="term-for-task-queue">task queues</span>
@@ -1470,6 +1474,7 @@ if ("serviceWorker" in navigator) {
      <li><span class="dfn-paneled" id="term-for-idl-USVString">USVString</span>
      <li><span class="dfn-paneled" id="term-for-idl-boolean">boolean</span>
      <li><span class="dfn-paneled" id="term-for-idl-sequence">sequence</span>
+     <li><span class="dfn-paneled" id="term-for-this">this</span>
      <li><span class="dfn-paneled" id="term-for-idl-undefined">undefined</span>
      <li><span class="dfn-paneled" id="term-for-idl-unsigned-long-long">unsigned long long</span>
      <li><span class="dfn-paneled" id="term-for-idl-unsigned-short">unsigned short</span>
@@ -1591,17 +1596,16 @@ if ("serviceWorker" in navigator) {
    <ul>
     <li><a href="#ref-for-websocket">1. Introduction</a>
     <li><a href="#ref-for-websocket①">3. The WebSocket interface</a>
-    <li><a href="#ref-for-websocket②">3.1. Interface definition</a> <a href="#ref-for-websocket③">(2)</a> <a href="#ref-for-websocket④">(3)</a> <a href="#ref-for-websocket⑤">(4)</a> <a href="#ref-for-websocket⑥">(5)</a> <a href="#ref-for-websocket⑦">(6)</a> <a href="#ref-for-websocket⑧">(7)</a> <a href="#ref-for-websocket⑨">(8)</a> <a href="#ref-for-websocket①⓪">(9)</a>
-    <li><a href="#ref-for-websocket①①">4. Feedback from the protocol</a> <a href="#ref-for-websocket①②">(2)</a> <a href="#ref-for-websocket①③">(3)</a> <a href="#ref-for-websocket①④">(4)</a> <a href="#ref-for-websocket①⑤">(5)</a> <a href="#ref-for-websocket①⑥">(6)</a> <a href="#ref-for-websocket①⑦">(7)</a>
-    <li><a href="#ref-for-websocket①⑧">6. The CloseEvent interface</a>
-    <li><a href="#ref-for-websocket①⑨">7. Garbage collection</a> <a href="#ref-for-websocket②⓪">(2)</a> <a href="#ref-for-websocket②①">(3)</a> <a href="#ref-for-websocket②②">(4)</a> <a href="#ref-for-websocket②③">(5)</a> <a href="#ref-for-websocket②④">(6)</a>
+    <li><a href="#ref-for-websocket②">3.1. Interface definition</a> <a href="#ref-for-websocket③">(2)</a> <a href="#ref-for-websocket④">(3)</a> <a href="#ref-for-websocket⑤">(4)</a> <a href="#ref-for-websocket⑥">(5)</a> <a href="#ref-for-websocket⑦">(6)</a> <a href="#ref-for-websocket⑧">(7)</a> <a href="#ref-for-websocket⑨">(8)</a>
+    <li><a href="#ref-for-websocket①⓪">4. Feedback from the protocol</a> <a href="#ref-for-websocket①①">(2)</a> <a href="#ref-for-websocket①②">(3)</a> <a href="#ref-for-websocket①③">(4)</a> <a href="#ref-for-websocket①④">(5)</a> <a href="#ref-for-websocket①⑤">(6)</a> <a href="#ref-for-websocket①⑥">(7)</a>
+    <li><a href="#ref-for-websocket①⑦">6. The CloseEvent interface</a>
+    <li><a href="#ref-for-websocket①⑧">7. Garbage collection</a> <a href="#ref-for-websocket①⑨">(2)</a> <a href="#ref-for-websocket②⓪">(3)</a> <a href="#ref-for-websocket②①">(4)</a> <a href="#ref-for-websocket②②">(5)</a> <a href="#ref-for-websocket②③">(6)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="url">
-   <b><a href="#url">#url</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="websocket-internal-url">
+   <b><a href="#websocket-internal-url">#websocket-internal-url</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-url">3.1. Interface definition</a> <a href="#ref-for-url①">(2)</a> <a href="#ref-for-url②">(3)</a>
-    <li><a href="#ref-for-url③">4. Feedback from the protocol</a>
+    <li><a href="#ref-for-websocket-internal-url">3.1. Interface definition</a> <a href="#ref-for-websocket-internal-url①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-websocket-websocket">
