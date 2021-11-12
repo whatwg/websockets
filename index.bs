@@ -146,9 +146,9 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
  <a for=request>credentials mode</a> is "`include`", <a for=request>cache mode</a> is "`no-store`"
  , and <a for=request>redirect mode</a> is "`error`".
 
-1. <a for="header list">Append</a> \``Upgrade`\`/\``websocket`\` to |request|'s
+1. <a for="header list">Append</a> (\``Upgrade`\`, \``websocket`\`) to |request|'s
  <a for=request>header list</a>.
-1. <a for="header list">Append</a> \``Connection`\`/\``Upgrade`\` to |request|'s
+1. <a for="header list">Append</a> (\``Connection`\`, \``Upgrade`\`) to |request|'s
  <a for=request>header list</a>.
 1. Let |keyValue| be a nonce consisting of a randomly selected 16-byte value that has been
  <a lt="forgiving-base64 encode">forgiving-base64-encoded</a> and [=isomorphic encoded=].
@@ -158,19 +158,19 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
   forgiving-base64-encoded to "`AQIDBAUGBwgJCgsMDQ4PEC==`" and isomorphic encoded to
   \``AQIDBAUGBwgJCgsMDQ4PEC==`\`.
 
-1. <a for="header list">Append</a> \``Sec-WebSocket-Key`\`/|keyValue| to |request|'s
+1. <a for="header list">Append</a> (\``Sec-WebSocket-Key`\`, |keyValue|) to |request|'s
  <a for=request>header list</a>.
-1. <a for="header list">Append</a> \``Sec-WebSocket-Version`\`/\``13`\` to |request|'s
+1. <a for="header list">Append</a> (\``Sec-WebSocket-Version`\`, \``13`\`) to |request|'s
  <a for=request>header list</a>.
 1. For each |protocol| in |protocols|, <a for="header list">combine</a>
- \``Sec-WebSocket-Protocol`\`/|protocol| in |request|'s <a for=request>header list</a>.
+ (\``Sec-WebSocket-Protocol`\`, |protocol|) in |request|'s <a for=request>header list</a>.
 
 1. Let |permessageDeflate| be a user-agent defined "`permessage-deflate`" extension
- <a for=/>header</a> <a for=header>value</a>. [[!WSP]]
+ <a>header value</a>. [[!WSP]]
 
  <p id=example-permessage-deflate class=example>\``permessage-deflate; client_max_window_bits`\`
 
-1. <a for="header list">Append</a> \``Sec-WebSocket-Extensions`\`/|permessageDeflate| to
+1. <a for="header list">Append</a> (\``Sec-WebSocket-Extensions`\`, |permessageDeflate|) to
  |request|'s <a for=request>header list</a>.
 1. <a lt=fetch for=/>Fetch</a> |request| with <a for=fetch><i>useParallelQueue</i></a> set to true,
  and <a for=fetch><i>processResponse</i></a> given |response| being these steps:
