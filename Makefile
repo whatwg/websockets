@@ -20,7 +20,6 @@ local: index.bs
 
 deploy: index.bs
 	curl --remote-name --fail https://resources.whatwg.org/build/deploy.sh
-	EXTRA_FILES="demos/* demos/**/*" \
 	bash ./deploy.sh
 
 review: index.bs
