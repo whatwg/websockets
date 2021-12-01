@@ -783,3 +783,18 @@ the following list:
 </dl>
 
 </div>
+
+<h2 id="acks" class="no-num">Acknowledgments</h2>
+
+Until the creation of this standard in 2021, the text here was maintained in the <a
+href="https://html.spec.whatwg.org/multipage/">HTML Standard</a> and <a
+href="https://fetch.spec.whatwg.org/">Fetch Standard</a>. Thanks to all of the contributors to those
+repositories who helped develop the specification, especially Ian Hickson and Anne van Kesteren as
+the respective original authors.
+
+Thanks to
+平野裕 (Yutaka Hirano)
+for their contributions after the creation of the WebSockets Standard.
+
+This standard is written by Adam Rice (<a href="https://google.com">Google</a>, <a
+href="mailto:ricea@chromium.org">ricea@chromium.org</a>).
