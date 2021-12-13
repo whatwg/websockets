@@ -83,17 +83,17 @@ through a custom server.</p>
 
 <div class=note>
  This section replaces part of the WebSocket protocol opening handshake client requirement to
- integrate it with algorithms defined in the Fetch Standard. This way CSP, cookies, HSTS, and other
- Fetch-related protocols are handled in a single location. Ideally the RFC would be updated with
- this language, but it is never that easy. The {{WebSocket}} API, defined below, uses this language.
- [[!WSP]] [[!FETCH]]
+ integrate it with algorithms defined in <cite>Fetch</cite>. This way CSP, cookies, HSTS, and other
+ <cite>Fetch</cite>-related protocols are handled in a single location. Ideally the RFC would be
+ updated with this language, but it is never that easy. The {{WebSocket}} API, defined below, uses
+ this language. [[!WSP]] [[!FETCH]]
 
  The way this works is by replacing The WebSocket Protocol's "establish a WebSocket connection"
- algorithm with a new one that integrates with Fetch. "Establish a WebSocket connection" consists of
- three algorithms: setting up a connection, creating and transmiting a handshake request, and
- validating the handshake response. That layering is different from Fetch, which first creates a
- handshake, then sets up a connection and transmits the handshake, and finally validates the
- response. Keep that in mind while reading these alterations.
+ algorithm with a new one that integrates with <cite>Fetch</cite>. "Establish a WebSocket
+ connection" consists of three algorithms: setting up a connection, creating and transmiting a
+ handshake request, and validating the handshake response. That layering is different from
+ <cite>Fetch</cite>, which first creates a handshake, then sets up a connection and transmits the
+ handshake, and finally validates the response. Keep that in mind while reading these alterations.
 </div>
 
 
