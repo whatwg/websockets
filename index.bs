@@ -101,7 +101,7 @@ through a custom server.</p>
 
 <div algorithm>
 
-To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</dfn>, given a
+To <dfn export id=concept-websocket-connection-obtain>obtain a WebSocket connection</dfn>, given a
 |url|, run these steps:
 
 1. Let |host| be |url|'s <a for=url>host</a>.
@@ -128,7 +128,7 @@ therefore not shareable, a WebSocket connection is very close to identical to an
 
 <div algorithm>
 
-To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, given a
+To <dfn export id=concept-websocket-establish>establish a WebSocket connection</dfn>, given a
 |url|, |protocols|, and |client|, run these steps:
 
 1. Let |requestURL| be a copy of |url|, with its <a for=url>scheme</a> set to "`http`", if |url|'s
