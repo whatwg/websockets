@@ -30,11 +30,6 @@ spec:url; type:dfn;
 spec:html; type:dfn;
  text:task queues
  for:/; text:event loop
-spec:html; type:idl; text:MessageEvent
-spec:html; type:event; for:WebSocket;
- text:message
- text:error
-spec:encoding-1; type:dfn; for:/; text:encoding
 spec:url; type:dfn;
  text:origin
  for:/; text:url
@@ -343,7 +338,7 @@ It can have the following values:
      fails, it triggers the [=fail the WebSocket connection=] algorithm, which
      then invokes the [=close the WebSocket connection=] algorithm, which then
      establishes that [=the WebSocket connection is closed=], which fires the
-     {{close!!event}} event <a href="#closeWebSocket">as described below</a>.
+     {{WebSocket/close}} event <a href="#closeWebSocket">as described below</a>.
 </div>
 
 <hr>
@@ -375,7 +370,7 @@ string. After [=the WebSocket connection is established=], its value might chang
   :: Do nothing.
 
    <p class="note">The connection is already closing or is already closed. If it has not already, a
-   {{close!!event}} event will eventually fire <a href="#closeWebSocket">as described below</a>.
+   {{WebSocket/close}} event will eventually fire <a href="#closeWebSocket">as described below</a>.
 
   : If the WebSocket connection is not yet [=established=] [[!WSP]]
   :: [=Fail the WebSocket connection=] and set [=this=]'s [=WebSocket/ready state=] to
@@ -383,7 +378,7 @@ string. After [=the WebSocket connection is established=], its value might chang
 
      <p class="note">The [=fail the WebSocket connection=] algorithm invokes the [=close the
      WebSocket connection=] algorithm, which then establishes that [=the WebSocket connection is
-     closed=], which fires the {{close!!event}} event <a href="#closeWebSocket">as described
+     closed=], which fires the {{WebSocket/close}} event <a href="#closeWebSocket">as described
      below</a>.
 
   : If the WebSocket closing handshake has not yet been <a lt="the WebSocket closing handshake is
@@ -405,7 +400,7 @@ string. After [=the WebSocket connection is established=], its value might chang
 
      <p class="note">The [=start the WebSocket closing handshake=] algorithm eventually invokes the
      [=close the WebSocket connection=] algorithm, which then establishes that [=the WebSocket
-     connection is closed=], which fires the {{close!!event}} event <a href="#closeWebSocket">as
+     connection is closed=], which fires the {{WebSocket/close}} event <a href="#closeWebSocket">as
      described below</a>.
 
   : Otherwise
@@ -413,7 +408,7 @@ string. After [=the WebSocket connection is established=], its value might chang
 
      <p class="note">[=The WebSocket closing handshake is started=], and will eventually invoke the
      [=close the WebSocket connection=] algorithm, which will establish that [=the WebSocket
-     connection is closed=], and thus the {{close!!event}} event will fire, <a
+     connection is closed=], and thus the {{WebSocket/close}} event will fire, <a
      href="#closeWebSocket">as described below</a>.
    </dl>
 </div>
@@ -540,10 +535,10 @@ that must be supported, as [=event handler IDL attributes=], by all objects impl
 <thead>
 <tr><th>[=Event handler=] <th>[=Event handler event type=]
 <tbody>
-<tr><td><dfn attribute for=WebSocket>onopen</dfn> <td> {{open!!event}}
-<tr><td><dfn attribute for=WebSocket>onmessage</dfn> <td> {{message!!event}}
-<tr><td><dfn attribute for=WebSocket>onerror</dfn> <td> {{error!!event}}
-<tr><td><dfn attribute for=WebSocket>onclose</dfn> <td> {{close!!event}}
+<tr><td><dfn attribute for=WebSocket>onopen</dfn> <td> {{WebSocket/open}}
+<tr><td><dfn attribute for=WebSocket>onmessage</dfn> <td> {{WebSocket/message}}
+<tr><td><dfn attribute for=WebSocket>onerror</dfn> <td> {{WebSocket/error}}
+<tr><td><dfn attribute for=WebSocket>onclose</dfn> <td> {{WebSocket/close}}
 </table>
 
 
@@ -559,11 +554,12 @@ steps:
     use=], if it is not the null value. [[!WSP]]
  1. Change the {{WebSocket/protocol}} attribute's value to the [=subprotocol in
     use=], if it is not the null value. [[!WSP]]
- 1. [=Fire an event=] named {{open!!event}} at the {{WebSocket}} object.
+ 1. [=Fire an event=] named <dfn event for="WebSocket">open</dfn> at the {{WebSocket}} object.
 
 <p class="note">Since the algorithm above is <a lt="queue a task">queued as a task</a>, there is no
 race condition between <a lt="the WebSocket connection is established">the WebSocket connection
-being established</a> and the script setting up an event listener for the {{open!!event}} event.
+being established</a> and the script setting up an event listener for the {{WebSocket/open}}
+event.
 
 </div>
 
@@ -592,8 +588,8 @@ When [=a WebSocket message has been received=] with type |type| and data |data|,
       whose contents are |data|
   </dl>
 
- 1. [=Fire an event=] named {{message!!event}} at the {{WebSocket}} object, using {{MessageEvent}},
-    with the {{MessageEvent/origin}} attribute initialized to the <a lt="URL
+ 1. [=Fire an event=] named <dfn event for="WebSocket">message</dfn> at the {{WebSocket}} object,
+    using {{MessageEvent}}, with the {{MessageEvent/origin}} attribute initialized to the <a lt="URL
     serializer">serialization</a> of the {{WebSocket}} object's [=url=]'s [=origin=], and the
     {{MessageEvent/data}} attribute initialized to |dataForEvent|.
 
@@ -609,8 +605,8 @@ this [=task=] so as to avoid stalling the main thread while it created the {{Arr
 
 <div class="example" id="message-example">
 
-Here is an example of how to define a handler for the {{message!!event}}
-event in the case of text frames:
+Here is an example of how to define a handler for the {{WebSocket/message}} event in the case of
+text frames:
 
 <xmp highlight="js">
 mysocket.onmessage = function (event) {
@@ -642,12 +638,14 @@ this task runs.) [[!WSP]]
  1. Change the [=WebSocket/ready state=] to {{WebSocket/CLOSED}} (3).
  1. If the user agent was required to [=fail the WebSocket connection=], or if <a lt="the
     WebSocket connection is closed">the WebSocket connection was closed</a> after being <dfn>flagged
-    as full</dfn>, [=fire an event=] named {{error!!event}} at the {{WebSocket}} object. [[!WSP]]
- 1. [=Fire an event=] named {{close!!event}} at the {{WebSocket}} object, using {{CloseEvent}}, with
-   the {{CloseEvent/wasClean}} attribute initialized to true if the connection closed [=cleanly=]
-   and false otherwise, the {{CloseEvent/code}} attribute initialized to [=the WebSocket connection
-   close code=], and the {{CloseEvent/reason}} attribute initialized to the result of applying
-   [=UTF-8 decode without BOM=] to [=the WebSocket connection close reason=].  [[!WSP]]
+    as full</dfn>, [=fire an event=] named <dfn event for="WebSocket">error</dfn> at the
+    {{WebSocket}} object. [[!WSP]]
+ 1. [=Fire an event=] named <dfn event for="WebSocket">close</dfn> at the {{WebSocket}} object,
+    using {{CloseEvent}}, with the {{CloseEvent/wasClean}} attribute initialized to true if the
+    connection closed [=cleanly=] and false otherwise, the {{CloseEvent/code}} attribute initialized
+    to [=the WebSocket connection close code=], and the {{CloseEvent/reason}} attribute initialized
+    to the result of applying [=UTF-8 decode without BOM=] to [=the WebSocket connection close
+    reason=].  [[!WSP]]
 </div>
 
 <div class="warning">
@@ -703,7 +701,7 @@ https://www.w3.org/Bugs/Public/show_bug.cgi?id=17264 -->
 
 # The {{CloseEvent}} interface # {#the-closeevent-interface}
 
-{{WebSocket}} objects use the {{CloseEvent}} interface for their {{close!!event}} events:
+{{WebSocket}} objects use the {{CloseEvent}} interface for their {{WebSocket/close}} events:
 
 <xmp class="idl">
 [Exposed=(Window,Worker)]
@@ -748,17 +746,17 @@ to. It represents the WebSocket connection close reason provided by the server.
 
 A {{WebSocket}} object whose [=WebSocket/ready state=] was set to {{WebSocket/CONNECTING}} (0) as
 of the last time the [=event loop=] reached <a for="event loop">step 1</a> must not be garbage
-collected if there are any event listeners registered for {{open!!event}} events,
-{{message!!event}} events, {{error!!event}} events, or {{close!!event}} events.
+collected if there are any event listeners registered for {{WebSocket/open}} events,
+{{WebSocket/message}} events, {{WebSocket/error}} events, or {{WebSocket/close}} events.
 
 A {{WebSocket}} object whose [=WebSocket/ready state=] was set to {{WebSocket/OPEN}} (1) as of the
 last time the [=event loop=] reached <a for="event loop">step 1</a> must not be garbage collected
-if there are any event listeners registered for {{message!!event}} events, {{error!!event}}, or
-{{close!!event}} events.
+if there are any event listeners registered for {{WebSocket/message}} events, {{WebSocket/error}},
+or {{WebSocket/close}} events.
 
 A {{WebSocket}} object whose [=WebSocket/ready state=] was set to {{WebSocket/CLOSING}} (2) as of
 the last time the [=event loop=] reached <a for="event loop">step 1</a> must not be garbage
-collected if there are any event listeners registered for {{error!!event}} or {{close!!event}}
+collected if there are any event listeners registered for {{WebSocket/error}} or {{WebSocket/close}}
 events.
 
 A {{WebSocket}} object with <a lt="the WebSocket connection is established">an established
