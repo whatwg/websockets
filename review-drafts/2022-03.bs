@@ -1,5 +1,6 @@
 <pre class=metadata>
 Group: WHATWG
+Date: 2022-03-21
 H1: WebSockets
 Shortname: websockets
 Text Macro: TWITTER whatsockets
