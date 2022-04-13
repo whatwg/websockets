@@ -571,7 +571,7 @@ event.
 When [=a WebSocket message has been received=] with type |type| and data |data|, the user agent must
 [=queue a task=] to follow these steps: [[!WSP]]
 
- 1. If [=WebSocket/ready state=] ]is not {{WebSocket/OPEN}} (1), then return.
+ 1. If [=WebSocket/ready state=] is not {{WebSocket/OPEN}} (1), then return.
  1. Let |dataForEvent| be determined by switching on |type| and [=WebSocket/binary type=]:
 
   <dl class="switch">
