@@ -37,7 +37,7 @@ spec:url; type:dfn;
 </pre>
 
 <pre class=anchors>
-spec:RFC6455; urlPrefix: https://tools.ietf.org/html/rfc6455
+spec:RFC6455; urlPrefix: https://datatracker.ietf.org/doc/html/rfc6455
  type: dfn
   text:the WebSocket connection is established; url:page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and
   text:extensions in use; url:page-19:~:text=_The%20WebSocket%20Connection%20is%20Established_,-and
@@ -109,9 +109,9 @@ To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</df
    <a for=url>query</a>, to |resource name|.
 1. Let |secure| be false, if |url|'s <a for=url>scheme</a> is "`http`", and true otherwise.
 1. Follow the requirements stated in step 2 to 5, inclusive, of the first set of steps in <a
- href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol to
- establish a <a lt="obtain a WebSocket connection">WebSocket connection</a>, passing |host|, |port|,
- |resource name| and |secure|.  [[!WSP]]
+ href=https://datatracker.ietf.org/doc/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket
+ Protocol to establish a <a lt="obtain a WebSocket connection">WebSocket connection</a>, passing
+ |host|, |port|, |resource name| and |secure|. [[!WSP]]
 1. If that established a connection, return it, and return failure otherwise.
 
 <p class=note>Although structured a little differently, carrying different properties, and
@@ -181,8 +181,8 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
   by the client, but not acknowledged by the server.
 
  1. Follow the requirements stated step 2 to step 6, inclusive, of the last set of steps in
-  <a href=http://tools.ietf.org/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket Protocol
-  to validate |response|. This either results in [=fail the WebSocket connection=]
+  <a href=https://datatracker.ietf.org/doc/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket
+  Protocol to validate |response|. This either results in [=fail the WebSocket connection=]
   or [=the WebSocket connection is established=].
 
 </div>
