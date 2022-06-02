@@ -278,7 +278,7 @@ It can have the following values:
 
  : <code>|socket|.<a method for=WebSocket>close</a>([ |code| ] [, |reason| ])</code>
  :: Closes the WebSocket connection, optionally using |code| as [=the WebSocket connection
-    close code=] and |reason| as the [=the WebSocket connection close reason=].
+    close code=] and |reason| as [=the WebSocket connection close reason=].
 
  : <code>|socket|.<a attribute for=WebSocket>url</a></code>
  :: Returns the <a lt="url">URL that was used</a> to establish the WebSocket connection.
