@@ -98,7 +98,7 @@ through a custom server.</p>
 
 <div algorithm>
 
-To <dfn id=concept-websocket-connection-obtain>obtain a WebSocket connection</dfn>, given a
+To <dfn export id=concept-websocket-connection-obtain>obtain a WebSocket connection</dfn>, given a
 |url|, run these steps:
 
 1. Let |host| be |url|'s <a for=url>host</a>.
@@ -260,7 +260,7 @@ It can have the following values:
  :: Creates a new {{WebSocket}} object, immediately establishing the associated WebSocket
     connection.
 
-    |url| is a string giving the <a dfn spec=url>URL</a> over which the connection is established.
+    |url| is a string giving the <a for=/>URL</a> over which the connection is established.
     Only "`ws`" or "`wss`" schemes are allowed; others will cause a "{{SyntaxError}}"
     {{DOMException}}. URLs with [=fragments=] will also cause such an exception.
 
