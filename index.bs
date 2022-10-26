@@ -128,8 +128,11 @@ therefore not shareable, a WebSocket connection is very close to identical to an
 To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, given a
 |url|, |protocols|, and |client|, run these steps:
 
-1. Let |requestURL| be a copy of |url|, with its <a for=url>scheme</a> set to "`http`", if |url|'s
- <a for=url>scheme</a> is "`ws`", and to "`https`" otherwise.
+1. Let |requestURL| be a copy of |url|.
+1. If |requestURL|'s <a for=url>scheme</a> is "`ws`", set |requestURL|'s <a for=url>scheme</a>
+   to "`http`".
+1. Otherwise, if |requestURL|'s <a for=url>scheme</a> is "`wss`", set |requestURL|'s
+   <a for=url>scheme</a> to "`https`".
 
  <p class="note no-backref">This change of scheme is essential to integrate well with
  <a lt=fetch for=/>fetching</a>. E.g., HSTS would not work without it. There is no real
@@ -261,8 +264,8 @@ It can have the following values:
     connection.
 
     |url| is a string giving the <a for=/>URL</a> over which the connection is established.
-    Only "`ws`" or "`wss`" schemes are allowed; others will cause a "{{SyntaxError}}"
-    {{DOMException}}. URLs with [=fragments=] will also cause such an exception.
+    Only "`ws`", "`wss`", "`http`", and "`https`" schemes are allowed; others will cause a
+    "{{SyntaxError}}" {{DOMException}}. URLs with [=fragments=] will also cause such an exception.
 
     |protocols| is either a string or an array of strings. If it is a string, it is equivalent to
     an array consisting of just that string; if it is omitted, it is equivalent to the empty array.
@@ -320,10 +323,11 @@ It can have the following values:
  WebSocket(|url|, |protocols|)</code></dfn>
  constructor steps are:
 
- 1. Let |urlRecord| be the result of applying the [=URL parser=] to |url|.
+ 1. Let |baseURL| be [=this=]'s [=relevant settings object=]'s [=API base URL=].
+ 1. Let |urlRecord| be the result of applying the [=URL parser=] to |url| with |baseURL|.
  1. If |urlRecord| is failure, then throw a "{{SyntaxError}}" {{DOMException}}.
- 1. If |urlRecord|'s [=scheme=] is not "<code>[=ws=]</code>" or "<code>[=wss=]</code>", then throw a
-    "{{SyntaxError}}" {{DOMException}}.
+ 1. If |urlRecord|'s [=scheme=] is not "<code>[=ws=]</code>", "<code>[=wss=]</code>",
+    "<code>http</code>", or "<code>https</code>" then throw a "{{SyntaxError}}" {{DOMException}}.
  1. If |urlRecord|'s [=fragment=] is non-null, then throw a "{{SyntaxError}}" {{DOMException}}.
  1. If |protocols| is a string, set |protocols| to a sequence consisting of just that string.
  1. If any of the values in |protocols| occur more than once or otherwise fail to match the
