@@ -804,6 +804,7 @@ repositories who helped develop the specification, especially Ian Hickson and An
 the respective original authors.
 
 Thanks to
+devsnek<!-- GitHub --> and
 平野裕 (Yutaka Hirano)
 for their contributions after the creation of the WebSockets Standard.
 
