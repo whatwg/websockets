@@ -107,7 +107,7 @@ To <dfn export id=concept-websocket-connection-obtain>obtain a WebSocket connect
    (including empty strings), if any, separated from each other by U+002F (/).
 1. If |url|'s <a for=url>query</a> is non-empty, append U+003F (?), followed by |url|'s
    <a for=url>query</a>, to |resource name|.
-1. Let |secure| be false, if |url|'s <a for=url>scheme</a> is "`http`", and true otherwise.
+1. Let |secure| be false, if |url|'s [=url/scheme=] is "`http`"; otherwise true.
 1. Follow the requirements stated in step 2 to 5, inclusive, of the first set of steps in <a
  href=https://datatracker.ietf.org/doc/html/rfc6455#section-4.1>section 4.1</a> of The WebSocket
  Protocol to establish a <a lt="obtain a WebSocket connection">WebSocket connection</a>, passing
@@ -128,8 +128,8 @@ therefore not shareable, a WebSocket connection is very close to identical to an
 To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, given a
 |url|, |protocols|, and |client|, run these steps:
 
-1. Let |requestURL| be a copy of |url|, with its <a for=url>scheme</a> set to "`http`", if |url|'s
- <a for=url>scheme</a> is "`ws`", and to "`https`" otherwise.
+1. Let |requestURL| be a copy of |url|, with its [=url/scheme=] set to "`http`", if |url|'s
+ [=url/scheme=] is "`ws`"; otherwise to "`https`".
 
  <p class="note no-backref">This change of scheme is essential to integrate well with
  <a lt=fetch for=/>fetching</a>. E.g., HSTS would not work without it. There is no real
@@ -261,8 +261,8 @@ It can have the following values:
     connection.
 
     |url| is a string giving the <a for=/>URL</a> over which the connection is established.
-    Only "`ws`" or "`wss`" schemes are allowed; others will cause a "{{SyntaxError}}"
-    {{DOMException}}. URLs with [=fragments=] will also cause such an exception.
+    Only "`ws`", "`wss`", "`http`", and "`https`" schemes are allowed; others will cause a
+    "{{SyntaxError}}" {{DOMException}}. URLs with [=fragments=] will always cause such an exception.
 
     |protocols| is either a string or an array of strings. If it is a string, it is equivalent to
     an array consisting of just that string; if it is omitted, it is equivalent to the empty array.
@@ -320,8 +320,12 @@ It can have the following values:
  WebSocket(|url|, |protocols|)</code></dfn>
  constructor steps are:
 
- 1. Let |urlRecord| be the result of applying the [=URL parser=] to |url|.
+ 1. Let |baseURL| be [=this=]'s [=relevant settings object=]'s [=API base URL=].
+ 1. Let |urlRecord| be the result of applying the [=URL parser=] to |url| with |baseURL|.
  1. If |urlRecord| is failure, then throw a "{{SyntaxError}}" {{DOMException}}.
+ 1. If |urlRecord|'s [=url/scheme=] is "`http`", then set |urlRecord|'s [=url/scheme=] to "`ws`".
+ 1. Otherwise, if |urlRecord|'s [=url/scheme=] is "`https`", set |urlRecord|'s [=url/scheme=] to
+    "`wss`".
  1. If |urlRecord|'s [=scheme=] is not "<code>[=ws=]</code>" or "<code>[=wss=]</code>", then throw a
     "{{SyntaxError}}" {{DOMException}}.
  1. If |urlRecord|'s [=fragment=] is non-null, then throw a "{{SyntaxError}}" {{DOMException}}.
@@ -800,6 +804,7 @@ repositories who helped develop the specification, especially Ian Hickson and An
 the respective original authors.
 
 Thanks to
+devsnek<!-- GitHub --> and
 平野裕 (Yutaka Hirano)
 for their contributions after the creation of the WebSockets Standard.
 
