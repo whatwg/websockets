@@ -325,7 +325,7 @@ It can have the following values:
  1. If |urlRecord| is failure, then throw a "{{SyntaxError}}" {{DOMException}}.
  1. If |urlRecord|'s [=url/scheme=] is "`http`", then set |urlRecord|'s [=url/scheme=] to "`ws`".
  1. Otherwise, if |urlRecord|'s [=url/scheme=] is "`https`", set |urlRecord|'s [=url/scheme=] to
-    "`https`".
+    "`wss`".
  1. If |urlRecord|'s [=scheme=] is not "<code>[=ws=]</code>" or "<code>[=wss=]</code>", then throw a
     "{{SyntaxError}}" {{DOMException}}.
  1. If |urlRecord|'s [=fragment=] is non-null, then throw a "{{SyntaxError}}" {{DOMException}}.
