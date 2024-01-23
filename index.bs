@@ -885,7 +885,7 @@ initially unset.
 
   : {{WebSocketOpenInfo/writable}}
   :: A {{WritableStream}} that can be used to send messages to the server. Each chunk written will
-   be converted to one messages. Strings will be sent as text messages; {{BufferSource}} chunks will
+   be converted to one message. Strings will be sent as text messages; {{BufferSource}} chunks will
    be sent as binary messages.
 
    The WebSocket can be closed by calling {{WritableStream/close()}} on
@@ -907,7 +907,7 @@ initially unset.
   [=cleanly=] then the promise is rejected. When the connection closes [=cleanly=] the promise is
   resolved with an object with properties {{WebSocketCloseInfo/code}} and
   {{WebSocketCloseInfo/reason}}, giving [=the WebSocket connection close code=] and [=the WebSocket
-  connection close reason=] the were supplied by the server.
+  connection close reason=] that were supplied by the server.
 
  : <code>|socket| . {{WebSocketStream/close()}}</code>
  :: Close the connection, optionally supplying an object with {{WebSocketCloseInfo/code}} and
