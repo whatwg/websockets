@@ -34,6 +34,8 @@ spec:html; type:dfn;
 spec:url; type:dfn;
  text:origin
  for:/; text:url
+spec:streams; type:dfn
+ text:writable stream writer
 </pre>
 
 <pre class=anchors>
@@ -886,7 +888,10 @@ initially unset.
   : {{WebSocketOpenInfo/writable}}
   :: A {{WritableStream}} that can be used to send messages to the server. Each chunk written will
    be converted to one message. Strings will be sent as text messages; {{BufferSource}} chunks will
-   be sent as binary messages.
+   be sent as binary messages. Backpressure due to the network or server being behind will
+   automatically be observed by piping. When using a [=writable stream writer=], waiting for the
+   {{WritableStreamDefaultWriter/ready|writer.ready}} promise will ensure that backpressure is
+   obeyed.
 
    The WebSocket can be closed by calling {{WritableStream/close()}} on
    {{WebSocketOpenInfo/writable}}.
