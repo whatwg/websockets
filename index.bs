@@ -876,11 +876,10 @@ initially unset.
    as ArrayBuffer objects.
 
    The stream can be closed by calling {{ReadableStream/cancel()}} on
-   {{WebSocketOpenInfo/readable}}. If the argument passed to {{ReadableStream/cancel()}} is an
-   object with a {{WebSocketCloseInfo/code}} property and an <span class=allow-2119>optional</span> {{WebSocketCloseInfo/reason}}
-   property then {{WebSocketCloseInfo/code}} will be used as [=the WebSocket connection close
-   code=] and {{WebSocketCloseInfo/reason}} or the empty string will be used as [=the WebSocket
-   connection close reason=].
+   {{WebSocketOpenInfo/readable}}. If the reason argument passed to {{ReadableStream/cancel()}} is a
+   {{WebSocketError}} object then {{WebSocketError/closeCode}} will be used as [=the WebSocket
+   connection close code=] and {{WebSocketError/reason}} will be used as [=the WebSocket connection
+   close reason=].
 
    If no messages are read, or if messages are read slower than they are sent, then backpressure
    will be applied and eventually the server will stop sending new messages.
@@ -897,9 +896,9 @@ initially unset.
    {{WebSocketOpenInfo/writable}}.
 
    The stream can also be closed by calling {{WritableStream/abort()}}
-   {{WebSocketOpenInfo/writable}}. If an argument is passed to {{WritableStream/abort()}} then it
-   can be used to specify [=the WebSocket connection close code=] and [=the WebSocket connection
-   close reason=] as with {{ReadableStream/cancel()}} above.
+   {{WebSocketOpenInfo/writable}}. If the reason passed to {{WritableStream/abort()}} is a
+   {{WebSocketError]}}, then it will be used to set [=the WebSocket connection close code=] and
+   [=the WebSocket connection close reason=] as with {{ReadableStream/cancel()}} above.
 
   : {{WebSocketOpenInfo/extensions}}
   :: The [=extensions in use=] for the connection.
