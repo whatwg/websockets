@@ -812,7 +812,7 @@ dictionary WebSocketOpenInfo {
 };
 
 dictionary WebSocketCloseInfo {
-  [Clamp] unsigned short code;
+  [Clamp] unsigned short closeCode;
   USVString reason = "";
 };
 
@@ -897,7 +897,7 @@ initially unset.
 
    The stream can also be closed by calling {{WritableStream/abort()}}
    {{WebSocketOpenInfo/writable}}. If the reason passed to {{WritableStream/abort()}} is a
-   {{WebSocketError]}}, then it will be used to set [=the WebSocket connection close code=] and
+   {{WebSocketError}}, then it will be used to set [=the WebSocket connection close code=] and
    [=the WebSocket connection close reason=] as with {{ReadableStream/cancel()}} above.
 
   : {{WebSocketOpenInfo/extensions}}
@@ -908,17 +908,64 @@ initially unset.
 
  : <code>|socket| . {{WebSocketStream/closed}}</code>
  :: A {{promise}} which resolves when the connection is closed. If the connection did not close
-  [=cleanly=] then the promise is rejected. When the connection closes [=cleanly=] the promise is
-  resolved with an object with properties {{WebSocketCloseInfo/code}} and
-  {{WebSocketCloseInfo/reason}}, giving [=the WebSocket connection close code=] and [=the WebSocket
-  connection close reason=] that were supplied by the server.
+  [=cleanly=] then the promise is rejected with a {{WebSocketError}}. When the connection closes
+  [=cleanly=] the promise is resolved with an object with properties {{WebSocketCloseInfo/closeCode}}
+  and {{WebSocketCloseInfo/reason}}, giving [=the WebSocket connection close code=] and [=the
+  WebSocket connection close reason=] that were supplied by the server.
 
  : <code>|socket| . {{WebSocketStream/close()}}</code>
- :: Close the connection, optionally supplying an object with {{WebSocketCloseInfo/code}} and
+ :: Close the connection, optionally supplying an object with {{WebSocketCloseInfo/closeCode}} and
   {{WebSocketCloseInfo/reason}} properties to indicate [=the WebSocket connection close code=] and
   [=the WebSocket connection close reason=] that will be sent to the remote server. If the handshake
-  is still in progress then it will be aborted and {{WebSocketCloseInfo/code}} and
+  is still in progress then it will be aborted and {{WebSocketCloseInfo/closeCode}} and
   {{WebSocketCloseInfo/reason}} will be ignored.
+</dl>
+
+
+
+# The {{WebSocketError}} interface # {#the-websocketevent-interface}
+
+<dfn interface>WebSocketError</dfn> is a subclass of {{DOMException}}
+that represents the information associated with closing a WebSocket.
+
+<xmp class="idl">
+[
+    Exposed=(Window,Worker),
+] interface WebSocketError : DOMException {
+  constructor(optional DOMString message = "",
+              optional WebSocketCloseInfo init = {});
+
+  readonly attribute unsigned short? closeCode;
+  readonly attribute USVString reason;
+};
+</xmp>
+
+A {{WebSocketError}} object has an associated <dfn>closeCode</dfn>.
+
+A {{WebSocketError}} object has an associated <dfn>reason</dfn>.
+
+<dl class="domintro non-normative">
+ : <code>|error| = new {{WebSocketError/constructor(message, init)|WebSocketError}}([|message| [,
+   |init| ] ]</code>
+ :: Creates a new {{WebSocketError}} object.
+
+  |message| is a string which will be used to initialize the {{DOMException/message}} attribute of
+  the base class.
+
+  The |init| argument is an object whose properties can be set as follows:
+
+  : {{WebSocketCloseInfo/closeCode}}
+  :: A number, either 1000 or any integer in the range 3000 to 4999, inclusive. Any other number
+   will result in an "{{InvalidAccessError}}" {{DOMException}}.
+  : {{WebSocketCloseInfo/reason}}
+  :: A string. Must be 123 bytes or less when converted to [=UTF-8=]. A longer string will result in
+   a "{{SyntaxError}}" {{DOMException}} being thrown.
+
+ : <code>|error| . {{WebSocketError/closeCode}}</code>
+ :: Returns the [=the WebSocket connection close code=].
+
+ : <code>|error| . {{WebSocketError/reason}}</code>
+ :: Returns the [=the WebSocket connection close reason=].
 </dl>
 
 <h2 id="acks" class="no-num">Acknowledgments</h2>
