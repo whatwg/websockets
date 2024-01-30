@@ -796,6 +796,9 @@ which is a {{WritableStream}}.
 Each {{WebSocketStream}} object has an associated <dfn for="WebSocketStream">was ever connected
 flag</dfn>, which is initially unset.
 
+Each {{WebSocketStream}} object has an associated <dfn for="WebSocketStream">handshake aborted
+flag</dfn>, which is initially unset.
+
 Each {{WebSocketStream}} object has an associated <dfn for="WebSocketStream">ready state</dfn>,
 which is a number representing the state of the connection. Initially it must be
 {{WebSocket/CONNECTING}} (0). It has the same semantics as {{WebSocket}}'s [=WebSocket/ready
@@ -895,8 +898,8 @@ state=], but is not exposed to JavaScript.
  1. Let |baseURL| be [=this=]'s [=relevant settings object=]'s [=API base URL=].
  1. Let |urlRecord| be the result of [=get a URL record|getting a URL record=] given |url| and
     |baseURL|.
- 1. Let |protocols| be |options|["{{WebSocketStreamOptions/protocols}}"] if it exists, otherwise an
-    empty sequence.
+ 1. Let |protocols| be |options|["{{WebSocketStreamOptions/protocols}}"] if it [=map/exists=],
+    otherwise an empty sequence.
  1. If any of the values in |protocols| occur more than once or otherwise fail to match the
     requirements for elements that comprise the value of
     \`<a http-header>`Sec-WebSocket-Protocol`</a>\` fields as defined by The WebSocket protocol,
@@ -904,6 +907,21 @@ state=], but is not exposed to JavaScript.
  1. Set [=this=]'s [=WebSocketStream/url=] to |urlRecord|.
  1. Set [=this=]'s [=WebSocketStream/opened promise=] and [=WebSocketStream/closed promise=] to new
     promises.
+ 1. Apply backpressure to the WebSocket.
+
+  Note: This means that messages won't be read until the application is ready for them.
+
+ 1. If |options|["{{WebSocketStreamOptions/signal}}"] [=map/exists=],
+  1. Let |signal| be |options|["{{WebSocketStreamOptions/signal}}"].
+  1. If |signal| is [=AbortSignal/aborted=], then reject [=this=]'s [=WebSocketStream/opened
+     promise=] and [=WebSocketStream/closed promise=] with |signal|'s [=abort reason=] and return.
+  1. [=AbortSignal/add|Add the following abort steps=] to |signal|:
+   1. If the WebSocket connection is not yet [=established=] [[!WSP]]
+    1. [=Fail the WebSocket connection=] and set [=this=]'s [=WebSocketStream/ready state=] to
+       {{WebSocket/CLOSING}}.
+    1. [=Reject=] [=this=]'s [=WebSocketStream/opened promise=] and [=WebSocketStream/closed
+       promise=] with |signal|'s [=abort reason=].
+    1. Set [=this=]'s [=WebSocketStream/handshake aborted flag=].
  1. Let |client| be [=this=]'s [=relevant settings object=].
  1. Run this step [=in parallel=]:
   1. [=Establish a WebSocket connection=] given |urlRecord|, |protocols|, and |client|. [[!FETCH]]
@@ -1008,6 +1026,7 @@ When [=the WebSocket connection is closed=] for a {{WebSocketStream}} |stream|, 
  [=cleanly=], the user agent must [=queue a task=] to run the following substeps:
 
  1. Change the [=WebSocketStream/ready state=] to {{WebSocket/CLOSED}} (3).
+ 1. If |stream|'s [=WebSocketStream/handshake aborted flag=] is set, then return.
  1. If |stream|'s [=WebSocketStream/was ever connected flag=] is not set, then [=reject=] |stream|'s
     [=opened promise=] with a [=new=] WebSocketError.
  1. Let |code| be [=the WebSocket connection close code=].
@@ -1174,8 +1193,10 @@ WebSocketError(|message|, |init|)</code></dfn> constructor steps are:
 
  1. Set |this|'s [=DOMException/name=] to "<code>WebSocketError</code>".
  1. Set |this|'s [=DOMException/message=] to |message|.
- 1. Let |code| be |init|["{{WebSocketCloseInfo/closeCode}}"] if it exists, or unset otherwise.
- 1. Let |reason| be |init|["{{WebSocketCloseInfo/reason}}"] if it exists, or unset otherwise.
+ 1. Let |code| be |init|["{{WebSocketCloseInfo/closeCode}}"] if it [=map/exists=], or unset
+    otherwise.
+ 1. Let |reason| be |init|["{{WebSocketCloseInfo/reason}}"] if it [=map/exists=], or unset
+    otherwise.
  1. [=Validate close code and reason=] with |code| and |reason|.
  1. If |reason| is non-empty, but |code| is not set, then set |code| to 1000 ("Normal Closure").
  1. Set |this|'s [=WebSocketError/closeCode=] to |code|.
