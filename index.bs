@@ -916,7 +916,7 @@ state=], but is not exposed to JavaScript.
   1. If |signal| is [=AbortSignal/aborted=], then reject [=this=]'s [=WebSocketStream/opened
      promise=] and [=WebSocketStream/closed promise=] with |signal|'s [=abort reason=] and return.
   1. [=AbortSignal/add|Add the following abort steps=] to |signal|:
-   1. If the WebSocket connection is not yet [=established=] [[!WSP]]
+   1. If the WebSocket connection is not yet [=established=]: [[!WSP]]
     1. [=Fail the WebSocket connection=] and set [=this=]'s [=WebSocketStream/ready state=] to
        {{WebSocket/CLOSING}}.
     1. [=Reject=] [=this=]'s [=WebSocketStream/opened promise=] and [=WebSocketStream/closed
