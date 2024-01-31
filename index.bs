@@ -323,7 +323,7 @@ It can have the following values:
  constructor steps are:
 
  1. Let |baseURL| be [=this=]'s [=relevant settings object=]'s [=API base URL=].
- 1. Let |urlRecord| be the result of [=get a URL record|getting a URL record=] given |url| and
+ 1. Let |urlRecord| be the result of [=getting a URL record=] given |url| and
     |baseURL|.
  1. If |protocols| is a string, set |protocols| to a sequence consisting of just that string.
  1. If any of the values in |protocols| occur more than once or otherwise fail to match the
