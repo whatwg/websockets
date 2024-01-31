@@ -758,7 +758,7 @@ dictionary WebSocketOpenInfo {
 };
 
 dictionary WebSocketCloseInfo {
-  [Clamp] unsigned short closeCode;
+  [EnforceRange] unsigned short closeCode;
   USVString reason = "";
 };
 
@@ -793,11 +793,11 @@ which is a {{ReadableStream}}.
 Each {{WebSocketStream}} object has an associated <dfn for="WebSocketStream">writable stream</dfn>,
 which is a {{WritableStream}}.
 
-Each {{WebSocketStream}} object has an associated <dfn for="WebSocketStream">was ever connected
-flag</dfn>, which is initially unset.
+Each {{WebSocketStream}} object has an associated boolean <dfn for="WebSocketStream">was ever
+connected</dfn>, which is initially false.
 
-Each {{WebSocketStream}} object has an associated <dfn for="WebSocketStream">handshake aborted
-flag</dfn>, which is initially unset.
+Each {{WebSocketStream}} object has an associated boolean <dfn for="WebSocketStream">handshake
+aborted</dfn>, which is initially false.
 
 Each {{WebSocketStream}} object has an associated <dfn for="WebSocketStream">ready state</dfn>,
 which is a number representing the state of the connection. Initially it must be
@@ -921,7 +921,7 @@ state=], but is not exposed to JavaScript.
        {{WebSocket/CLOSING}}.
     1. [=Reject=] [=this=]'s [=WebSocketStream/opened promise=] and [=WebSocketStream/closed
        promise=] with |signal|'s [=abort reason=].
-    1. Set [=this=]'s [=WebSocketStream/handshake aborted flag=].
+    1. Set [=this=]'s [=WebSocketStream/handshake aborted=] to true.
  1. Let |client| be [=this=]'s [=relevant settings object=].
  1. Run this step [=in parallel=]:
   1. [=Establish a WebSocket connection=] given |urlRecord|, |protocols|, and |client|. [[!FETCH]]
@@ -960,7 +960,7 @@ must [=queue a task=] to run these steps:
 <div algorithm="handle WebSocketStream connection establishment">
 
  1. Change the [=WebSocketStream/ready state=] to {{WebSocket/OPEN}} (1).
- 1. Set |stream|'s [=WebSocketStream/was ever connected flag=].
+ 1. Set |stream|'s [=WebSocketStream/was ever connected=] to true.
  1. Let |extensions| be the [=extensions in use=].
  1. Let |protocol| be the [=subprotocol in use=].
  1. Let |pullAlgorithm| be an action that [=pulls bytes=] from |stream|.
@@ -1026,8 +1026,8 @@ When [=the WebSocket connection is closed=] for a {{WebSocketStream}} |stream|, 
  [=cleanly=], the user agent must [=queue a task=] to run the following substeps:
 
  1. Change the [=WebSocketStream/ready state=] to {{WebSocket/CLOSED}} (3).
- 1. If |stream|'s [=WebSocketStream/handshake aborted flag=] is set, then return.
- 1. If |stream|'s [=WebSocketStream/was ever connected flag=] is not set, then [=reject=] |stream|'s
+ 1. If |stream|'s [=WebSocketStream/handshake aborted=] is true, then return.
+ 1. If |stream|'s [=WebSocketStream/was ever connected=] is false, then [=reject=] |stream|'s
     [=opened promise=] with a [=new=] WebSocketError.
  1. Let |code| be [=the WebSocket connection close code=].
  1. Let |reason| be the result of applying [=UTF-8 decode without BOM=] to [=the WebSocket
@@ -1119,21 +1119,22 @@ To <dfn>abort</dfn> a {{WebSocketStream}} |stream| given |reason|, [=close using
 
 <div algorithm="close using reason algorithm">
 
-To <dfn>close using reason</dfn> a {{WebSocketStream}} |stream| given |reason|,
+To <dfn>close using reason</dfn> a {{WebSocketStream}} |stream| given |reason|:
 
- 1. Let |code| and |reasonString| be unset.
- 1. If |reason| is a {{WebSocketError}},
-  1. Set |code| to |reason|'s {{WebSocketError/closeCode}}.
-  1. Set |reasonString| to |reason|'s {{WebSocketError/reason}}.
+ 1. Let |code| be null.
+ 1. Let |reasonString| be the empty string.
+ 1. If |reason| [=implements=] {{WebSocketError}},
+  1. Set |code| to |reason|'s [=WebSocketError/closeCode=].
+  1. Set |reasonString| to |reason|'s [=WebSocketError/reason=].
  1. [=Close the WebSocket=] with |stream|, |code|, and |reasonString|. If this throws an exception,
   discard |code| and |reasonString| and [=close the WebSocket=] with |stream|.
 
  Note: A {{WebSocketError}} object constructed from JavaScript will always have a
- {{WebSocketError/closeCode}} and {{WebSocketError/reason}} that JavaScript is permitted to set.
- However, the {{WebSocketStream/closed}} promise might be rejected with a {{WebSocketError}} whose {{WebSocketError/closeCode}} has a
- value coming from the server that JavaScript is not permitted to set itself, such as 1001 "Going
- Away".
- </div>
+ [=WebSocketError/closeCode=] and [=WebSocketError/reason=] that JavaScript is permitted to set.
+ However, the {{WebSocketStream/closed}} promise might be rejected with a {{WebSocketError}} whose
+ [=WebSocketError/closeCode=] has a value coming from the server that JavaScript is not permitted to
+ set itself, such as 1001 "Going Away".
+</div>
 
 
 
@@ -1143,9 +1144,8 @@ To <dfn>close using reason</dfn> a {{WebSocketStream}} |stream| given |reason|,
 that represents the information associated with closing a WebSocket.
 
 <xmp class="idl">
-[
-    Exposed=(Window,Worker),
-] interface WebSocketError : DOMException {
+[Exposed=(Window,Worker)]
+interface WebSocketError : DOMException {
   constructor(optional DOMString message = "",
               optional WebSocketCloseInfo init = {});
 
