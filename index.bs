@@ -1129,9 +1129,9 @@ To <dfn>close using reason</dfn> a {{WebSocketStream}} |stream| given |reason|,
   discard |code| and |reasonString| and [=close the WebSocket=] with |stream|.
 
  Note: A {{WebSocketError}} object constructed from JavaScript will always have a
- {{WebSocketError/closeCode}} and {{WebSocketError/reason}} that JavaScript is permitted to set,
- however the {{WebSocketStream/closed}} promise might be rejected with {{WebSocketError/closeCode}}
- values coming from the server that JavaScript is not permitted to set itself, such as 1001 "Going
+ {{WebSocketError/closeCode}} and {{WebSocketError/reason}} that JavaScript is permitted to set.
+ However, the {{WebSocketStream/closed}} promise might be rejected with a {{WebSocketError}} whose {{WebSocketError/closeCode}} has a
+ value coming from the server that JavaScript is not permitted to set itself, such as 1001 "Going
  Away".
  </div>
 
