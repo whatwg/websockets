@@ -839,9 +839,10 @@ state=], but is not exposed to JavaScript.
    corresponds to one message. Text messages will be read as strings; binary messages will be read
    as {{Uint8Array}} objects.
 
-    Note: The original {{WebSocket}} API supplied {{ArrayBuffer}} objects, but modern practice is to
-    prefer the {{Uint8Array}} type for binary data, particularly when using streams. The underlying
-    {{ArrayBuffer}} object can be recovered by calling <code><var ignore>chunk</var>.buffer</code>.
+    <p class=note>The original {{WebSocket}} API supplied {{ArrayBuffer}} objects, but modern
+    practice is to prefer the {{Uint8Array}} type for binary data, particularly when using streams.
+    The underlying {{ArrayBuffer}} object can be recovered by calling <code><var
+    ignore>chunk</var>.buffer</code>.
 
    The stream can be closed by calling {{ReadableStream/cancel()}} on
    {{WebSocketOpenInfo/readable}}. If the reason argument passed to {{ReadableStream/cancel()}} is a
@@ -909,7 +910,7 @@ state=], but is not exposed to JavaScript.
     promises.
  1. Apply backpressure to the WebSocket.
 
-  Note: This means that messages won't be read until the application is ready for them.
+  <p class=note>This means that messages won't be read until the application is ready for them.
 
  1. If |options|["{{WebSocketStreamOptions/signal}}"] [=map/exists=],
   1. Let |signal| be |options|["{{WebSocketStreamOptions/signal}}"].
@@ -917,8 +918,8 @@ state=], but is not exposed to JavaScript.
      promise=] and [=WebSocketStream/closed promise=] with |signal|'s [=abort reason=] and return.
   1. [=AbortSignal/add|Add the following abort steps=] to |signal|:
    1. If the WebSocket connection is not yet [=established=]: [[!WSP]]
-    1. [=Fail the WebSocket connection=] and set [=this=]'s [=WebSocketStream/ready state=] to
-       {{WebSocket/CLOSING}}.
+    1. [=Fail the WebSocket connection=].
+    1. Set [=this=]'s [=WebSocketStream/ready state=] to {{WebSocket/CLOSING}}.
     1. [=Reject=] [=this=]'s [=WebSocketStream/opened promise=] and [=WebSocketStream/closed
        promise=] with |signal|'s [=abort reason=].
     1. Set [=this=]'s [=WebSocketStream/handshake aborted=] to true.
@@ -976,11 +977,10 @@ must [=queue a task=] to run these steps:
     |abortAlgorithm|.
  1. Set |stream|'s [=WebSocketStream/readable stream=] to |readable|.
  1. Set |stream|'s [=WebSocketStream/writable stream=] to |writable|.
- 1. Let |openInfo| be a [=new=] {{WebSocketOpenInfo}}.
- 1. Set |openInfo| to «[ "{{WebSocketOpenInfo/extensions}}" → |extensions|,
-    "{{WebSocketOpenInfo/protocol}}" → |protocol|, "{{WebSocketOpenInfo/readable}}" → |readable|,
-    "{{WebSocketOpenInfo/writable}}" → |writable| ]».
- 1. [=Resolve=] |stream|'s [=WebSocketStream/opened promise=] with |openInfo|.
+ 1. [=Resolve=] |stream|'s [=WebSocketStream/opened promise=] with {{WebSocketOpenInfo}} «[
+    "{{WebSocketOpenInfo/extensions}}" → |extensions|, "{{WebSocketOpenInfo/protocol}}" →
+    |protocol|, "{{WebSocketOpenInfo/readable}}" → |readable|, "{{WebSocketOpenInfo/writable}}" →
+    |writable| ]».
 
 </div>
 
@@ -1006,7 +1006,7 @@ and data |data|, the user agent must [=queue a task=] to follow these steps: [[!
  1. [=ReadableStream/Enqueue=] |chunk| into |stream|'s [=WebSocketStream/readable stream=].
  1. Apply backpressure to the WebSocket.
 
- Note: Applying backpressure <span class=allow-2119>should</span> result in no new WebSocket
+ <p class=note>Applying backpressure <span class=allow-2119>should</span> result in no new WebSocket
  messages being handled until the backpressure is released. After an implementation-defined amount
  of data is buffered, the client will stop reading from the underlying network connection resulting
  in network-layer backpressure being applied.
@@ -1037,15 +1037,18 @@ When [=the WebSocket connection is closed=] for a {{WebSocketStream}} |stream|, 
   1. [=WritableStream/Error=] |stream|'s [=WebSocketStream/writable stream=] with an
      "{{InvalidStateError}}" {{DOMException}} indicating that a closed {{WebSocketStream}} cannot be
      written to.
-  1. [=Resolve=] |stream|'s [=closed promise=] with a [=new=] {{WebSocketCloseInfo}} constructed
-     with |code| and |reason|.
+  1. [=Resolve=] |stream|'s [=closed promise=] with {{WebSocketCloseInfo}} «[
+    "{{WebSocketCloseInfo/closeCode}}" → |code|, "{{WebSocketCloseInfo/reason}}" → |reason|]».
  1. Otherwise,
   1. [=ReadableStream/Error=] |stream|'s [=WebSocketStream/readable stream=] with a [=new=]
-     {{WebSocketError}} constructed with |code| and |reason|.
+     {{WebSocketError}} whose [=WebSocketError/closeCode=] is |code| and [=WebSocketError/reason=]
+     is |reason|.
   1. [=WritableStream/Error=] |stream|'s [=WebSocketStream/writable stream=] with a [=new=]
-     {{WebSocketError}} constructed with |code| and |reason|.
-  1. [=Reject=] |stream|'s [=closed promise=] with a [=new=] {{WebSocketError}} constructed with
-     |code| and |reason|.
+     {{WebSocketError}} whose [=WebSocketError/closeCode=] is |code| and [=WebSocketError/reason=]
+     is |reason|.
+  1. [=Reject=] |stream|'s [=closed promise=] with [=new=]
+     {{WebSocketError}} whose [=WebSocketError/closeCode=] is |code| and [=WebSocketError/reason=]
+     is |reason|.
 </div>
 
 <hr>
@@ -1053,7 +1056,6 @@ When [=the WebSocket connection is closed=] for a {{WebSocketStream}} |stream|, 
 The [=task source=] for all [=tasks=] <a lt="queue a task">queued</a> in this section is the
 [=WebSocket task source=].
 
-<hr>
 
 
 ## Stream operations ## {#stream-operations}
@@ -1063,7 +1065,7 @@ The [=task source=] for all [=tasks=] <a lt="queue a task">queued</a> in this se
 To <dfn>pull bytes</dfn> from a {{WebSocketStream}} |stream|, if |stream| is currently applying
 backpressure, release backpressure.
 
- Note: If any messages are queued, one will be handled immediately as a result.
+ <p class=note>If any messages are queued, one will be handled immediately as a result.
 </div>
 
 <hr>
@@ -1081,7 +1083,7 @@ To <dfn>cancel</dfn> a {{WebSocketStream}} |stream| given |reason|, [=close usin
 To <dfn>write</dfn> |chunk| to a {{WebSocketStream}} |stream|:
  1. Let |promise| be a new promise.
  1. If |chunk| is a {{BufferSource}},
-  1. Let |data| be a [=get a copy of the buffer source|copy of the bytes=].
+  1. Let |data| be a [=get a copy of the buffer source|copy of the bytes=] given |chunk|.
   1. Let |opcode| be a binary frame opcode.
  1. Otherwise,
   1. Let |string| be the result of [=Converted to an IDL value|converting=] |chunk| to an IDL
@@ -1091,7 +1093,8 @@ To <dfn>write</dfn> |chunk| to a {{WebSocketStream}} |stream|:
  1. In parallel,
   1. Wait until there is sufficient buffer space in |stream| to send the message.
 
-   Note: This means that backpressure will be applied when the user agent's buffers are full.
+   <p class=note>This means that backpressure will be applied when the user agent's buffers are
+   full.
 
   1. If [=the WebSocket closing handshake is started|the closing handshake has not yet started=],
      [=Send a WebSocket Message=] to |stream| comprised of |data| using |opcode|.
@@ -1129,7 +1132,7 @@ To <dfn>close using reason</dfn> a {{WebSocketStream}} |stream| given |reason|:
  1. [=Close the WebSocket=] with |stream|, |code|, and |reasonString|. If this throws an exception,
   discard |code| and |reasonString| and [=close the WebSocket=] with |stream|.
 
- Note: A {{WebSocketError}} object constructed from JavaScript will always have a
+ <p class=note>A {{WebSocketError}} object constructed from JavaScript will always have a
  [=WebSocketError/closeCode=] and [=WebSocketError/reason=] that JavaScript is permitted to set.
  However, the {{WebSocketStream/closed}} promise might be rejected with a {{WebSocketError}} whose
  [=WebSocketError/closeCode=] has a value coming from the server that JavaScript is not permitted to
