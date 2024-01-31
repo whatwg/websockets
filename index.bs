@@ -1126,7 +1126,7 @@ To <dfn>close using reason</dfn> a {{WebSocketStream}} |stream| given |reason|,
   1. Set |code| to |reason|'s {{WebSocketError/closeCode}}.
   1. Set |reasonString| to |reason|'s {{WebSocketError/reason}}.
  1. [=Close the WebSocket=] with |stream|, |code|, and |reasonString|. If this throws an exception,
-  discard |code| and |reasonString| and [=Close the WebSocket=] with |stream|.
+  discard |code| and |reasonString| and [=close the WebSocket=] with |stream|.
 
  Note: A {{WebSocketError}} object constructed from JavaScript will always have a
  {{WebSocketError/closeCode}} and {{WebSocketError/reason}} that JavaScript is permitted to set,
