@@ -803,7 +803,7 @@ state=], but is not exposed to JavaScript.
    array is a subprotocol name. The connection will only be established if the server reports that
    it has selected one of these subprotocols. The subprotocol names have to match the requirements
    for elements that comprise the value of \`<a http-header>`Sec-WebSocket-Protocol`</a>\` fields as
-   defined by The WebSocket protocol.  [[!WSP]]
+   defined by <cite>The WebSocket Protocol</cite>.  [[!WSP]]
 
   : {{WebSocketStreamOptions/signal}}
   :: An {{AbortSignal}} that can be used to abort the handshake. After the handshake is complete,
@@ -885,8 +885,8 @@ state=], but is not exposed to JavaScript.
     otherwise an empty sequence.
  1. If any of the values in |protocols| occur more than once or otherwise fail to match the
     requirements for elements that comprise the value of
-    \`<a http-header>`Sec-WebSocket-Protocol`</a>\` fields as defined by The WebSocket protocol,
-    then throw a "{{SyntaxError}}" {{DOMException}}.  [[!WSP]]
+    \`<a http-header>`Sec-WebSocket-Protocol`</a>\` fields as defined by <cite>The WebSocket
+    Protocol</cite>, then throw a "{{SyntaxError}}" {{DOMException}}. [[!WSP]]
  1. Set [=this=]'s [=WebSocketStream/url=] to |urlRecord|.
  1. Set [=this=]'s [=WebSocketStream/opened promise=] and [=WebSocketStream/closed promise=] to new
     promises.
@@ -1259,9 +1259,9 @@ To <dfn>close the WebSocket</dfn> for a {WebSocket} or {WebSocketStream} [=this=
      If |code| is null and |reason| is the empty string, the WebSocket Close message must not have a
      body.
 
-     <p class="note">The WebSocket Protocol erroneously states that the status code is <span
-     class=allow-2119>required</a> for the [=start the WebSocket closing handshake=] algorithm.
-     <!-- TODO(ricea): File an errata against RFC6455. -->
+     <p class="note"><cite>The WebSocket Protocol</cite> erroneously states that the status code is
+     <span class=allow-2119>required</a> for the [=start the WebSocket closing handshake=]
+     algorithm. <!-- TODO(ricea): File an errata against RFC6455. -->
 
      if |reason| is non-empty but |code| is null, then set |code| to 1000 ("Normal Closure").
 
@@ -1289,7 +1289,7 @@ To <dfn>close the WebSocket</dfn> for a {WebSocket} or {WebSocketStream} [=this=
 
 # Ping and Pong frames # {#ping-and-pong-frames}
 
-<cite>The WebSocket protocol</cite> defines Ping and Pong frames that can be used for keep-alive,
+<cite>The WebSocket Protocol</cite> defines Ping and Pong frames that can be used for keep-alive,
 heart-beats, network status probing, latency instrumentation, and so forth. These are not currently
 exposed in the API.
 
