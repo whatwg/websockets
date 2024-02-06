@@ -718,7 +718,7 @@ the following list:
  : If the WebSocket closing handshake has not yet been
    <a lt="the WebSocket closing handshake is started">started</a> [[!WSP]]
  :: [=Start the WebSocket closing handshake=], with the status code<!--CLOSE CODE--> to use in the
-    WebSocket Close message being 1001. [[!WSP]]
+    WebSocket Close frame being 1001. [[!WSP]]
  : Otherwise
  :: Do nothing.
 
@@ -1024,7 +1024,7 @@ When [=the WebSocket connection is closed=] for a {{WebSocketStream}} |stream|, 
      "{{InvalidStateError}}" {{DOMException}} indicating that a closed {{WebSocketStream}} cannot be
      written to.
   1. [=Resolve=] |stream|'s [=closed promise=] with {{WebSocketCloseInfo}} «[
-    "{{WebSocketCloseInfo/closeCode}}" → |code|, "{{WebSocketCloseInfo/reason}}" → |reason|]».
+    "{{WebSocketCloseInfo/closeCode}}" → |code|, "{{WebSocketCloseInfo/reason}}" → |reason| ]».
  1. Otherwise,
   1. Let |error| be a [=new=]
      {{WebSocketError}} whose [=WebSocketError/closeCode=] is |code| and [=WebSocketError/reason=]
@@ -1066,7 +1066,7 @@ To <dfn>write</dfn> |chunk| to a {{WebSocketStream}} |stream|:
  1. Otherwise,
   1. Let |string| be the result of [=Converted to an IDL value|converting=] |chunk| to an IDL
      {{USVString}}. If this throws an exception, return [=a promise rejected with=] the exception.
-  1. Let |data| be the result of [=UTF-8 encode|encoding=] |string|.
+  1. Let |data| be the result of [=UTF-8 encoding=] |string|.
   1. Let |opcode| be a text frame opcode.
  1. In parallel,
   1. Wait until there is sufficient buffer space in |stream| to send the message.
@@ -1137,14 +1137,14 @@ interface WebSocketError : DOMException {
 </xmp>
 
 Each {{WebSocketError}} object has an associated <dfn for="WebSocketError">closeCode</dfn>, which is
-a number.
+a number or null.
 
 Each {{WebSocketError}} object has an associated <dfn for="WebSocketError">reason</dfn>, which is a
 string.
 
 <dl class="domintro non-normative">
  : <code>|error| = new {{WebSocketError/constructor(message, init)|WebSocketError}}([|message| [,
-   |init| ] ]</code>
+   |init|]])</code>
  :: Creates a new {{WebSocketError}} object.
 
   |message| is a string which will be used to initialize the {{DOMException/message}} attribute of
@@ -1153,11 +1153,13 @@ string.
   The |init| argument is an object whose properties can be set as follows:
 
   : {{WebSocketCloseInfo/closeCode}}
-  :: A number, either 1000 or any integer in the range 3000 to 4999, inclusive. Any other number
-   will result in an "{{InvalidAccessError}}" {{DOMException}}.
+  :: A number, either 1000 or any integer in the range 3000 to 4999, inclusive. Any other
+   number will result in an "{{InvalidAccessError}}" {{DOMException}}. If a non-empty
+   {{WebSocketCloseInfo/reason}} is set, defaults to 1000, since there is no way to send a non-empty
+   reason without a close code.
   : {{WebSocketCloseInfo/reason}}
   :: A string. Must be 123 bytes or less when converted to [=UTF-8=]. A longer string will result in
-   a "{{SyntaxError}}" {{DOMException}} being thrown.
+   a "{{SyntaxError}}" {{DOMException}} being thrown. Defaults to the empty string.
 
  : <code>|error|.{{WebSocketError/closeCode}}</code>
  :: Returns the [=the WebSocket connection close code=].
@@ -1175,10 +1177,10 @@ WebSocketError(|message|, |init|)</code></dfn> constructor steps are:
 
  1. Set [=this=]'s [=DOMException/name=] to "<code>WebSocketError</code>".
  1. Set [=this=]'s [=DOMException/message=] to |message|.
- 1. Let |code| be |init|["{{WebSocketCloseInfo/closeCode}}"] if it [=map/exists=], or unset
+ 1. Let |code| be |init|["{{WebSocketCloseInfo/closeCode}}"] if it [=map/exists=], or null
     otherwise.
- 1. Let |reason| be |init|["{{WebSocketCloseInfo/reason}}"] if it [=map/exists=], or unset
-    otherwise.
+ 1. Let |reason| be |init|["{{WebSocketCloseInfo/reason}}"] if it [=map/exists=], or the empty
+    string otherwise.
  1. [=Validate close code and reason=] with |code| and |reason|.
  1. If |reason| is non-empty, but |code| is not set, then set |code| to 1000 ("Normal Closure").
  1. Set [=this=]'s [=WebSocketError/closeCode=] to |code|.
@@ -1197,13 +1199,14 @@ These algorithms are shared between the {{WebSocket}} and {{WebSocketStream}} in
 
 <div algorithm>
 
-To <dfn>get a URL record</dfn> given a |url| and |baseURL|,
+To <dfn>get a URL record</dfn> given a |url| and |baseURL|:
 
  1. Let |urlRecord| be the result of applying the [=URL parser=] to |url| with |baseURL|.
  1. If |urlRecord| is failure, then throw a "{{SyntaxError}}" {{DOMException}}.
- 1. If |urlRecord|'s [=url/scheme=] is "`http`", then set |urlRecord|'s [=url/scheme=] to "`ws`".
+ 1. If |urlRecord|'s [=url/scheme=] is "`http`", then set |urlRecord|'s [=url/scheme=] to
+    "<code>[=ws=]</code>".
  1. Otherwise, if |urlRecord|'s [=url/scheme=] is "`https`", set |urlRecord|'s [=url/scheme=] to
-    "`wss`".
+    "<code>[=wss=]</code>".
  1. If |urlRecord|'s [=scheme=] is not "<code>[=ws=]</code>" or "<code>[=wss=]</code>", then throw a
     "{{SyntaxError}}" {{DOMException}}.
  1. If |urlRecord|'s [=fragment=] is non-null, then throw a "{{SyntaxError}}" {{DOMException}}.
@@ -1214,12 +1217,12 @@ To <dfn>get a URL record</dfn> given a |url| and |baseURL|,
 
 <div algorithm>
 
-To <dfn>validate close code and reason</dfn> given a |code| and |reason|,
+To <dfn>validate close code and reason</dfn> given a |code| and |reason|:
 
  1. If |code| is not null, but is neither an integer equal to 1000 nor an integer in the range 3000
     to 4999, inclusive, throw an "{{InvalidAccessError}}" {{DOMException}}.
- 1. If |reason| is not null, then run these substeps:
-  1. Let |reasonBytes| be the result of <a lt="UTF-8 encode">encoding</a> |reason|.
+ 1. If |reason| is not null, then:
+  1. Let |reasonBytes| be the result of [=UTF-8 encoding=] |reason|.
   1. If |reasonBytes| is longer than 123 bytes, then throw a "{{SyntaxError}}" {{DOMException}}.
 </div>
 
@@ -1227,36 +1230,36 @@ To <dfn>validate close code and reason</dfn> given a |code| and |reason|,
 
 <div algorithm>
 
-To <dfn>close the WebSocket</dfn> for a {WebSocket} or {WebSocketStream} [=this=], given optional
-|code| and optional |reason|,
+To <dfn>close the WebSocket</dfn> for a {{WebSocket}} or {{WebSocketStream}} |object|, given
+optional |code| and optional |reason|:
 
  1. If |code| was not supplied, let |code| be null.
  1. If |reason| was not supplied, let |reason| be the empty string.
  1. [=Validate close code and reason=] with |code| and |reason|.
  1. Run the first matching steps from the following list:
   <dl class="switch">
-  : If [=this=]'s [=WebSocket/ready state=] is {{WebSocket/CLOSING}} (2) or {{WebSocket/CLOSED}} (3)
+  : If |object|'s [=WebSocket/ready state=] is {{WebSocket/CLOSING}} (2) or {{WebSocket/CLOSED}} (3)
   :: Do nothing.
 
    <p class="note">The connection is already closing or is already closed. If it has not already, a
-   {{WebSocket/close}} event will eventually fire if [=this=] is a {{WebSocket}}, or the
-   {{WebSocketStream/closed}} promise will become settled if [=this=] is a {{WebSocketStream}}.
+   {{WebSocket/close}} event will eventually fire if |object| is a {{WebSocket}}, or the
+   {{WebSocketStream/closed}} promise will become settled if |object| is a {{WebSocketStream}}.
 
   : If the WebSocket connection is not yet [=established=] [[!WSP]]
-  :: [=Fail the WebSocket connection=] and set [=this=]'s [=WebSocket/ready state=] to
+  :: [=Fail the WebSocket connection=] and set |object|'s [=WebSocket/ready state=] to
      {{WebSocket/CLOSING}} (2). [[!WSP]]
 
      <p class="note">The [=fail the WebSocket connection=] algorithm invokes the [=close the
      WebSocket connection=] algorithm, which then establishes that [=the WebSocket connection is
-     closed=], which fires the {{WebSocket/close}} event if [=this=] is a {{WebSocket}}, or settles
-     the {{WebSocketStream/closed}} promise if [=this=] is a {{WebSocketStream}}.
+     closed=], which fires the {{WebSocket/close}} event if |object| is a {{WebSocket}}, or settles
+     the {{WebSocketStream/closed}} promise if |object| is a {{WebSocketStream}}.
 
   : If the WebSocket closing handshake has not yet been <a lt="the WebSocket closing handshake is
     started">started</a> [[!WSP]]
-  :: [=Start the WebSocket closing handshake=] and set [=this=]'s [=WebSocket/ready state=] to
+  :: [=Start the WebSocket closing handshake=] and set |object|'s [=WebSocket/ready state=] to
      {{WebSocket/CLOSING}} (2). [[!WSP]]
 
-     If |code| is null and |reason| is the empty string, the WebSocket Close message must not have a
+     If |code| is null and |reason| is the empty string, the WebSocket Close frame must not have a
      body.
 
      <p class="note"><cite>The WebSocket Protocol</cite> erroneously states that the status code is
@@ -1266,24 +1269,24 @@ To <dfn>close the WebSocket</dfn> for a {WebSocket} or {WebSocketStream} [=this=
      if |reason| is non-empty but |code| is null, then set |code| to 1000 ("Normal Closure").
 
      If |code| is set, then the status code<!--CLOSE CODE--> to use in the WebSocket Close
-     message must be the integer given by |code|. [[!WSP]]
+     frame must be the integer given by |code|. [[!WSP]]
 
      If |reason| is non-empty, then |reason|, <a lt="UTF-8 encode">encoded as UTF-8</a>, must be
-     provided in the Close message after the status code<!--CLOSE CODE-->. [[!WSP]]
+     provided in the Close frame after the status code<!--CLOSE CODE-->. [[!WSP]]
 
      <p class="note">The [=start the WebSocket closing handshake=] algorithm eventually invokes the
      [=close the WebSocket connection=] algorithm, which then establishes that [=the WebSocket
-     connection is closed=], which fires the {{WebSocket/close}} event if [=this=] is a
-     {{WebSocket}}, or settles the {{WebSocketStream/closed}} promise if [=this=] is a
+     connection is closed=], which fires the {{WebSocket/close}} event if |object| is a
+     {{WebSocket}}, or settles the {{WebSocketStream/closed}} promise if |object| is a
      {{WebSocketStream}}.
 
   : Otherwise
-  :: Set [=this=]'s [=WebSocket/ready state=] to {{WebSocket/CLOSING}} (2).
+  :: Set |object|'s [=WebSocket/ready state=] to {{WebSocket/CLOSING}} (2).
 
      <p class="note">[=The WebSocket closing handshake is started=], and will eventually invoke the
      [=close the WebSocket connection=] algorithm, which will establish that [=the WebSocket
      connection is closed=], and thus the {{WebSocket/close}} event will fire or the
-     {{WebSocketStream/closed}} promise will resolve, depending on the type of [=this=].
+     {{WebSocketStream/closed}} promise will resolve, depending on the type of |object|.
    </dl>
 
 
