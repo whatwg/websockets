@@ -1210,6 +1210,8 @@ To <dfn>get a URL record</dfn> given a |url| and |baseURL|,
  1. Return |urlRecord|.
 </div>
 
+<hr>
+
 <div algorithm>
 
 To <dfn>validate close code and reason</dfn> given a |code| and |reason|,
@@ -1220,6 +1222,8 @@ To <dfn>validate close code and reason</dfn> given a |code| and |reason|,
   1. Let |reasonBytes| be the result of <a lt="UTF-8 encode">encoding</a> |reason|.
   1. If |reasonBytes| is longer than 123 bytes, then throw a "{{SyntaxError}}" {{DOMException}}.
 </div>
+
+<hr>
 
 <div algorithm>
 
