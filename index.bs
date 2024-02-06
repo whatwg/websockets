@@ -34,8 +34,6 @@ spec:html; type:dfn;
 spec:url; type:dfn;
  text:origin
  for:/; text:url
-spec:streams; type:dfn
- text:writable stream writer
 </pre>
 
 <pre class=anchors>
@@ -940,7 +938,8 @@ The <dfn attribute for=WebSocketStream>closed</dfn> getter steps are to return [
 ## Feedback to WebSocketStream from the protocol ## {#feedback-to-websocket-stream-from-the-protocol}
 
 When [=the WebSocket connection is established=] for a {{WebSocketStream}} |stream|, the user agent
-must [=queue a task=] to run these steps:
+must [=queue a global task=] on the [=WebSocket task source=] given |stream|'s [=relevant global
+object=] to run these steps:
 
 <div algorithm="handle WebSocketStream connection establishment">
 
@@ -973,7 +972,8 @@ must [=queue a task=] to run these steps:
 <div algorithm="handle a WebSocketStream message">
 
 When [=a WebSocket message has been received=] for a {{WebSocketStream}} |stream| with type |type|
-and data |data|, the user agent must [=queue a task=] to follow these steps: [[!WSP]]
+and data |data|, the user agent must [=queue a global task=] on the [=WebSocket task source=] given
+|stream|'s [=relevant global object=] to follow these steps: [[!WSP]]
 
  1. If [=WebSocket/ready state=] is not {{WebSocket/OPEN}} (1), then return.
  1. Let |chunk| be determined by switching on |type|:
@@ -998,8 +998,9 @@ and data |data|, the user agent must [=queue a task=] to follow these steps: [[!
 
 <hr>
 
-When [=the WebSocket closing handshake is started=] for a {{WebSocketStream}} |stream|, the user
-agent must [=queue a task=] to change the |stream|'s [=WebSocketStream/ready state=] to
+When [=the WebSocket closing handshake is started=] for a {{WebSocketStream}}
+|stream|, the user agent must [=queue a global task=] on the [=WebSocket task source=] given
+|stream|'s [=relevant global object=] to change the |stream|'s [=WebSocketStream/ready state=] to
 {{WebSocket/CLOSING}} if it is not already. [[!WSP]]
 
 <hr>
@@ -1007,7 +1008,8 @@ agent must [=queue a task=] to change the |stream|'s [=WebSocketStream/ready sta
 <div algorithm="handle WebSocketStream connection close">
 
 When [=the WebSocket connection is closed=] for a {{WebSocketStream}} |stream|, possibly
- [=cleanly=], the user agent must [=queue a task=] to run the following substeps:
+[=cleanly=], the user agent must [=queue a global task=] on the [=WebSocket task source=] given
+|stream|'s [=relevant global object=] to run the following substeps:
 
  1. Change the [=WebSocketStream/ready state=] to {{WebSocket/CLOSED}} (3).
  1. If |stream|'s [=WebSocketStream/handshake aborted=] is true, then return.
@@ -1024,21 +1026,13 @@ When [=the WebSocket connection is closed=] for a {{WebSocketStream}} |stream|, 
   1. [=Resolve=] |stream|'s [=closed promise=] with {{WebSocketCloseInfo}} «[
     "{{WebSocketCloseInfo/closeCode}}" → |code|, "{{WebSocketCloseInfo/reason}}" → |reason|]».
  1. Otherwise,
-  1. [=ReadableStream/Error=] |stream|'s [=WebSocketStream/readable stream=] with a [=new=]
+  1. Let |error| be a [=new=]
      {{WebSocketError}} whose [=WebSocketError/closeCode=] is |code| and [=WebSocketError/reason=]
      is |reason|.
-  1. [=WritableStream/Error=] |stream|'s [=WebSocketStream/writable stream=] with a [=new=]
-     {{WebSocketError}} whose [=WebSocketError/closeCode=] is |code| and [=WebSocketError/reason=]
-     is |reason|.
-  1. [=Reject=] |stream|'s [=closed promise=] with [=new=]
-     {{WebSocketError}} whose [=WebSocketError/closeCode=] is |code| and [=WebSocketError/reason=]
-     is |reason|.
+  1. [=ReadableStream/Error=] |stream|'s [=WebSocketStream/readable stream=] with |error|.
+  1. [=WritableStream/Error=] |stream|'s [=WebSocketStream/writable stream=] with |error|.
+  1. [=Reject=] |stream|'s [=closed promise=] with |error|.
 </div>
-
-<hr>
-
-The [=task source=] for all [=tasks=] <a lt="queue a task">queued</a> in this section is the
-[=WebSocket task source=].
 
 
 
@@ -1082,7 +1076,8 @@ To <dfn>write</dfn> |chunk| to a {{WebSocketStream}} |stream|:
 
   1. If [=the WebSocket closing handshake is started|the closing handshake has not yet started=],
      [=Send a WebSocket Message=] to |stream| comprised of |data| using |opcode|.
-  1. [=Queue a task=] on the [=WebSocket task source=] to resolve |promise| with undefined.
+  1. [=Queue a global task=] on the [=WebSocket task source=] given |stream|'s [=relevant global
+     object=] to resolve |promise| with undefined.
  1. Return |promise|.
 </div>
 
