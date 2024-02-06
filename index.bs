@@ -1059,7 +1059,7 @@ To <dfn>cancel</dfn> a {{WebSocketStream}} |stream| given |reason|, [=close usin
 <div algorithm="write algorithm">
 
 To <dfn>write</dfn> |chunk| to a {{WebSocketStream}} |stream|:
- 1. Let |promise| be a new promise.
+ 1. Let |promise| be [=a new promise=] created in |stream|'s [=relevant realm=].
  1. If |chunk| is a {{BufferSource}},
   1. Let |data| be a [=get a copy of the buffer source|copy of the bytes=] given |chunk|.
   1. Let |opcode| be a binary frame opcode.
