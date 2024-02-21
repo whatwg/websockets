@@ -775,8 +775,8 @@ which is a {{ReadableStream}}.
 Each {{WebSocketStream}} object has an associated <dfn for="WebSocketStream">writable stream</dfn>,
 which is a {{WritableStream}}.
 
-Each {{WebSocketStream}} object has an associated boolean <dfn for="WebSocketStream">was ever
-connected</dfn>, which is initially false.
+Each {{WebSocketStream}} object has an associated <dfn for="WebSocketStream">was ever
+connected</dfn>, which is a boolean, initially false.
 
 Each {{WebSocketStream}} object has an associated boolean <dfn for="WebSocketStream">handshake
 aborted</dfn>, which is initially false.
