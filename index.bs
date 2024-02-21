@@ -866,7 +866,7 @@ state=], but is not exposed to JavaScript.
   server.
 
  : <code>|socket|.{{WebSocketStream/close()}}</code>
- : <code>|socket|.{{WebSocketStream/close({ {{WebSocketCloseInfo/closeCode}}, {{WebSocketCloseInfo/reason}} })}}</code>
+ : <code>|socket|.{{WebSocketStream/close()|close}}({ {{WebSocketCloseInfo/closeCode}}, {{WebSocketCloseInfo/reason}} })</code>
  :: Close the connection, optionally supplying an object with {{WebSocketCloseInfo/closeCode}} and
   {{WebSocketCloseInfo/reason}} properties to indicate [=the WebSocket connection close code=] and
   [=the WebSocket connection close reason=] that will be sent to the remote server. If the handshake
