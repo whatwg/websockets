@@ -788,7 +788,7 @@ state=], but is not exposed to JavaScript.
 
 
 <dl class="domintro non-normative">
- : <code>|socket| = new {{WebSocketStream/constructor(url, options)|WebSocketStream}}(|url| [, |options|])</code>
+ : <code>|socket| = new {{WebSocketStream/constructor(url, options)|WebSocketStream}}(|url|[, |options|])</code>
  :: Creates a new {{WebSocketStream}} object, immediately establishing the associated WebSocket
   connection.
 
@@ -813,7 +813,7 @@ state=], but is not exposed to JavaScript.
  :: Returns the [=WebSocketStream/url|URL=] that was used</a> to establish the WebSocket connection.
 
  : <code>|socket|.{{WebSocketStream/opened}}</code>
- :: Returns a {{promise}} which resolves when the handshake successfully completes, or rejects if
+ :: Returns a {{Promise}} which resolves when the handshake successfully completes, or rejects if
   the handshake fails. On success, it resolves to an object with the following properties:
 
   : {{WebSocketOpenInfo/readable}}
@@ -823,7 +823,7 @@ state=], but is not exposed to JavaScript.
 
     <p class=note>The original {{WebSocket}} API supplied {{ArrayBuffer}} objects, but modern
     practice is to prefer the {{Uint8Array}} type for binary data, particularly when using streams.
-    The underlying {{ArrayBuffer}} object can be recovered by calling <code><var
+    The underlying {{ArrayBuffer}} object can be recovered by accessing <code><var
     ignore>chunk</var>.buffer</code>.
 
    The stream can be closed by calling {{ReadableStream/cancel()}} on
@@ -858,7 +858,7 @@ state=], but is not exposed to JavaScript.
   :: The [=subprotocol in use=] for the connection.
 
  : <code>|socket|.{{WebSocketStream/closed}}</code>
- :: A {{promise}} which resolves when the connection is closed. If the connection did not close
+ :: A {{Promise}} which resolves when the connection is closed. If the connection did not close
   [=cleanly=] then the promise is rejected with a {{WebSocketError}}. When the connection closes
   [=cleanly=] the promise is fulfilled with an object with properties
   {{WebSocketCloseInfo/closeCode}} and {{WebSocketCloseInfo/reason}}, giving [=the WebSocket
@@ -866,6 +866,7 @@ state=], but is not exposed to JavaScript.
   server.
 
  : <code>|socket|.{{WebSocketStream/close()}}</code>
+ : <code>|socket|.{{WebSocketStream/close({ {{WebSocketCloseInfo/closeCode}}, {{WebSocketCloseInfo/reason}} })}}</code>
  :: Close the connection, optionally supplying an object with {{WebSocketCloseInfo/closeCode}} and
   {{WebSocketCloseInfo/reason}} properties to indicate [=the WebSocket connection close code=] and
   [=the WebSocket connection close reason=] that will be sent to the remote server. If the handshake
@@ -943,12 +944,12 @@ object=] to run these steps:
 
 <div algorithm="handle WebSocketStream connection establishment">
 
- 1. Change the [=WebSocketStream/ready state=] to {{WebSocket/OPEN}} (1).
+ 1. Change |stream|'s [=WebSocketStream/ready state=] to {{WebSocket/OPEN}} (1).
  1. Set |stream|'s [=WebSocketStream/was ever connected=] to true.
  1. Let |extensions| be the [=extensions in use=].
  1. Let |protocol| be the [=subprotocol in use=].
  1. Let |pullAlgorithm| be an action that [=pulls bytes=] from |stream|.
- 1. Let |cancelAlgorithm| be an action that [=cancels=] the {{WebSocketStream}} with |stream| and
+ 1. Let |cancelAlgorithm| be an action that [=cancels=] |stream| with
     |reason|, given |reason|.
  1. Let |readable| be a [=new=] {{ReadableStream}}.
  1. [=ReadableStream/Set up=] |readable| with |pullAlgorithm| and |cancelAlgorithm|.
@@ -975,7 +976,7 @@ When [=a WebSocket message has been received=] for a {{WebSocketStream}} |stream
 and data |data|, the user agent must [=queue a global task=] on the [=WebSocket task source=] given
 |stream|'s [=relevant global object=] to follow these steps: [[!WSP]]
 
- 1. If [=WebSocket/ready state=] is not {{WebSocket/OPEN}} (1), then return.
+ 1. If |stream|'s [=WebSocketStream/ready state=] is not {{WebSocket/OPEN}} (1), then return.
  1. Let |chunk| be determined by switching on |type|:
 
   <dl class="switch">
@@ -1000,7 +1001,7 @@ and data |data|, the user agent must [=queue a global task=] on the [=WebSocket 
 
 When [=the WebSocket closing handshake is started=] for a {{WebSocketStream}}
 |stream|, the user agent must [=queue a global task=] on the [=WebSocket task source=] given
-|stream|'s [=relevant global object=] to change the |stream|'s [=WebSocketStream/ready state=] to
+|stream|'s [=relevant global object=] to change |stream|'s [=WebSocketStream/ready state=] to
 {{WebSocket/CLOSING}} if it is not already. [[!WSP]]
 
 <hr>
@@ -1011,10 +1012,10 @@ When [=the WebSocket connection is closed=] for a {{WebSocketStream}} |stream|, 
 [=cleanly=], the user agent must [=queue a global task=] on the [=WebSocket task source=] given
 |stream|'s [=relevant global object=] to run the following substeps:
 
- 1. Change the [=WebSocketStream/ready state=] to {{WebSocket/CLOSED}} (3).
+ 1. Change |stream|'s [=WebSocketStream/ready state=] to {{WebSocket/CLOSED}} (3).
  1. If |stream|'s [=WebSocketStream/handshake aborted=] is true, then return.
  1. If |stream|'s [=WebSocketStream/was ever connected=] is false, then [=reject=] |stream|'s
-    [=opened promise=] with a [=new=] WebSocketError.
+    [=opened promise=] with a [=new=] {{WebSocketError}}.
  1. Let |code| be [=the WebSocket connection close code=].
  1. Let |reason| be the result of applying [=UTF-8 decode without BOM=] to [=the WebSocket
     connection close reason=].
@@ -1143,7 +1144,7 @@ Each {{WebSocketError}} object has an associated <dfn for="WebSocketError">reaso
 string.
 
 <dl class="domintro non-normative">
- : <code>|error| = new {{WebSocketError/constructor(message, init)|WebSocketError}}([|message| [,
+ : <code>|error| = new {{WebSocketError/constructor(message, init)|WebSocketError}}([|message|[,
    |init|]])</code>
  :: Creates a new {{WebSocketError}} object.
 
@@ -1182,7 +1183,7 @@ WebSocketError(|message|, |init|)</code></dfn> constructor steps are:
  1. Let |reason| be |init|["{{WebSocketCloseInfo/reason}}"] if it [=map/exists=], or the empty
     string otherwise.
  1. [=Validate close code and reason=] with |code| and |reason|.
- 1. If |reason| is non-empty, but |code| is not set, then set |code| to 1000 ("Normal Closure").
+ 1. If |reason| is non-empty, but |code| is null, then set |code| to 1000 ("Normal Closure").
  1. Set [=this=]'s [=WebSocketError/closeCode=] to |code|.
  1. Set [=this=]'s [=WebSocketError/reason=] to |reason|.
 </div>
