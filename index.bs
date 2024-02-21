@@ -789,7 +789,7 @@ state=], but is not exposed to JavaScript.
 
 <dl class="domintro non-normative">
  : <code>|socket| = new {{WebSocketStream/constructor(url, options)|WebSocketStream}}(|url| [, |options|])</code>
- :: Creates a new {{WebSocketStream}} object, immediately establishing the associating WebSocket
+ :: Creates a new {{WebSocketStream}} object, immediately establishing the associated WebSocket
   connection.
 
   |url| is a string giving the <a dfn spec=url>URL</a> over which the connection is established.
