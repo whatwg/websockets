@@ -1140,10 +1140,10 @@ interface WebSocketError : DOMException {
 </xmp>
 
 Each {{WebSocketError}} object has an associated <dfn for="WebSocketError">closeCode</dfn>, which is
-a number or null.
+a number or null, and defaults to null.
 
 Each {{WebSocketError}} object has an associated <dfn for="WebSocketError">reason</dfn>, which is a
-string.
+string, and defaults to the empty string.
 
 <dl class="domintro non-normative">
  : <code>|error| = new {{WebSocketError/constructor(message, init)|WebSocketError}}([|message|[,
