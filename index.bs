@@ -359,7 +359,7 @@ string. After [=the WebSocket connection is established=], its value might chang
  The <dfn method for=WebSocket>close(|code|, |reason|)</dfn> method steps are:
 
   1. If |code| is the special value "missing", then set |code| to null.
-  1. If |reason| is the special value "missing" then set |reason| to the empty string.
+  1. If |reason| is the special value "missing", then set |reason| to the empty string.
   1. [=Close the WebSocket=] with [=this=], |code|, and |reason|.
 
 </div>
