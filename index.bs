@@ -991,10 +991,10 @@ and data |data|, the user agent must [=queue a global task=] on the [=WebSocket 
  1. [=ReadableStream/Enqueue=] |chunk| into |stream|'s [=WebSocketStream/readable stream=].
  1. Apply backpressure to the WebSocket.
 
- <p class=note>Applying backpressure <span class=allow-2119>should</span> result in no new WebSocket
- messages being handled until the backpressure is released. After an implementation-defined amount
- of data is buffered, the client will stop reading from the underlying network connection resulting
- in network-layer backpressure being applied.
+ <p class=note>Applying backpressure will result in no new WebSocket messages being handled until
+ the backpressure is released. After an implementation-defined amount of data is buffered, the
+ client will stop reading from the underlying network connection resulting in network-layer
+ backpressure being applied.
 </div>
 
 <hr>
@@ -1002,7 +1002,7 @@ and data |data|, the user agent must [=queue a global task=] on the [=WebSocket 
 When [=the WebSocket closing handshake is started=] for a {{WebSocketStream}}
 |stream|, the user agent must [=queue a global task=] on the [=WebSocket task source=] given
 |stream|'s [=relevant global object=] to change |stream|'s [=WebSocketStream/ready state=] to
-{{WebSocket/CLOSING}} if it is not already. [[!WSP]]
+{{WebSocket/CLOSING}} [[!WSP]]
 
 <hr>
 
@@ -1061,14 +1061,16 @@ To <dfn>cancel</dfn> a {{WebSocketStream}} |stream| given |reason|, [=close usin
 
 To <dfn>write</dfn> |chunk| to a {{WebSocketStream}} |stream|:
  1. Let |promise| be [=a new promise=] created in |stream|'s [=relevant realm=].
+ 1. Let |data| be null.
+ 1. Let |opcode| be null.
  1. If |chunk| is a {{BufferSource}},
-  1. Let |data| be a [=get a copy of the buffer source|copy of the bytes=] given |chunk|.
-  1. Let |opcode| be a binary frame opcode.
+  1. Set |data| to a [=get a copy of the buffer source|copy of the bytes=] given |chunk|.
+  1. Set |opcode| to a binary frame opcode.
  1. Otherwise,
   1. Let |string| be the result of [=Converted to an IDL value|converting=] |chunk| to an IDL
      {{USVString}}. If this throws an exception, return [=a promise rejected with=] the exception.
-  1. Let |data| be the result of [=UTF-8 encoding=] |string|.
-  1. Let |opcode| be a text frame opcode.
+  1. Set |data| to the result of [=UTF-8 encoding=] |string|.
+  1. Set |opcode| to a text frame opcode.
  1. In parallel,
   1. Wait until there is sufficient buffer space in |stream| to send the message.
 
