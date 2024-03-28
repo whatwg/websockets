@@ -752,11 +752,11 @@ dictionary WebSocketStreamOptions {
 
 [Exposed=(Window,Worker)]
 interface WebSocketStream {
-  constructor(USVString url, optional WebSocketStreamOptions options);
+  constructor(USVString url, optional WebSocketStreamOptions options = {});
   readonly attribute USVString url;
   readonly attribute Promise<WebSocketOpenInfo> opened;
   readonly attribute Promise<WebSocketCloseInfo> closed;
-  undefined close(optional WebSocketCloseInfo closeInfo);
+  undefined close(optional WebSocketCloseInfo closeInfo = {});
 };
 </xmp>
 
