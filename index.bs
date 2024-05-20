@@ -209,7 +209,7 @@ enum BinaryType { "blob", "arraybuffer" };
 
 [Exposed=(Window,Worker)]
 interface WebSocket : EventTarget {
-  constructor(USVString url, optional (DOMString or sequence<DOMString>) protocols = []);
+  constructor(USVString url, optional (DOMString or sequence<DOMString> or WebSocketInitDict) protocols = []);
   readonly attribute USVString url;
 
   // ready state
@@ -232,6 +232,10 @@ interface WebSocket : EventTarget {
   attribute EventHandler onmessage;
   attribute BinaryType binaryType;
   undefined send((BufferSource or Blob or USVString) data);
+};
+
+dictionary WebSocketInitDict {
+  sequence<DOMString> protocols = [];
 };
 </xmp>
 
@@ -330,6 +334,8 @@ It can have the following values:
     "{{SyntaxError}}" {{DOMException}}.
  1. If |urlRecord|'s [=fragment=] is non-null, then throw a "{{SyntaxError}}" {{DOMException}}.
  1. If |protocols| is a string, set |protocols| to a sequence consisting of just that string.
+ 1. Otherwise, if |protocols| is a dictionary, set |protocols| to
+    |protocols|["{{WebSocketInitDict/protocols}}"]
  1. If any of the values in |protocols| occur more than once or otherwise fail to match the
     requirements for elements that comprise the value of
     \`<a http-header>`Sec-WebSocket-Protocol`</a>\` fields as defined by The WebSocket protocol,
