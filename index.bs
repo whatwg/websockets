@@ -357,7 +357,7 @@ The <dfn attribute for=WebSocket>readyState</dfn> getter steps are to return [=t
 
 The <dfn attribute for=WebSocket>extensions</dfn> attribute must initially return the empty
 string. After [=the WebSocket connection is established=], its value might change, as defined
-below.</p>
+below.
 
 The <dfn attribute for=WebSocket>protocol</dfn> attribute must initially return the empty
 string. After [=the WebSocket connection is established=], its value might change, as defined below.
@@ -395,7 +395,7 @@ string. After [=the WebSocket connection is established=], its value might chang
      If neither |code| nor |reason| is present, the WebSocket Close message must not have a body.
 
      <p class="note">The WebSocket Protocol erroneously states that the status code is <span
-     class=allow-2119>required</a> for the [=start the WebSocket closing handshake=] algorithm.
+     class=allow-2119>required</span> for the [=start the WebSocket closing handshake=] algorithm.
      <!-- TODO(ricea): File an errata against RFC6455. -->
 
      If |code| is present, then the status code<!--CLOSE CODE--> to use in the WebSocket Close
@@ -584,7 +584,7 @@ When [=a WebSocket message has been received=] with type |type| and data |data|,
    :: a new {{DOMString}} containing |data|
 
    : |type| indicates that the data is Binary and [=WebSocket/binary type=] is
-     <dfn enum-value for=BinaryType>"blob"</a>
+     <dfn enum-value for=BinaryType>"blob"</dfn>
    :: a new {{Blob}} object, created in the [=relevant Realm=] of the {{WebSocket}} object, that
       represents |data| as its raw data [[!FILEAPI]]
 
