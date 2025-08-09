@@ -8,6 +8,7 @@ Abstract: This specification provides APIs to enable web applications to maintai
 Abstract: communications with server-side processes.
 Translation: ja https://triple-underscore.github.io/WebSocket-ja.html
 Translation: zh-Hans https://htmlspecs.com/websockets/
+Translation: ko https://ko.htmlspecs.com/websockets/
 Indent: 1
 Markup Shorthands: markdown yes
 </pre>
