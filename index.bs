@@ -141,8 +141,9 @@ To <dfn id=concept-websocket-establish>establish a WebSocket connection</dfn>, g
 1. Let |request| be a new <a for=/>request</a>, whose <a for=request>URL</a> is |requestURL|,
  <a for=request>client</a> is |client|, [=service-workers mode=] is "`none`",
  <a for=request>referrer</a> is "`no-referrer`", <a for=request>mode</a> is "`websocket`",
- <a for=request>credentials mode</a> is "`include`", <a for=request>cache mode</a> is "`no-store`"
- , and <a for=request>redirect mode</a> is "`error`".
+ <a for=request>credentials mode</a> is "`include`", <a for=request>cache mode</a> is "`no-store`",
+ <a for=request>redirect mode</a> is "`error`", and <a for=request>use-URL-credentials flag</a> is
+ set.
 
 1. <a for="header list">Append</a> (\``Upgrade`\`, \``websocket`\`) to |request|'s
  <a for=request>header list</a>.
