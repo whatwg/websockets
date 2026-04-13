@@ -797,6 +797,25 @@ the following list:
 
 </div>
 
+<hr>
+
+If a user agent is to run the <dfn export>context cleanup steps</dfn> given a {{WebSocket}} object,
+the user agent must follow the first appropriate set of steps from the following list:
+
+<div algorithm="context cleanup steps">
+
+<dl class="switch">
+
+ : If the WebSocket connection is not yet [=established=] or the WebSocket closing handshake has
+   not yet been <a lt="the WebSocket closing handshake is started">started</a> [[!WSP]]
+ :: [=Fail the WebSocket connection=]. [[!WSP]]
+ : Otherwise
+ :: Do nothing.
+
+</dl>
+
+</div>
+
 <h2 id="acks" class="no-num">Acknowledgments</h2>
 
 Until the creation of this standard in 2021, the text here was maintained in the <a
