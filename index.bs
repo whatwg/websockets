@@ -210,7 +210,7 @@ The Web IDL definition for the {{WebSocket}} class is given as follows:
 enum BinaryType { "blob", "arraybuffer" };
 
 dictionary WebSocketInit {
-  (DOMString or sequence<DOMString>) protocols = [];
+  sequence<DOMString> protocols = [];
 };
 
 [Exposed=(Window,Worker)]
