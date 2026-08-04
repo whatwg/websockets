@@ -209,9 +209,13 @@ The Web IDL definition for the {{WebSocket}} class is given as follows:
 <xmp class="idl">
 enum BinaryType { "blob", "arraybuffer" };
 
+dictionary WebSocketInit {
+  (DOMString or sequence<DOMString>) protocols = [];
+};
+
 [Exposed=(Window,Worker)]
 interface WebSocket : EventTarget {
-  constructor(USVString url, optional (DOMString or sequence<DOMString>) protocols = []);
+  constructor(USVString url, optional (DOMString or sequence<DOMString> or WebSocketInit) protocolsOrOptions = []);
   readonly attribute USVString url;
 
   // ready state
@@ -258,7 +262,7 @@ It can have the following values:
 :: The connection has been closed or could not be opened.
 
 <dl class="domintro non-normative">
- : <code>|socket| = new {{WebSocket/constructor(url, protocols)|WebSocket}}(|url| [, |protocols| ])</code>
+ : <code>|socket| = new {{WebSocket/constructor(url, protocolsOrOptions)|WebSocket}}(|url| [, |protocolsOrOptions| ])</code>
  :: Creates a new {{WebSocket}} object, immediately establishing the associated WebSocket
     connection.
 
@@ -266,8 +270,10 @@ It can have the following values:
     Only "`ws`", "`wss`", "`http`", and "`https`" schemes are allowed; others will cause a
     "{{SyntaxError}}" {{DOMException}}. URLs with [=fragments=] will always cause such an exception.
 
-    |protocols| is either a string or an array of strings. If it is a string, it is equivalent to
-    an array consisting of just that string; if it is omitted, it is equivalent to the empty array.
+    |protocolsOrOptions| is either a string, a sequence of strings, or a {{WebSocketInit}}
+    dictionary containing options (such as |subprotocols| in the dictionary's {{WebSocketInit/protocols}}
+    member). If it is a string, it is equivalent to an array consisting of just that string;
+    if it is omitted, it is equivalent to the empty array.
     Each string in the array is a subprotocol name. The connection will only be established if the
     server reports that it has selected one of these subprotocols. The subprotocol names have to
     match the requirements for elements that comprise the value of \`<a
@@ -318,8 +324,8 @@ It can have the following values:
 </dl>
 
 <div algorithm>
- The <dfn constructor for="WebSocket" data-lt="WebSocket(url, protocols)"><code>new
- WebSocket(|url|, |protocols|)</code></dfn>
+ The <dfn constructor for="WebSocket" data-lt="WebSocket(url, protocolsOrOptions)"><code>new
+ WebSocket(|url|, |protocolsOrOptions|)</code></dfn>
  constructor steps are:
 
  1. Let |baseURL| be [=this=]'s [=relevant settings object=]'s [=API base URL=].
@@ -331,6 +337,10 @@ It can have the following values:
  1. If |urlRecord|'s [=scheme=] is not "<code>[=ws=]</code>" or "<code>[=wss=]</code>", then throw a
     "{{SyntaxError}}" {{DOMException}}.
  1. If |urlRecord|'s [=fragment=] is non-null, then throw a "{{SyntaxError}}" {{DOMException}}.
+ 1. Let |protocols| be an empty sequence.
+ 1. If |protocolsOrOptions| is a {{WebSocketInit}} dictionary, set |protocols| to 
+   |protocolsOrOptions|["{{WebSocketInit/protocols}}"].
+ 1. Otherwise, set |protocols| to |protocolsOrOptions|.
  1. If |protocols| is a string, set |protocols| to a sequence consisting of just that string.
  1. If any of the values in |protocols| occur more than once or otherwise fail to match the
     requirements for elements that comprise the value of
