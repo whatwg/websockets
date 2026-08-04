@@ -271,7 +271,7 @@ It can have the following values:
     "{{SyntaxError}}" {{DOMException}}. URLs with [=fragments=] will always cause such an exception.
 
     |protocolsOrOptions| is either a string, a sequence of strings, or a {{WebSocketInit}}
-    dictionary containing options (such as |subprotocols| in the dictionary's {{WebSocketInit/protocols}}
+    dictionary containing options (such as subprotocols in the dictionary's {{WebSocketInit/protocols}}
     member). If it is a string, it is equivalent to an array consisting of just that string;
     if it is omitted, it is equivalent to the empty array.
     Each string in the array is a subprotocol name. The connection will only be established if the
