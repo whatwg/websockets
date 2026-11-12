@@ -529,8 +529,8 @@ user agent has fired the event for it.
        WebSocket connection=]. The data to be sent is the data stored in the section of the buffer
        described by the {{ArrayBuffer}} object that |data| references. Any invocation of this
        method with this kind of argument that does not throw an exception must increase the
-       {{WebSocket/bufferedAmount}} attribute by the number of bytes in the section of the buffer
-       that |data| references. [[!WSP]]
+       {{WebSocket/bufferedAmount}} attribute by the [=BufferSource/byte length=] of |data|.
+       [[!WSP]]
 </div>
 
 <hr>
